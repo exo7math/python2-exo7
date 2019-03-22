@@ -1,0 +1,234 @@
+
+\pagestyle{empty}\thispagestyle{empty}
+\vspace*{\fill}
+\vspace*{5ex}
+\begin{center}
+	\fontsize{40}{40}\selectfont
+	\textsc{python au lycée}
+	
+	\vspace*{-0.5ex}
+	\textsc{\fontsize{24}{24}\selectfont tome \fontsize{22}{22}\selectfont 2}
+	
+	\vspace*{2ex}
+	
+	%\fontsize{32}{32}\selectfont
+	\Large
+	\textsc{arnaud bodin}
+
+\end{center}
+\vfill
+\begin{center}
+	\Large
+	\textsc{algorithmes \  et \  programmation}
+\end{center}
+\begin{center}
+	\LogoExoSept{2}
+\end{center}
+%\clearemptydoublepage
+\clearpage
+
+\thispagestyle{empty}
+
+\vspace*{\fill}
+\section*{Python au lycée -- tome 2}
+
+
+
+%---------------------------
+{\large\textbf{Informatique et ordinateur}}
+
+E.~Dijkstra a dit que \og{}l'informatique est autant la science des ordinateurs que l'astronomie est la science des télescopes\fg{}. 
+Une partie fondamentale de l'informatique est en effet la science des algorithmes :
+comment résoudre un problème le plus efficacement possible.
+Un algorithme étant une suite d'instructions théoriques indépendantes du langage et de la machine utilisée.
+Mais il faut comprendre le \og{}autant\fg{} de façon positive : les astronomes ont besoin de télescopes performants  autant que les informaticiens d'ordinateurs puissants. Pour programmer intelligemment il faut donc bien connaître sa machine, ses limitations mais aussi le langage utilisé.
+
+ 
+\bigskip
+
+%---------------------------
+{\large\textbf{Python}}
+
+Le but de ce second volume est d'approfondir notre connaissance de \Python{}. Tu vas écrire des programmes de plus en plus compliqués et résoudre à la machine des grilles de sudoku, les calculs du \og{}compte est bon\fg{} et la recherche du \og{}mot le plus long\fg{}. Tu vas aussi programmer de belles images : des automates cellulaires, du traitement d'images, des surfaces, des dessins en perspective et de nombreuses fractales.
+Tu vas aussi découvrir de nouveaux algorithmes pour trier, pour calculer en parallèle, pour résoudre des équations. Parmi les nouveaux outils que tu vas découvrir il y aura les algorithmes récursifs, la programmation objet, les dictionnaires.
+
+\bigskip
+
+%---------------------------
+{\large\textbf{Mathématiques}}
+
+Contrairement au premier tome on ne se limite plus aux mathématiques du niveau seconde. Voici les chapitres abordés de niveau première et terminale : suites, dérivées, intégration, nombres complexes, logarithme, exponentielle, matrices. 
+
+
+
+
+\bigskip
+\vspace*{\fill}
+\begin{center}
+L'intégralité des codes \Python{} des activités ainsi que tous les fichiers sources sont sur la page \emph{GitHub} d'Exo7 :
+\href{https://github.com/exo7math/python2-exo7}{\og{}GitHub : Python au lycée\fg{}}.
+
+\medskip
+
+Les vidéos des notions de base et des activités du premier tome sont accessibles depuis la chaîne \emph{Youtube} :
+\href{https://www.youtube.com/channel/UC6PiFyqBiUjiJ7Q3DRSW2Wg}{\og{}Youtube : Python au lycée\fg{}}.
+\end{center}
+
+
+
+%\vspace*{\fill}
+
+
+%\newpage
+\cleardoublepage
+\thispagestyle{empty}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+\tableofcontents
+
+
+\newpage
+
+\section*{Résumé des activités}
+
+
+\newcommand{\titreactivite}[1]{{\textbf{#1}}\nopagebreak}
+\newcommand{\descriptionactivite}[1]{%
+\smallskip\hfill
+\begin{minipage}{0.95\textwidth}\small#1\end{minipage}\medskip\smallskip}
+
+
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+\center\emph{
+La plupart des activités sont indépendantes les unes des autres.\\
+Tu peux commencer par celles qui te font le plus envie !
+}	
+\end{minipage}
+\end{center}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Suites arithmétiques – Suites géométriques}
+
+\descriptionactivite{Tu vas manipuler deux types de suites fondamentales : les suites
+	arithmétiques et les suites géométriques.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Nombres complexes I}
+
+\descriptionactivite{Nous allons faire des calculs avec les nombres complexes. Ce sera facile car  \Python{} sait les manipuler.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Nombres complexes II}
+
+\descriptionactivite{On poursuit l'exploration des nombres complexes en se concentrant sur la forme module/argument.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Dérivée – Zéros de fonctions}
+
+\descriptionactivite{Nous étudions les fonctions : 
+	le calcul de la dérivée d'une fonction, 
+	le tracé du graphe et de tangentes,
+	et enfin la recherche des valeurs où la fonction s'annule.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Intégrale}
+
+\descriptionactivite{Nous allons étudier différentes techniques pour calculer des valeurs approchées d'intégrales.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Exponentielle}
+
+\descriptionactivite{L'exponentielle joue un rôle important dans la vie de tous les jours : elle permet de modéliser la vitesse de refroidissement de votre café, de calculer la croissance d'une population ou de calculer la performance d'un algorithme.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Logarithme}
+
+\descriptionactivite{Le logarithme est une fonction aussi importante que l'exponentielle. C'est le logarithme qui donne l'ordre de grandeur de certaines quantités physiques, par exemple la puissance d'un séisme ou celle d'un son.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Programmation objet}
+
+\descriptionactivite{Avec \Python{} tout est objet : un entier, une chaîne, une liste, une fonction\ldots{} Nous allons voir comment définir nos propres objets.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Mouvement de particules}
+
+\descriptionactivite{Tu vas simuler le mouvement d'une particule soumise à différentes forces, comme la gravité ou des frottements. Tu appliqueras ceci afin de simuler le mouvement des planètes autour du Soleil. Cette activité utilise la programmation objet.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Algorithmes récursifs}
+
+\descriptionactivite{Une fonction récursive est une fonction qui s'appelle elle-même. C'est un concept puissant de l'informatique : certaines tâches compliquées s'obtiennent à l'aide d'une fonction récursive simple. La récursivité est l'analogue de la récurrence mathématique.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Tri – Complexité}
+
+\descriptionactivite{Ordonner les éléments d'une liste est une activité essentielle en informatique. Par exemple une fois qu'une liste est triée, il est très facile de chercher si elle contient tel ou tel élément. Par définition un algorithme renvoie toujours le résultat attendu, mais certains algorithmes sont plus rapides que d'autres ! Cette efficacité est mesurée par la notion de complexité.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Calculs en parallèle}
+
+\descriptionactivite{Comment profiter d'avoir plusieurs processeurs (ou plusieurs c\oe urs dans chaque processeur) pour calculer plus vite ? C'est simple il s'agit de partager les tâches afin que tout le monde travaille en même temps, puis de regrouper les résultats.
+	Dans la pratique ce n'est pas si facile.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Automates}
+
+\descriptionactivite{Tu vas programmer des automates cellulaires, qui à partir de règles simples, produisent des comportements amusants.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Cryptographie}
+
+\descriptionactivite{Tu vas jouer le rôle d'un espion qui intercepte des messages secrets et tente de les décrypter.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Images et matrices}
+
+\descriptionactivite{Le traitement des images est très utile, par exemple pour les agrandir ou bien les tourner. Nous allons aussi voir comment rendre une image plus floue, mais aussi plus nette ! Tout cela à l'aide des matrices.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Le compte est bon}
+
+\descriptionactivite{Qui n'a jamais rêvé d'épater sa grand-mère en gagnant à tous les coups au jeu \og{}Des chiffres et des lettres\fg{} ? Une partie du jeu est \og{}Le compte est bon\fg{} dans lequel il faut atteindre un total à partir de chiffres donnés et des quatre opérations élémentaires. 
+% L'autre partie du jeu est \og{}Le mot le plus long\fg{}, cette fois il faut trouver un mot français à partir d'un tirage de lettres.  
+Pour ce jeu les ordinateurs sont plus rapides que les humains, il ne te reste plus qu'à écrire le programme !}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Le mot le plus long}
+
+\descriptionactivite{La seconde partie du jeu \og{}Des chiffres et des lettres\fg{} est le  \og{}Le mot le plus long\fg{}. Il s'agit simplement de trouver le mot le plus grand à partir d'un tirage de lettres. Pour savoir si un mot est valide on va utiliser une longue liste des mots français.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Ensemble de Mandelbrot}
+
+\descriptionactivite{Tu vas découvrir un univers encore plus passionnant qu'\emph{Harry Potter} : l'ensemble de Mandelbrot. C'est une fractale, c'est-à-dire que lorsque l'on zoome sur certaines parties de l'ensemble, on retrouve une image similaire à l'ensemble de départ. On découvrira aussi les ensembles de Julia.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Images 3D}
+
+\descriptionactivite{Comment dessiner des objets dans l'espace et comment les représenter sur un plan ?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Sudoku}
+
+\descriptionactivite{Tu vas programmer un algorithme qui complète entièrement une grille de sudoku. La méthode utilisée est la recherche par l'algorithme du \og{}retour en arrière\fg{}.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Fractale de Lyapunov}
+
+\descriptionactivite{Nous allons étudier des suites dont le comportement peut être chaotique. La fonction logarithme nous aidera à déterminer le caractère stable ou instable de la suite. Avec beaucoup de calculs et de patience nous tracerons des fractales très différentes de l'ensemble de Mandelbrot : les fractales de Lyapunov.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Big data I}
+
+\descriptionactivite{\emph{Big data}, intelligence artificielle, \emph{deep learning}, réseau de neurones, \emph{machine learning}\ldots{} plein de mots compliqués ! Le but commun est de faire exécuter à un ordinateur de tâches de plus en plus complexes : \emph{choisir} (par exemple trouver un bon élément parmi des milliards selon plusieurs critères), \emph{décider} (séparer des photos de chats de photos de voitures), \emph{prévoir} (un malade a de la fièvre et le nez qui coule, quelle maladie est la plus probable ?). Dans cette première partie on va utiliser des outils classiques de statistique et de probabilité pour résoudre des problèmes amusants.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titreactivite{Big data II}
+
+\descriptionactivite{L'essor des \emph{big-data} et de l'intelligence artificielle est dû à l'apparition de nouveaux algorithmes adaptés à la résolution de problèmes complexes : reconnaissance d'images, comportement des électeurs, conduite autonome des voitures\ldots{} Dans cette seconde partie tu vas programmer quelques algorithmes emblématiques et innovants.}
+

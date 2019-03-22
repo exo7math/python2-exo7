@@ -1,0 +1,68 @@
+\begin{tikzpicture}[scale=1]
+
+\node[scale=1.1] at (0,0) {$7$};
+\node[scale=1.1,red] at (1,0) {$\oplus$};
+\node[scale=1.1] at (2,0) {$5$};
+\node[scale=1.1] at (3,0) {$+$};
+\node[scale=1.1] at (4,0) {$9$};
+\node[scale=1.1] at (5,0) {$+$};
+\node[scale=1.1] at (6,0) {$4$};
+
+
+\node[scale=1.1] at (2,-1) {$12$};
+\node[scale=1.1,red] at (3,-1) {$\oplus$};
+\node[scale=1.1] at (4,-1) {$9$};
+\node[scale=1.1] at (5,-1) {$+$};
+\node[scale=1.1] at (6,-1) {$4$};
+
+
+\node[scale=1.1] at (4,-2) {$21$};
+\node[scale=1.1,red] at (5,-2) {$\oplus$};
+\node[scale=1.1] at (6,-2) {$4$};
+
+\node[scale=1.1] at (6,-3) {$25$};
+
+
+\draw[|->,>=latex,ultra thick,blue] (-0.8,0) to ++(0,-1);
+\draw[|->,>=latex,ultra thick,blue] (-0.3,-1) to ++(0,-1);
+\draw[|->,>=latex,ultra thick,blue] (+0.2,-2) to ++(0,-1);
+
+\node at (3,-4) {$C=3 \qquad T=3$};
+\node at (3,-5) {\bf Calculs s\'equentiels};
+
+
+
+
+\begin{scope}[xshift=10cm]
+\node[scale=1.1] at (0,0) {$7$};
+\node[scale=1.1,red] at (1,0) {$\oplus$};
+\node[scale=1.1] at (2,0) {$5$};
+\node[scale=1.1] at (3,0) {$+$};
+\node[scale=1.1] at (4,0) {$9$};
+\node[scale=1.1,red] at (5,0) {$\oplus$};
+\node[scale=1.1] at (6,0) {$4$};
+
+
+\node[scale=1.1] at (2,-1) {$12$};
+\node[scale=1.1,red] at (3,-1) {$\oplus$};
+\node[scale=1.1] at (4,-1) {$13$};
+
+
+\node[scale=1.1] at (3,-2) {$25$};
+
+\draw[|->,>=latex,ultra thick,blue] (-0.8,0) to ++(0,-1);
+\draw[|->,>=latex,ultra thick,blue] (-0.4,-1) to ++(0,-1);
+
+\draw[-,ultra thick,gray] (-0.2,-0.4) -- (2.3,-0.4);
+\draw[->,>=latex,ultra thick,gray] (1,-0.4) to[bend right] ++(0.5,-0.5);
+
+\draw[-,ultra thick,gray] (4-0.3,-0.4) -- (6.2,-0.4);
+\draw[->,>=latex,ultra thick,gray] (5,-0.4) to[bend left] ++(-0.5,-0.5);
+
+\draw[-,ultra thick,gray] (2-0.2,-1-0.4) -- (2+2.3,-1-0.4);
+\draw[->,>=latex,ultra thick,gray] (2.2,-1.4) to[bend right] ++(0.5,-0.5);
+
+\node at (3,-4) {$C=3 \qquad T=2$};
+\node at (3,-5) {\bf Calculs en parall\`ele};
+\end{scope}
+\end{tikzpicture}  

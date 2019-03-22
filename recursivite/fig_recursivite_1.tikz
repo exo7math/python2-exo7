@@ -1,0 +1,28 @@
+\begin{tikzpicture}[scale=1.2]
+
+
+\node[scale=1.1] (A) at (0,0) {$[1,2,3,4,5]$};
+\draw[->,>=latex,ultra thick,red] (A.south) to[bend right] node[midway, left,black,scale=0.8,text width = 4em] {premier \'el\'ement} ++(-1,-1.5) ;
+\draw[->,>=latex,ultra thick,red] (A.south) to[bend left] node[midway, right,black,scale=0.8] {reste} ++(+1,-1.5) ;
+
+\node[scale=1.1] (B) at (-1,-2) {$1$};
+\node[scale=1.1] (C) at (1,-2) {$[2,3,4,5]$};
+
+\draw[->,>=latex,ultra thick,red!20] (B.south) to[] node[midway, right,black,scale=0.8] {} ++(1.9,-1.5) ;
+\node[scale=1.1] (E) at (1,-4) {$1$};
+
+\draw[->,>=latex,ultra thick,red] (C.south) to[bend right] node[pos=0.8, left=1em,black,scale=0.8, text width = 6em] {inverse par appel r\'ecursif} ++(-2,-1.5) ;
+\node[scale=1.1] (D) at (-1,-4) {$[5,4,3,2]$};
+
+\coordinate (FF) at (0,-5);
+\draw[ultra thick,red!40] (D.south) -- (FF) ;
+\draw[ultra thick,red!40]  (E.south) -- (FF);
+\draw[->,>=latex,ultra thick,red!40]  (FF) -- ++(0,-0.7) ;
+\node[scale=1.1] (F) at (0,-6) {$[5,4,3,2,1]$};
+
+
+
+
+
+
+\end{tikzpicture}  

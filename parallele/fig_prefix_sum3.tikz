@@ -1,0 +1,17 @@
+\begin{tikzpicture}[scale=0.3]
+
+\node[circle,draw,color=black,scale=1.1,ultra thick,text=red] (O) at (0,0) {\bf +};
+\draw[-<,>=latex,ultra thick] (O) -- ++ (-5,5);
+\draw[-<,>=latex,ultra thick] (O) -- ++ (0,5);
+\draw[->,>=latex,ultra thick,dashed] (O) -- ++ (0,-5);
+\draw[->,>=latex,ultra thick,dashed] (O) -- ++ (2,-5);
+
+
+\begin{scope}[xshift=20cm]
+\node[circle,draw,color=black,scale=1.1,ultra thick,text=red] (O) at (0,0) {\bf 8};
+\draw[-<,>=latex,ultra thick] (O) -- ++ (-5,5) node[above,scale=1.2]{$5$};
+\draw[-<,>=latex,ultra thick] (O) -- ++ (0,5) node[above,scale=1.2]{$3$};
+\draw[->,>=latex,ultra thick,dashed] (O) -- ++ (0,-5) node[midway,gray,left,scale=1.2]{$8$};
+\draw[->,>=latex,ultra thick,dashed] (O) -- ++ (2,-5) node[midway,gray,right,scale=1.2]{$8$};
+\end{scope}
+\end{tikzpicture}  

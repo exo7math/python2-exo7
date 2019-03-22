@@ -1,0 +1,22 @@
+\begin{tikzpicture}[scale=1]
+
+\begin{scope}[rotate=30]
+
+\fill[gray!10] (0,0) -- (20:9) -- (-20:9) -- cycle;
+
+\draw[->,>=latex,red,ultra thick] (0,0) to node[midway,below]{$\vec u$} (5,0);
+
+\draw[thick] (0,0) -- (-20:10);
+\draw[fill] (0,0) -- (20:10);
+
+\fill (0,0) circle (2pt) node[below left] {$O$};
+
+\fill[blue] (15:8) circle (2pt) node[above right] {$P_1$};
+\fill[blue] (25:7) circle (2pt) node[above left] {$P_2$};
+
+\draw[double] (3,0) arc (0:20:3) node[midway,right] {$\theta$};
+\draw[double] (3.5,0) arc (0:-20:3.5) node[midway,right] {$\theta$};
+
+\end{scope}
+
+\end{tikzpicture}

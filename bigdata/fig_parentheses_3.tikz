@@ -1,0 +1,48 @@
+\begin{tikzpicture}
+
+\newcommand{\boites}[1]{
+\draw[gray,ultra thick]  (0,0) -- ++ (#1,0);
+ \foreach \i in {0,...,#1}{
+\draw[gray,ultra thick]  (\i,0) -- ++ (0,0.7);
+}; }
+
+
+\begin{scope}
+\boites{13};
+ \foreach \i/\n in {0/[, 1/(, 2/a, 3/+, 4/b, 5/),6/x,7/(,8/a,9/-,10/b,11/),12/]}{
+\node[blue,scale=1.1]  at (\i+0.5,0.4) {\bf \n};
+};
+
+% \draw[->,>=latex,thick] (2.5,-0.1) to[bend right]node[midway,left]{$+1$} ++(-0.5,-1) ;
+% \draw[->,>=latex,thick] (5.5,-0.1) to[bend right]node[midway,left]{$+1$} ++(-0.5,-1) ;
+% \draw[->,>=latex,thick] (9.5,-0.1) to[bend left]node[midway,right]{$-1$} ++(0.5,-1) ;
+% \draw[->,>=latex,thick] (12.5,-0.1) to[bend left]node[midway,right]{$-1$} ++(0.5,-1) ;
+
+\draw[->,>=latex,line width=7pt,blue!20] (0.5,-0.2) to ++(0,-5) ;
+\draw[->,>=latex,line width=7pt,blue!20] (1.5,-0.2) to ++(0,-5) ;
+\draw[->,>=latex,line width=7pt,blue!20] (5.5,-0.2) to ++(0,-5) ;
+\draw[->,>=latex,line width=7pt,blue!20] (7.5,-0.2) to ++(0,-5) ;
+\draw[->,>=latex,line width=7pt,blue!20] (11.5,-0.2) to ++(0,-5) ;
+\draw[->,>=latex,line width=7pt,blue!20] (12.5,-0.2) to ++(0,-5) ;
+\end{scope}
+
+\begin{scope}[yshift=-3cm]
+\node[orange,scale=1.1] at (-1,0.4) {$h$};
+\boites{13};
+ \foreach \i/\n in {0/1, 1/2, 2/2, 3/2, 4/2, 5/2,6/1,7/2,8/2,9/2,10/2,11/2,12/1}{
+\node[orange,scale=1.1]  at (\i+0.5,0.4) {\bf \n};
+};
+\end{scope}
+
+
+\begin{scope}[yshift=-6cm]
+\node[red,scale=1.1,left] at (-0.5,0.4) {$\pm 2^h$ ou $\pm 3^h$ };
+\draw[->,>=latex,line width=5pt,red!50] (14,0.4)--++(3,0);
+\node[red,scale=1.1,right] at (17.5,0.4) {$S=0$};
+%\boites{15};
+ \foreach \i/\n in {0/$3^1$, 1/$2^2$,5/$-2^2$, 7/$2^2$,11/$-2^2$,12/$-3^1$}{
+\node[red,scale=1.1]  at (\i+0.5,0.4) {\bf \n};
+};
+\end{scope}
+
+\end{tikzpicture}  

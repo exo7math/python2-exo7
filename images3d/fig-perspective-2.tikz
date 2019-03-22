@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=1]
+
+
+\draw[blue] (0,0,0) -- ++(0,0,10);
+\draw[->,gray,>=latex] (0,0,0) -- ++(0,0,-10) node[above] {$y$};
+\draw[->,gray,>=latex] (0,0,0) -- ++(0,10,0) node[above] {$z$ et $Y$};
+\draw[->,gray,>=latex] (0,0,0) -- ++(10,0,0) node[above] {$x$ et $X$};
+
+\draw[blue] (0,0,10) -- (2,0.5,-10);
+\draw[blue] (0,0,10) -- (7,0.5,-10);
+\draw[blue] (0,0,10) -- (2,5.5,-10);
+\draw[blue] (0,0,10) -- (7,5.5,-10);
+
+\draw[green!70!black,ultra thick] (1,0.25,0) -- ++(2.5,0,0) -- ++(0,2.5,0) -- ++(-2.5,0,0) -- cycle;
+
+\draw[red,ultra thick] (2,0.5,-10) -- ++(5,0,0) -- ++(0,5,0) -- ++(-5,0,0) -- cycle;
+
+
+\draw[blue!10] (0,0,10) -- (2,0.5,-10);
+\draw[blue] (0,0,10) -- (7,0.5,-10);
+\draw[blue] (0,0,10) -- (2,5.5,-10);
+\draw[blue] (0,0,10) -- (7,5.5,-10);
+
+\node[below] at (0,0,10) {$(0,-f,0)$ point focal};
+\node[below,red] at (7,0.5,-10) {objet de l'epace};
+\node[below,green!70!black] at (4,0.25,0) {projection sur le plan};
+\end{tikzpicture}

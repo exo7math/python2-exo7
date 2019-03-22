@@ -1,0 +1,75 @@
+\begin{tikzpicture}
+
+\newcommand{\boites}[1]{
+\draw[gray,ultra thick]  (0,0) -- ++ (#1,0);
+ \foreach \i in {0,...,#1}{
+\draw[gray,ultra thick]  (\i,0) -- ++ (0,0.7);
+};
+ }
+
+\node at (3,2) {\bf Tri fusion};
+
+
+\begin{scope}
+\boites{6};
+ \foreach \i/\n in {0/7, 1/5, 2/1, 3/4, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+
+\draw[|-|,red,very thick] (0.2,-0.3)--++(2.6,0);
+\draw[->,>=latex,red,very thick] (1.5,-0.3) to[bend right]node[midway,left,black] {partie gauche} ++(-2,-2) ;
+
+\draw[|-|,red,very thick] (3.2,-0.3)--++(2.6,0);
+\draw[->,>=latex,red,very thick] (4.5,-0.3) to[bend left]node[midway,right,black] {partie droite} ++(2,-2) ;
+
+\end{scope}
+
+\begin{scope}[yshift=-3cm,xshift=-2cm]
+
+\boites{3};
+ \foreach \i/\n in {0/7, 1/5, 2/1}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\draw[->,>=latex,red,very thick] (1.5,-0.3) to node[midway,left,black] {tri par r\'ecursivit\'e} ++(0,-2) ;
+\end{scope}
+
+\begin{scope}[yshift=-3cm,xshift=5cm]
+\boites{3};
+ \foreach \i/\n in {0/4, 1/9, 2/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\draw[->,>=latex,red,very thick] (1.5,-0.3) to node[midway,right,black] {tri par r\'ecursivit\'e} ++(0,-2) ;
+\end{scope}
+
+\begin{scope}[yshift=-6cm,xshift=-2cm]
+
+\boites{3};
+ \foreach \i/\n in {0/1, 1/5, 2/7}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\draw[->,>=latex,red,very thick] (1.5,-0.3) to[bend right] %node[midway,right,black] {fusion}
+ ++(2,-1.8) ;
+\end{scope}
+
+\begin{scope}[yshift=-6cm,xshift=5cm]
+\boites{3};
+ \foreach \i/\n in {0/2, 1/4, 2/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\draw[->,>=latex,red,very thick] (1.5,-0.3) to[bend left] % node[midway,left,black] {fusion}
+++(-2,-1.8) ;
+
+
+
+\end{scope}
+
+\begin{scope}[yshift=-9cm]
+\boites{6};
+ \foreach \i/\n in {0/1, 1/2, 2/4, 3/5, 4/7, 5/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[black] at (3,1.5) {fusion};
+\end{scope}
+
+
+\end{tikzpicture}  

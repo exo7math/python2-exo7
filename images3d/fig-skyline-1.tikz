@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+
+\pgfmathsetmacro{\h}{0.5}; 
+
+  \draw[->,>=latex,thick,gray] (-1,0)--(6,0);
+ \draw[->,>=latex,thick,gray] (0,-1)--(0,11);
+
+\draw[red,ultra thick] (2,0) rectangle ++(2,10);
+
+\node[below right,gray] at (0,0) {$0$};
+\node[below] at (2,0) {$x$};
+\node[below] at (4,0) {$y$};
+\draw[dashed] (2,10) -- (0,10) node[left,black] {$h$};
+
+\node at (8,2) {immeuble $(x,y,h)$}; 
+\end{tikzpicture}

@@ -1,0 +1,267 @@
+\documentclass[11pt,class=report,crop=false]{standalone}
+\usepackage[screen]{../python}
+
+
+\begin{document}
+
+
+%====================================================================
+\chapitre{Intégrale}
+%====================================================================
+
+\index{integrale@intégrale}
+
+\objectifs{Nous allons étudier différentes techniques pour calculer des valeurs approchées d'intégrales.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Primitive]
+\index{primitive}
+Soit $f : [a,b] \to \Rr$. Une \defi{primitive} de $f$ est une fonction dérivable 
+$F : [a,b] \to \Rr$ tel que $F'(x) = f(x)$ pour tout $x\in [a,b]$.
+Si on sait calculer une primitive alors on sait calculer l'intégrale de $f$ :
+$$\int_a^b f(t) \;\dd t = F(b) - F(a).$$
+
+Exemple : soit $f(x) = x^2$, une primitive de la fonction $f$ est la fonction $F$ définie par $F(x) = \frac13 x^3$, donc par exemple 
+$\int_0^1 t^2\;\dd t = F(1)-F(0) = \frac13$.
+
+
+\end{cours}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Primitive]
+
+\objectifs{Objectifs : vérifier expérimentalement si une fonction donnée $F$ est une primitive de $f$.}
+
+\begin{enumerate}
+  \item Programme une fonction \ci{verification_primitive(f,F,a,b,n,epsilon)}
+  qui vérifie expérimentalement que $F$ est bien une de primitive de $f$ sur l'intervalle $[a,b]$ ($n$ est un entier donné, par exemple $n=10$ et $\epsilon$ une marge d'erreur, par exemple $\epsilon = 0.001$). 
+  
+  \emph{Méthode.} Vérifie que pour $n+1$ valeurs $x$ de $[a,b]$ on a
+  $F'(x) \simeq f(x)$. Dans le détail :
+  \begin{itemize}
+    \item soit $x_k = a + k\frac{b-a}{n}$, $k=0,1,\ldots,n$ ;
+    \item on calcule une valeur approchée de $F'(x_k)$ en utilisant la fonction \ci{derivee()} du chapitre \og{}Dérivée\fg{} ;
+    \item on vérifie $F'(x_k) \simeq f(x_k)$ en testant si $\big| F'(x_k) - f(x_k) \big| \le \epsilon$ pour tout $k=0,\ldots,n$.
+  \end{itemize}
+  
+   
+  \item \'Ecris une fonction \ci{integrale_primitive(F,a,b)} qui calcule l'intégrale 
+  d'une fonction $f$ connaissant une primitive $F$.
+  
+  \item \emph{Application.}
+  \begin{enumerate}
+    \item Calcule l'aire sous la parabole d'équation $y=x^2$ entre les droites verticales d'équation $(x=1)$ et $(x=2)$ et au-dessus de l'axe des abscisses.
+    \item Même question avec l'aire sous le graphe de $f(x) = \sin(x)$ sur $[0,\pi]$.
+  \end{enumerate}
+  
+\end{enumerate} 
+
+\end{activite}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Calcul approché d'une intégrale]
+
+% Avec du matériel venant du cours "Calcul formel"
+
+Il n'est pas toujours possible de calculer une primitive pour une fonction $f : [a,b] \to \Rr$. On va déterminer des valeurs approchées de $\int_a^b f(t) \;\dd t$.
+
+Les trois méthodes d'approximation que l'on va étudier sont toutes basées sur
+le même principe : 
+\begin{itemize}
+  \item On divise l'intervalle $[a,b]$ en $n$ sous-intervalles en posant $x_k = a + k \frac{b-a}{n}$ pour $0\le k \le n$.
+  Alors $x_0=a$ et $x_n = b$ et chaque sous-intervalle $[x_k,x_{k+1}]$ est de longueur constante $x_{k+1}-x_k= \frac{b-a}{n}$.
+  
+  
+  
+\myfigure{1}{
+\input{fig_int_09.tikz}
+}  
+
+  \item Sur chaque sous-intervalle $[x_k,x_{k+1}]$, on approche l'aire sous la courbe
+  par l'aire d'une figure géométrique simple.
+\end{itemize}
+
+\begin{itemize}
+  \item \textbf{Méthode des rectangles.} La \defi{méthode des rectangles (à gauche)} consiste à approcher l'aire sous la courbe par l'aire de rectangles. La hauteur de chaque rectangle est la valeur à gauche
+de $f$ sur le sous-intervalle (voir les figures ci-dessous).
+Pour un intervalle élémentaire, cela revient à approcher
+$\int_{x_k}^{x_{k+1}} f(t)\;\dd t$ par $(x_{k+1}-x_k) f(x_k)$.
+
+\myfigure{1}{
+\input{fig_int_03.tikz}\qquad
+\input{fig_int_05.tikz}
+} 
+  
+  \item \textbf{Méthode des trapèzes.}
+ On approche l'aire sous la courbe d'un intervalle élémentaire, 
+ par l'aire d'un trapèze.
+ 
+ \myfigure{1}{
+ \input{fig_int_07.tikz}
+ } 
+  
+  \item \textbf{Méthode de Simpson.}
+ On approche la courbe sur chaque intervalle élémentaire
+par une branche de parabole. 
+\myfigure{1}{
+\input{fig_int_08.tikz}
+} 
+%Cette parabole est la parabole passant par les trois
+%points de la courbe  : 
+%\begin{itemize}
+%  \item $\big( \alpha, f(\alpha) \big)$,
+%  \item $\big( \beta, f(\beta) \big)$,
+%  \item et le point dont l'abscisse est le milieu :
+%$\big( \frac{\alpha+\beta}{2}, f\left( \frac{\alpha+\beta}{2}\right)\big)$.
+%\end{itemize}
+%
+%Il se trouve que l'aire sous cette portion de parabole se calcule très facilement,
+%c'est :
+%$$\frac{\beta-\alpha}{6} \left( f(\alpha)+f(\beta) + 4f\left(\frac{\alpha+\beta}{2}\right) \right).$$ 
+\end{itemize}  
+
+
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Calcul approché d'intégrales]
+
+\objectifs{Objectifs : programmer la méthode des rectangles, des trapèzes et de Simpson.}
+
+$$I = \int_a^b f(t) \;\dd t$$
+
+\begin{enumerate}
+  \item \textbf{Méthode des rectangles (à gauche).}
+  
+  \'Ecris une fonction \ci{integrale_rectangles(f,a,b,n)} qui renvoie une valeur approchée de l'intégrale $I$ par la formule :
+  
+  \mybox{$\displaystyle S_R(n) = \frac{b-a}{n}\sum_{k=0}^{n-1} f(x_k)$}
+  
+  \emph{Application.} Calcule une valeur approchée de $I_1 = \int_{1}^{2} \frac 1t \; \dd t$. Compare avec la valeur exacte (obtenue par primitive). \`A partir de quelle valeur de $n$ obtiens-tu $3$ chiffres exacts après la virgule ? Et pour obtenir $10$ chiffres exacts ?
+  
+    
+  \item  \textbf{Méthode des trapèzes.}
+  
+  \'Ecris une fonction \ci{integrale_trapezes(f,a,b,n)} qui renvoie une valeur approchée de l'intégrale $I$ par la formule :
+  \mybox{$\displaystyle S_T(n) = \frac{b-a}{n}\sum_{k=0}^{n-1} \frac{f(x_k)+f(x_{k+1})}{2}$}
+
+  \begin{itemize}
+  \item \emph{Application.} Recommence le calcul de $I_1 = \int_{1}^{2} \frac 1t \; \dd t$. Cherche quelles valeurs de $n$ permettent d'avoir $3$ chiffres exacts après la virgule, puis $10$ chiffres.
+  
+  \item 
+  \begin{minipage}[t]{0.60\textwidth}   
+  \emph{Application.} Fais le même travail pour calculer une valeur approchée de l'aire d'un disque de rayon $1$ par la formule $I_2 = 4 \int_0^1 \sqrt{1-t^2}\dd t$. 
+  \end{minipage}\qquad
+  \begin{minipage}[]{0.25\textwidth}      
+\myfigure{0.5}{
+\input{fig_int_02.tikz}
+}    
+ \end{minipage} 
+  
+   
+  \end{itemize}
+  
+   
+  \item  \textbf{Méthode de Simpson.}  
+  
+  \'Ecris une fonction \ci{integrale_simpson(f,a,b,n)} qui renvoie une valeur approchée de l'intégrale $I$ par la formule :
+  \mybox{$\displaystyle S_S(n) = \frac{b-a}{n}\sum_{k=0}^{n-1} \frac{f(x_k)+4f(\frac{x_k+x_{k+1}}{2}) + f(x_{k+1})}{6}$}
+  
+  \begin{itemize}
+  \item \emph{Application.} Recommence le calcul de $I_1 = \int_{1}^{2} \frac 1t \; \dd t$ et trouve les valeurs de $n$ qui permettent d'avoir $3$ chiffres exacts après la virgule, puis $10$ chiffres.
+  
+  \item \emph{Application.} Fais le même travail pour $I_2 = 4 \int_0^1 \sqrt{1-t^2} \; \dd t$.
+   
+  \item \emph{Application.} Trouve une valeur approchée de $I_3 = 4\int_0^1 \frac{1}{1+t^2} \; \dd t$. 
+  \end{itemize}  
+  
+  \item \textbf{Bonus.}
+  \begin{enumerate}
+  
+    \item     
+    \begin{minipage}[t]{0.6\textwidth}    
+   Programme une fonction qui calcule une valeur approchée d'une intégrale par la méthode des rectangles à droite : c'est-à-dire que sur l'intervalle $[x_k,x_{k+1}]$ on approche l'intégrale par le rectangle de hauteur $f(x_{k+1})$ (et pas celui de hauteur $f(x_k)$). 
+   \end{minipage}
+   \begin{minipage}[c]{0.25\textwidth}      
+	\myfigure{0.5}{
+	\input{fig_int_06.tikz}
+	}  
+	\end{minipage}
+
+  \item Montre que dans le cas d'une fonction monotone (croissante ou bien décroissante) les deux méthodes des rectangles (droite et gauche) fournissent un encadrement de l'intégrale. Déduis-en des encadrement des intégrales $I_1$, $I_2$, $I_3$.
+  
+  
+  
+ \item Pour la méthode des trapèzes, essaie d'écrire ta fonction de sorte qu'elle ne calcule  qu'une seule fois chaque $f(x_k)$.
+ 
+ \item \emph{Projet.} Réalise la visualisation graphique des différentes méthodes.
+  \end{enumerate} 
+\end{enumerate} 
+
+\end{activite}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{activite}[Intégrale de Gauss]
+
+\objectifs{Objectifs : calculer une valeur approchée de l'intégrale de Gauss.}
+
+On note 
+$$I = \int_{-\infty}^{+\infty} e^{-t^2}\;\dd t \qquad
+\text{ et } \qquad I(x) =  \int_{-\infty}^{x} e^{-t^2}\;\dd t.$$
+
+\myfigure{0.6}{
+\input{fig_int_11.tikz}\qquad
+\input{fig_int_12.tikz}
+} 
+
+
+Dans les exemples précédents, les intégrales à calculer avaient une valeur bien connue. C'est aussi le cas de l'intégrale de Gauss $I$ qui vaut $I = \sqrt\pi$. 
+Par contre, en général, on ne saura pas calculer la valeur exacte d'une intégrale :
+c'est le cas des intégrales $I(x)$. D'où l'intérêt d'en trouver des valeurs approchées.
+\begin{enumerate}
+  \item Programme une fonction \ci{integrale_gauss1()} qui renvoie une valeur approchée de $I$ et compare ta valeur avec $\sqrt \pi$.
+  
+  \emph{Indication.} Définis une grande valeur pour l'infini, par exemple en posant $N = 25$. Au lieu de calculer $\int_{-\infty}^{+\infty} f(t)\;\dd t$, tu calcules $\int_{-N}^{+N} f(t)\;\dd t$  (pour $|x|\ge 25$, $\exp(-x^2)$ est presque nul).
+  
+  \item Programme une fonction \ci{integrale_gauss2(x)} qui renvoie une valeur approchée de $I(x)$.
+  
+  \item Pour les calculs de probabilités, nous aurons besoin de calculer la loi normale dont la fonction de répartition est donnée par 
+  $$I_{\mu,\sigma^2}(x) =  \frac{1}{\sqrt{2\pi\sigma^2}}\int_{-\infty}^{x} e^{-\frac{(t-\mu)^2}{\sigma^2}}\;\dd t$$ 
+  où $\mu$ est l'espérance et $\sigma^2$ la variance ($\sigma$ est l'écart-type).
+  
+  Programme une fonction \ci{integrale_gauss3(x,mu,sigma2)} qui renvoie $I_{\mu,\sigma^2}(x)$.
+  
+  \item On modélise la répartition des personnes selon leur QI par une courbe de Gauss
+  de paramètre $\mu = 100$ (le QI moyen) et $\sigma^2 = 225$ (écart-type $\sigma=15$). Avec ces paramètres $I_{\mu,\sigma^2}(x)$ représente le pourcentage de personnes ayant un QI inférieur à $x$. Par exemple $I(100) = 0.5$, donc $50\%$ de la population a un QI inférieur à $100$. Quel pourcentage de la population a un QI supérieur à $115$ ?
+  
+  
+\myfigure{1.5}{
+\input{fig_int_13.tikz}
+}    
+  
+\end{enumerate} 
+
+\end{activite}
+
+
+
+\end{document}

@@ -1,0 +1,15 @@
+\begin{tikzpicture}[scale=1]
+
+\draw[->,gray,thick,>=latex] (0,0,0) -- ++(0,0,5) node[above] {$x$};
+\draw[->,gray,thick,>=latex] (0,0,0) -- ++(0,4,0) node[above] {$z$};
+\draw[->,gray,thick,>=latex] (0,0,0) -- ++(5,0,0) node[above] {$y$};
+
+\coordinate (P) at (4,3,3);
+\draw[->,>=latex,blue,ultra thick] (0,0,0) -- (P) node[above] {$\vec u$} node[below right]{$(x,y,z)$};
+\node[left] at (0,0,0) {$O$};
+
+\draw[dashed,gray] (P) -- (4,3,0) -- (0,3,0)--(0,3,3)--cycle;
+\draw[dashed,gray] (0,3,3)--(0,0,3)--(4,0,3)--(4,3,3);
+\draw[dashed,gray] (4,0,3) --  (4,0,0) -- (4,3,0);
+
+\end{tikzpicture}

@@ -1,0 +1,25 @@
+\begin{tikzpicture}[scale=1]
+\usetikzlibrary{patterns}
+\begin{scope}[rotate=-10]
+
+\draw[gray] (0,0)--(0,6);
+\draw[gray, thick] (-5,0)--(5,0) node[right]{plan};
+\fill[pattern=north west lines, pattern color=gray!50] (-5,0) rectangle (5,-1);
+
+\coordinate (P) at (0,3);
+\draw[->,>=latex,blue,ultra thick] (0,0) to  (P)node[right]{$\vec n$};
+
+
+\draw[->,>=latex,blue,ultra thick] (-0.15,0.1) to  ++(0,1.5)node[above left]{$\vec n'$};
+
+\coordinate (Q) at (-3,5);
+\draw[->,>=latex,red,ultra thick] (Q) to node[midway,below left]{$\vec u$} (-0.15,0.05);
+
+\coordinate (QQ) at (3,5);
+\draw[->,>=latex,green!70!black,ultra thick] (0.15,0.05) to node[midway,below]{$\vec v$} (QQ);
+
+\draw[gray,dashed] (-3,0) -- (-3,5)--(3,5)--(3,0);
+
+\end{scope}
+
+\end{tikzpicture}

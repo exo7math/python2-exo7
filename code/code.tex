@@ -1,0 +1,462 @@
+\documentclass[11pt,class=report,crop=false]{standalone}
+\usepackage[screen]{../python}
+
+\begin{document}
+
+%====================================================================
+% \chapitre{Codes}
+%====================================================================
+
+\lstset{
+  language=Python,
+  upquote=true,
+  columns=flexible,
+  keepspaces=true,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\color{gray},
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},  
+  showspaces=false,
+  showstringspaces=false,
+  extendedchars=true,
+  inputencoding=utf8,
+  literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+
+% Reduit la hauteur des lignes vides
+\makeatletter
+\lst@AddToHook{OnEmptyLine}{\vspace{-0.5\baselineskip}}
+\makeatother
+
+% Copy-paste-able spaces
+%\makeatletter
+%\def\lst@outputspace{{\ifx\lst@bkgcolor\empty\color{white}\else\lst@bkgcolor\fi\lst@visiblespace}}
+%\makeatother
+
+
+
+% \setlength{\parindent}{0em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Test
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{Test}
+%
+%
+%\insertcode{test-tex.py}{test.py}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Suites arithmétiques -- Suites géométriques}
+
+\subsection*{Activité 1}
+
+\insertcode{../suites/suites_1.py}{Activité 1 \hfill \texttt{suites\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../suites/suites_2.py}{Activité 2 \hfill \texttt{suites\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../suites/suites_3.py}{Activité 3 \hfill \texttt{suites\_3.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../suites/suites_4.py}{Activité 4 \hfill \texttt{suites\_4.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../suites/suites_5.py}{Activité 5 \hfill \texttt{suites\_5.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Nombres complexes I}
+
+\subsection*{Activité 1}
+
+\insertcode{../complexes/complexes_I_1.py}{Activité 1 \hfill \texttt{complexes\_I\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../complexes/complexes_I_2.py}{Activité 2 \hfill \texttt{complexes\_I\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../complexes/complexes_I_3.py}{Activité 3 \hfill \texttt{complexes\_I\_3.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../complexes/complexes_I_4.py}{Activité 4 \hfill \texttt{complexes\_I\_4.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../complexes/complexes_I_5.py}{Activité 5 \hfill \texttt{complexes\_I\_5.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Nombres complexes II}
+
+\subsection*{Activité 1}
+
+\insertcode{../complexes/complexes_II_1.py}{Activité 1 \hfill \texttt{complexes\_II\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../complexes/complexes_II_2.py}{Activité 2 \hfill \texttt{complexes\_II\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../complexes/complexes_II_3.py}{Activité 3 \hfill \texttt{complexes\_II\_3.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../complexes/complexes_II_4.py}{Activité 4 \hfill \texttt{complexes\_II\_4.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../complexes/complexes_II_5.py}{Activité 5 \hfill \texttt{complexes\_II\_5.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dérivée -- Zéros de fonctions}
+
+\subsection*{Activité 1 à 4}
+
+\insertcode{../derivee/derivee.py}{Activité 1 à 4 \hfill \texttt{derivee.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exponentielle}
+
+\subsection*{Activité 1 à 4}
+
+\insertcode{../exponentielle/exponentielle_1.py}{Activité 1 à 4 \hfill \texttt{exponentielle\_1.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../exponentielle/exponentielle_2.py}{Activité 5 \hfill \texttt{exponentielle\_2.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Logarithme}
+
+\subsection*{Activité 1}
+
+\insertcode{../logarithme/logarithme_1.py}{Activité 1 \hfill \texttt{logarithme\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../logarithme/logarithme_2.py}{Activité 2 \hfill \texttt{logarithme\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../logarithme/logarithme_3.py}{Activité 3 \hfill \texttt{logarithme\_3.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../logarithme/logarithme_4.py}{Activité 4 \hfill \texttt{logarithme\_4.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../logarithme/logarithme_5.py}{Activité 5 \hfill \texttt{logarithme\_5.py}}
+
+\subsection*{Activité 6}
+
+\insertcode{../logarithme/logarithme_6.py}{Activité 6 \hfill \texttt{logarithme\_6.py}}
+
+\subsection*{Activité 7}
+
+\insertcode{../logarithme/logarithme_7.py}{Activité 7 \hfill \texttt{logarithme\_7.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intégrale}
+
+\subsection*{Activité 1 à 3}
+
+\insertcode{../integrale/integrale.py}{Activité 1 à 3 \hfill \texttt{integrale.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Programmation objet}
+
+\subsection*{Activité 1}
+
+\insertcode{../objet/objet_1.py}{Activité 1 \hfill \texttt{objet\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../objet/objet_2.py}{Activité 2 \hfill \texttt{objet\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../objet/objet_3.py}{Activité 3 \hfill \texttt{objet\_3.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mouvement de particules}
+
+\subsection*{Activité 1}
+
+\insertcode{../particule/particule_1.py}{Activité 1 \hfill \texttt{particule\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../particule/particule_2.py}{Activité 2 \hfill \texttt{particule\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../particule/particule_3.py}{Activité 3 \hfill \texttt{particule\_3.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithmes récursifs}
+
+
+\subsection*{Activité 1}
+
+\insertcode{../recursivite/recursivite_1.py}{Activité 1 \hfill \texttt{recursivite\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../recursivite/recursivite_2.py}{Activité 2 \hfill \texttt{recursivite\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../recursivite/recursivite_3.py}{Activité 3 \hfill \texttt{recursivite\_3.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../recursivite/recursivite_4.py}{Activité 4 \hfill \texttt{recursivite\_4.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../recursivite/recursivite_5.py}{Activité 5 \hfill \texttt{recursivite\_5.py}}
+
+\subsection*{Activité 6}
+
+\insertcode{../recursivite/recursivite_6.py}{Activité 6 \hfill \texttt{recursivite\_6.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tri -- Complexité}
+
+\subsection*{Activité 1}
+
+\insertcode{../tri/complexite.py}{Activité 1 \hfill \texttt{complexite.py}}
+
+\subsection*{Activité 2 à 5}
+
+\insertcode{../tri/tri.py}{Activité 2 à 5 \hfill \texttt{tri.py}}
+
+\subsection*{Activité 6}
+
+\insertcode{../tri/tri_avec_complexite.py}{Activité 6 \hfill \texttt{tri\_avec\_complexite.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calculs en parallèle}
+
+\subsection*{Activité 1}
+
+\insertcode{../parallele/parallele_1.py}{Activité 1 \hfill \texttt{parallele\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../parallele/parallele_2.py}{Activité 2 \hfill \texttt{parallele\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../parallele/parallele_3.py}{Activité 3 \hfill \texttt{parallele\_3.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../parallele/parallele_4.py}{Activité 4 \hfill \texttt{parallele\_4.py}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Automates}
+
+\subsection*{Activité 1}
+
+\insertcode{../automate/automate_1.py}{Activité 1 \hfill \texttt{automate\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../automate/automate_2.py}{Activité 2 \hfill \texttt{automate\_2.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cryptographie}
+
+\subsection*{Activité 1}
+
+\insertcode{../cryptographie/cryptographie_1.py}{Activité 1 \hfill \texttt{cryptographie\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../cryptographie/cryptographie_2.py}{Activité 2 \hfill \texttt{cryptographie\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../cryptographie/cryptographie_3.py}{Activité 3 \hfill \texttt{cryptographie\_3.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../cryptographie/cryptographie_4.py}{Activité 4 \hfill \texttt{cryptographie\_4.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Le compte est bon}
+
+\subsection*{Activité 1 à 4}
+
+\insertcode{../chiffres/chiffres.py}{Activité 1 à 4 \hfill \texttt{chiffres.py}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Le mot le plus long}
+
+\subsection*{Activité 1 à 4}
+
+\insertcode{../lettres/lettres.py}{Activité 1 à 4 \hfill \texttt{lettres.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Images et matrices}
+
+\subsection*{Activité 1 à 4}
+
+\insertcode{../matrice/matrice.py}{Activité 1 à 4 \hfill \texttt{matrice.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ensemble de Mandelbrot}
+
+\subsection*{Activité 1 à 4}
+
+\insertcode{../mandelbrot/mandelbrot_complexe.py}{Activité 1 à 4 \hfill \texttt{mandelbrot\_complexe.py}}
+
+\insertcode{../mandelbrot/mandelbrot_reel.py}{Activité 1 à 4 \hfill \texttt{mandelbrot\_reel.py}}
+
+\subsection*{Activité 5 et 6}
+
+\insertcode{../mandelbrot/julia_complexe.py}{Activité 5 et 6 \hfill \texttt{mandelbrot\_complexe.py}}
+
+\insertcode{../mandelbrot/julia_reel.py}{Activité 5 et 6 \hfill \texttt{mandelbrot\_reel.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Images 3D }
+
+\subsection*{Activité 1}
+
+\insertcode{../images3d/images3d_surface.py}{Activité 1 \hfill \texttt{images3d\_surface.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../images3d/images3d_perspective.py}{Activité 2 \hfill \texttt{images3d\_perspective.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../images3d/images3d_sphere.py}{Activité 3 \hfill \texttt{images3d\_sphere.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../images3d/images3d_vecteurs.py}{Activité 4 \hfill \texttt{images3d\_vecteurs.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../images3d/images3d_skyline.py}{Activité 5 \hfill \texttt{images3d\_skyline.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sudoku}
+
+\subsection*{Activité 1}
+
+\insertcode{../sudoku/sudoku_piles.py}{Activité 1 \hfill \texttt{sudoku\_piles.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../sudoku/sudoku_reines.py}{Activité 2 \hfill \texttt{sudoku\_reines.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../sudoku/sudoku_sudoku.py}{Activité 3 \hfill \texttt{sudoku\_sudoku.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fractale de Lyapunov}
+
+\subsection*{Activité 1}
+
+\insertcode{../lyapunov/lyapunov_1.py}{Activité 1 \hfill \texttt{lyapunov\_1.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../lyapunov/lyapunov_2.py}{Activité 2 \hfill \texttt{lyapunov\_2.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../lyapunov/lyapunov_3.py}{Activité 3 \hfill \texttt{lyapunov\_3.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Big data I}
+
+\subsection*{Activité 1}
+
+\insertcode{../bigdata/bigdata_sondage.py}{Activité 1 \hfill \texttt{bigdata\_sondage.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../bigdata/bigdata_chercher.py}{Activité 2 \hfill \texttt{bigdata\_chercher.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../bigdata/bigdata_tank.py}{Activité 3 \hfill \texttt{bigdata\_tank.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../bigdata/bigdata_secretaire.py}{Activité 4 \hfill \texttt{bigdata\_secretaire.py}}
+
+\subsection*{Activité 5}
+
+\insertcode{../bigdata/bigdata_regression.py}{Activité 5 \hfill \texttt{bigdata\_regression.py}}
+
+\subsection*{Activité 6}
+
+\insertcode{../bigdata/bigdata_bayes_1.py}{Activité 6 \hfill \texttt{bigdata\_bayes\_1.py}}
+
+\subsection*{Activité 7}
+
+\insertcode{../bigdata/bigdata_bayes_2.py}{Activité 7 \hfill \texttt{bigdata\_bayes\_2.py}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Big data II}
+
+\subsection*{Activité 1}
+
+\insertcode{../bigdata/bigdata_voisins.py}{Activité 1 \hfill \texttt{bigdata\_voisins.py}}
+
+\subsection*{Activité 2}
+
+\insertcode{../bigdata/bigdata_parentheses.py}{Activité 2 \hfill \texttt{bigdata\_parentheses.py}}
+
+\subsection*{Activité 3}
+
+\insertcode{../bigdata/bigdata_barycentres.py}{Activité 3 \hfill \texttt{bigdata\_barycentres.py}}
+
+\subsection*{Activité 4}
+
+\insertcode{../bigdata/bigdata_neurone.py}{Activité 4 \hfill \texttt{bigdata\_neurone.py}}
+
+
+\end{document}

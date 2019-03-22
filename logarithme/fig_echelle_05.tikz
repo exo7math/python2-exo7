@@ -1,0 +1,24 @@
+\begin{tikzpicture}[scale=0.7]
+
+\draw[gray] (0,0) grid ++(10,10);
+
+\draw[->,>=latex,very thick,gray] (-0.5,0) -- (11,0) node[above right,black]{$\log_{10}(x)$};
+\draw[->,>=latex,very thick,gray] (0,-0.5) -- (0,11) node[right,black]{$\log_{10}(y)$};
+
+\draw[very thick,blue] (0,3) -- (9,8.95);
+
+\foreach\x in {1,...,8}{
+\pgfmathsetmacro{\X}{log10(\x)};
+\pgfmathsetmacro{\y}{log10(2)+\X*0.66};
+  \fill[blue] (10*\X,10*\y) circle (5pt);
+}
+
+\node[below] at (10,0) {$1$};
+\node[below] at (1,0) {$0.1$};
+\node[left] at (0,10) {$1$};
+\node[left] at (0,1) {$0.1$};
+\node[below left] at (0,0) {$0$};
+
+\node at (5,-1.5) {\bf Points de coordonn\'ees $(\log_{10}(x),\log_{10}(y))$};
+
+\end{tikzpicture} 

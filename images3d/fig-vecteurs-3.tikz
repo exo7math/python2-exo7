@@ -1,0 +1,23 @@
+\begin{tikzpicture}[scale=2]
+
+\draw[->,gray,thick,>=latex] (0,0,0) -- ++(0,0,2) node[above] {$x$};
+\draw[->,gray,thick,>=latex] (0,0,0) -- ++(0,2,0) node[above] {$z$};
+\draw[->,gray,thick,>=latex] (0,0,0) -- ++(2,0,0) node[above] {$y$};
+
+\coordinate (P) at (1,2,3);
+\draw[->,>=latex,blue,ultra thick] (0,0,0) -- (P) node[above] {$\vec u$};
+\node[left] at (0,0,0) {$O$};
+
+\coordinate (Q) at (1,0,1);
+\draw[->,>=latex,blue,ultra thick] (0,0,0) -- (Q) node[below] {$\vec v$};
+\node[left] at (0,0,0) {$O$};
+
+
+\coordinate (R) at (1,1,-1);
+\draw[->,>=latex,red,ultra thick] (0,0,0) -- (R) node[above] {$\vec w$};
+\node[left] at (0,0,0) {$O$};
+
+\draw[fill=blue!10,opacity=0.5] (0,0,0)--(P)--(2,2,4)--(Q)--cycle;
+
+
+\end{tikzpicture}

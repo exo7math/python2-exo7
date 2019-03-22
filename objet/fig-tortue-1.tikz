@@ -1,0 +1,28 @@
+\begin{tikzpicture}
+
+   %   \draw[lightgray] (-2,-2) grid (4,3);
+
+       \draw[thick] (0,0)--(3,0);
+       \draw[thick] (0,0)--(0,2);
+
+      \coordinate (A) at (3,2);
+      \coordinate (Ax) at (3,0);
+      \coordinate (Ay) at (0,2);
+
+       \draw[ultra thick, blue] (0,0)--(A) node[midway,above,black] {$\ell$};
+       \draw[dashed,gray] (A)--(Ax);
+       \draw[dashed,gray] (A)--(Ay);
+
+       \fill (A) circle (2pt);
+       \fill (0,0) circle (2pt);
+
+ %       \node at (0,-1) [below] {$\pi r^2$};
+       \node at (0,0) [below left] {$(x_0,y_0)$};
+       \node at (A) [above right] {$(x,y)$};
+       \node at (3,0) [below,blue] {$x$};
+       \node at (0,2) [left,blue] {$y$};
+
+       \draw[->,>=latex] (0:1.6) arc (0:33.69:1.6);
+       \node[right] at (16.5:1.6) {$\theta$};
+
+\end{tikzpicture}

@@ -1,0 +1,42 @@
+% Sudoku
+% Author: Roberto Bonvallet
+\begin{tikzpicture}[scale=0.5]
+
+\makeatletter
+\ifx\c@row\undefined\newcounter{row}\fi
+\ifx\c@col\undefined\newcounter{col}\fi
+\makeatother
+
+% \newcounter{row}
+% \newcounter{col}
+
+\newcommand\setrow[6]{
+  \setcounter{col}{1}
+  \foreach \n in {#1, #2, #3, #4, #5, #6} {
+    \edef\x{\value{col} - 0.5}
+    \edef\y{6.5 - \value{row}}
+    \node[anchor=center] at (\x, \y) {\n};
+    \stepcounter{col}
+  }
+  \stepcounter{row}
+}
+
+  \begin{scope}
+    \draw (0, 0) grid (6, 6);
+    \draw[very thick, xscale=3,yscale=2] (0, 0) grid (2,3);
+
+    \setcounter{row}{1}
+    \setrow { }{ }{5}  { }{6}{ }
+    \setrow {6}{ }{ }  { }{ }{ }
+
+    \setrow {4}{ }{ }  {3}{ }{ }
+    \setrow { }{3}{ }  { }{ }{2}
+
+    \setrow { }{ }{ }  { }{ }{1}
+    \setrow { }{5}{ }  {2}{ }{ }
+
+
+    \node[anchor=center] at (3, -1) {Grille $6 \times 6$};
+  \end{scope}
+
+\end{tikzpicture}

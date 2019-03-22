@@ -1,0 +1,39 @@
+\begin{tikzpicture}[scale=1]
+\begin{scope}[xshift=0cm,yshift=0cm]
+\foreach \i/\j in {0/0,1/1,2/2}{
+\draw[|->,>=latex,thick,red] (\i*0.8,0) node[above,black,scale=1]{$\i$} -- ++(0,-1) node[below,blue,scale=1]{$\j$};
+};
+\end{scope}
+
+\begin{scope}[xshift=3cm,yshift=0cm]
+\foreach \i/\j in {0/0,1/2,2/1}{
+\draw[|->,>=latex,thick,red] (\i*0.8,0) node[above,black,scale=1]{$\i$} -- ++(0,-1) node[below,blue,scale=1]{$\j$};
+};
+\end{scope}
+
+\begin{scope}[xshift=6cm,yshift=0cm]
+\foreach \i/\j in {0/1,1/0,2/2}{
+\draw[|->,>=latex,thick,red] (\i*0.8,0) node[above,black,scale=1]{$\i$} -- ++(0,-1) node[below,blue,scale=1]{$\j$};
+};
+\end{scope}
+
+\begin{scope}[xshift=9cm,yshift=0cm]
+\foreach \i/\j in {0/1,1/2,2/0}{
+\draw[|->,>=latex,thick,red] (\i*0.8,0) node[above,black,scale=1]{$\i$} -- ++(0,-1) node[below,blue,scale=1]{$\j$};
+};
+\end{scope}
+
+\begin{scope}[xshift=12cm,yshift=0cm]
+\foreach \i/\j in {0/2,1/0,2/1}{
+\draw[|->,>=latex,thick,red] (\i*0.8,0) node[above,black,scale=1]{$\i$} -- ++(0,-1) node[below,blue,scale=1]{$\j$};
+};
+\end{scope}
+
+\begin{scope}[xshift=15cm,yshift=0cm]
+\foreach \i/\j in {0/2,1/1,2/0}{
+\draw[|->,>=latex,thick,red] (\i*0.8,0) node[above,black,scale=1]{$\i$} -- ++(0,-1) node[below,blue,scale=1]{$\j$};
+};
+\end{scope}
+
+
+\end{tikzpicture}  

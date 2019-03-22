@@ -1,0 +1,26 @@
+\begin{tikzpicture}[scale=2]
+\draw[red,thick] (0,0,0) -- ++(1,0,0) -- ++(0,1,0) -- ++(-1,0,0) -- cycle;
+
+\draw[red] (0,0,-1) -- ++(1,0,0);
+\draw[red] (0,0,-1) -- ++(0,1,0);
+\draw[red,thick] (0,1,-1) -- ++(1,0,0);
+\draw[red,thick] (1,0,-1) -- ++(0,1,0);
+
+%-- ++(-1,0,0) -- cycle;
+
+\draw[red] (0,0,0) -- ++(0,0,-1);
+\draw[red,thick] (1,0,0) -- ++(0,0,-1);
+\draw[red,thick] (1,1,0) -- ++(0,0,-1);
+\draw[red,thick] (0,1,0) -- ++(0,0,-1);
+
+\node[left] at (0,0,0) {$P_0$};
+\node[right] at (1,0,0) {$P_1$};
+\node[right] at (1,1,0) {$P_5$};
+\node[left] at (0,1,0) {$P_4$};
+
+\node[left] at (0,0,-1) {$P_3$};
+\node[right] at (1,0,-1) {$P_2$};
+\node[right] at (1,1,-1) {$P_6$};
+\node[left] at (0,1,-1) {$P_7$};
+
+\end{tikzpicture}

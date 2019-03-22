@@ -1,0 +1,25 @@
+% https://tex.stackexchange.com/questions/103364/
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\alphsize}{26}
+
+    \pgfmathsetmacro{\ang}{360/\alphsize}
+    \pgfmathsetmacro{\d}{3}
+    \pgfmathsetmacro{\op}{98 + \ang/2 - 1.2}
+    \pgfmathsetmacro{\e}{\ang + \ang*\d}
+    \pgfmathsetmacro{\ep}{\op + \ang*\d}
+
+    \foreach \x in {0,\ang,...,360} {
+      \draw[gray] (\x:8em) -- (\x:12em);
+    }
+
+    \foreach \x [count=\xi] in {A,...,Z} {
+      \node[rotate=\ang - \ang*\xi] at (\op - \ang*\xi:11em) {\prive{\large\x}};
+      \node[rotate=\e - \ang*\xi] at (\ep - \ang*\xi:9em) {\public{\large\x}};
+    }
+
+    \draw[thick] (0cm,0cm) circle(12em);
+    \draw[gray] (0cm,0cm) circle(10em);
+    \draw[thick] (0cm,0cm) circle(8em);
+
+  \node at (0,-15em) {\bf D\'ecalage $k=3$};
+  \end{tikzpicture}

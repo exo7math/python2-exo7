@@ -1,0 +1,152 @@
+%\documentclass[11pt]{report}
+\documentclass[10pt,twoside,openright]{report}
+
+%\usepackage[screen]{python}
+\usepackage[print]{python}
+
+% Pour les symboles d'échec (voir "Sudoku")
+\usepackage{skak}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titre + préface + sommaire
+\renewcommand{\contentsname}{Sommaire}
+
+% Préface
+\pagenumbering{roman}
+\import{divers/}{preface_livre_python.tex}
+\debutchapitres
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Les feuilles
+
+\clearemptydoublepage
+
+
+%======================================
+% Mathématiques
+%======================================
+
+\part{Mathématiques avec informatique}
+
+% 1 - Suites arithmétiques et géométriques
+\import{suites/}{suites.tex}
+
+% 2 - Complexes I
+\import{complexes/}{complexes-1.tex}
+
+% 3 - Complexes II
+\import{complexes/}{complexes-2.tex}
+
+% 4 - Dérivée - Zéros de fonctions
+\import{derivee/}{derivee.tex}
+
+% 5 - Exponentielle
+\import{exponentielle/}{exponentielle.tex}
+
+% 6 - Logarithme
+\import{logarithme/}{logarithme.tex}
+
+% 7 - Intégrale
+\import{integrale/}{integrale.tex}
+
+
+
+%======================================
+% Informatique
+%======================================
+\clearemptydoublepage
+\part{Informatique avec mathématiques}
+
+% 1 - Programmation objet
+\import{objet/}{objet.tex}
+
+% 2 - Mouvement des particules
+\import{particule/}{particule.tex}
+
+% 3 - Algorithmes récursifs
+\import{recursivite/}{recursivite.tex}
+
+% 4 - Tri - Complexité
+\import{tri/}{tri.tex}
+
+% 5 - Calculs en parallèle
+\import{parallele/}{parallele.tex}
+
+
+%======================================
+% Projets
+%======================================
+\clearemptydoublepage
+\part{Projets}
+
+% 1 - Automates
+\import{automate/}{automate.tex}
+
+% 2 - Cryptographie
+\import{cryptographie/}{cryptographie.tex}
+
+% 3 - Le compte est bon
+\import{chiffres/}{chiffres.tex}
+
+% 4 - Le mot le plus long
+\import{lettres/}{lettres.tex}
+
+% 5 - Images 3D
+\import{matrice/}{matrice.tex}
+
+% 6 - Mandelbrot
+\import{mandelbrot/}{mandelbrot.tex}
+
+% 7 - Images 3D
+\import{images3d/}{images3d.tex}
+
+% 8 - Sudoku
+\import{sudoku/}{sudoku.tex}
+
+% 9 - Lyapunov
+\import{lyapunov/}{lyapunov.tex}
+
+% 10 - Big data I
+\import{bigdata/}{bigdata-1.tex}
+
+% 11 - Big data II
+\import{bigdata/}{bigdata-2.tex}
+
+%======================================
+% Guides
+%======================================
+\clearemptydoublepage
+\part{Guides}
+
+% 1 - Python
+\import{guide/}{guide-python.tex}
+
+% 2 - Principales fonctions
+\import{guide/}{guide-fonctions.tex}
+
+% 3 - Notes et références
+\import{guide/}{guide-biblio.tex}
+
+
+
+\clearemptydoublepage
+
+%======================================
+% Postface et index
+%======================================
+
+\import{divers/}{postface_livre_python.tex}
+
+\vfill
+\bigskip
+\bigskip
+
+\mycenterline{Version 1.00 -- Avril 2019}
+
+
+
+\end{document}
+

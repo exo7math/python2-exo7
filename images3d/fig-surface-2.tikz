@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+
+ \draw[->,>=latex,thick,gray] (-1,0)--(4,0);
+ \draw[->,>=latex,thick,gray] (0,-1)--(0,5);
+
+
+
+\node[below right,gray] at (0,0) {$0$};
+\node[below] at (1,0) {$x_{\min}$};
+\node[below] at (3,0) {$x_{\max}$};
+
+\draw (1,0)--(1,0.5);
+\draw (3,0)--(3,4.5);
+ \draw [very thick, color=red,samples=10,smooth,domain=0:2] plot(1+\x,0.5+\x*\x);
+
+\end{tikzpicture}

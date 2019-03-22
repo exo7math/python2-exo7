@@ -1,0 +1,364 @@
+\documentclass[11pt,class=report,crop=false]{standalone}
+\usepackage[screen]{../python}
+
+
+\begin{document}
+
+
+%====================================================================
+\chapitre{Exponentielle}
+%====================================================================
+
+\index{exponentielle}
+
+\objectifs{L'exponentielle joue un rôle important dans la vie de tous les jours : elle permet de modéliser la vitesse de refroidissement de votre café, de calculer la croissance d'une population ou de calculer la performance d'un algorithme.}
+
+
+
+\myfigure{0.8}{
+\tikzinput{fig_exponentielle_01}
+}
+
+\bigskip
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[La fonction exponentielle]
+Voici un très court cours sur l'exponentielle.
+\begin{itemize}
+  \item La \defi{fonction exponentielle} est la fonction $\exp : \Rr \to ]0,+\infty[$ qui vérifie :
+  $$\exp(0) = 1 \qquad \text{ et } \qquad \exp(x+y) = \exp(x) \times \exp(y).$$ 
+  
+  \item On note $e = \exp(1) = 2.718281\ldots$
+  
+  \item La fonction exponentielle est strictement croissante, strictement positive,
+  $\lim_{x\to-\infty} \exp(x) = 0$, \ $\lim_{x\to+\infty} \exp(x) = +\infty$.
+  
+  \item $\exp(-x) = \frac{1}{\exp(x)}$, \ $\exp(nx) = (\exp(x))^n$.
+  
+  \item On note $e^x = \exp(x)$, de sorte que \ $e^{x+y} = e^x \cdot e^y$, \ $e^{-x} = 1/e^x$, \ $e^0=1$, \ $e^1=e$, \ $e^{nx} = (e^x)^n$ \ \ldots
+  
+  \item La dérivée de l’exponentielle est elle même : $\exp'(x) = \exp(x)$.
+  
+  \item La \defi{fonction logarithme} $\ln : ]0,+\infty[ \to \Rr$ est la bijection réciproque de la fonction exponentielle, c'est-à-dire :
+  $$y = \exp(x) \iff x = \ln(y).$$
+  Plus précisément :
+  $$\exp\big(\ln(x) \big) \qquad \text{ pour tout } x >0,$$
+  $$\ln\big(\exp(x) \big) \qquad \text{ pour tout } x \in \Rr.$$
+  Le logarithme vérifie $\ln(1)=0$ et $\ln(x\times y) = \ln(x)+\ln(y)$.
+    
+  \item L'exponentielle permet de définir une puissance avec des exposants réels :  
+ $$a^b = \exp\big(b \ln(a) \big).$$
+ Autrement dit $a^b = e^{b\ln(a)}$.
+  \end{itemize}
+
+\end{cours}
+
+
+\begin{cours}[Exponentielle et logarithme avec \Python]
+\sauteligne
+\begin{itemize}
+  \item Pour obtenir une valeur approchée de l'exponentielle en un point il faut importer le module \ci{math} par la commande \ci{from math import *} \  puis utiliser la fonction \ci{exp()}.
+  
+  \index{exp@\ci{exp}}
+  
+  \item Il y a plusieurs fonctions logarithmes accessibles depuis le module \ci{math}. Celle qui correspond au logarithme népérien $\ln(x)$ s'obtient par l'appel à la fonction \ci{log()}. (\`A ne pas confondre avec la notation mathématique $\log(x)$ qui désigne habituellement le logarithme décimal !)
+
+  \item Il est possible de faire des calculs de puissances, sans importer le module \ci{math}, par la commande :
+  \mycenterline{\ci{a ** b}}
+  
+  % \index{**@\ci{**}}
+  \index{puissance}
+\end{itemize}
+
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1a - Découverte de l'exponentielle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+\bigskip
+
+\objectifs{Objectifs des quatre premières activités : découvrir le comportement de l'exponentielle à travers des activités variées.}
+
+
+\begin{activite}[Les grains de riz]
+
+Pour le remercier d'avoir inventé le jeu d'échec, le roi des Indes demande à Sissa ce qu'il veut comme récompense. Sissa répond : \og{}Je souhaiterais que vous déposiez un grain de riz sur la première case, deux grains de riz sur la seconde, quatre grains de riz sur la troisième\ldots{} et ainsi de suite en doublant à chaque case le nombre de grains.\fg{}. \og{}Facile !\fg{} répondit le roi\ldots 
+  
+  \begin{enumerate}
+    \item Combien faut-il de grains de riz au total pour recouvrir l'échiquier de $64$ cases ?
+    
+    \item Un kilogramme de riz contient $50\,000$ grains. Quelle est la masse totale (en tonnes) de tous les grains de riz de l'échiquier ?
+  \end{enumerate}
+  
+  Et toi : préfères-tu recevoir $1$ million d'euros d'un coup ou bien $1$ centime le premier jour, puis $2$ centimes le second, $4$ centimes le jour suivant\ldots{} pendant un mois ?
+
+\end{activite}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1b - Découverte de l'exponentielle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Le nénuphar qui s'agrandit]
+
+  
+  Un nénuphar multiplie sa surface d'un facteur $1.5$ chaque jour.
+  Au dixième jour sa surface vaut $100\;m^2$.
+  \begin{enumerate}
+    \item Quelle surface recouvre le nénuphar au quinzième jour ?
+    
+    \item Quelle surface $S_9$ recouvrait le nénuphar le neuvième jour ? Et le huitième jour ? Calcule la surface $S_0$ que recouvrait le nénuphar le jour initial (le jour $0$).
+    
+    \item Trouve la formule $S(j)$ qui exprime la surface recouverte au jour $j$,
+    en fonction de $j$ et de $S_0$.
+    
+    Définis une fonction \ci{surface_nenuphar(x)} qui renvoie cette surface $S(x)$. Le paramètre $x$ représente le nombre de jours écoulés, mais n'est pas nécessairement un nombre entier.
+    
+    Vérifie que tu peux utiliser indifféremment une commande du type 
+    \ci{a ** x} (pour $a^x$) ou bien
+    \ci{exp(x*log(a))} pour $\exp\big(x\ln(a)\big)$.
+    
+    \item Trouve par tâtonnement ou par balayage au bout de combien de jours la surface du nénuphar est de $10\,000\;m^2$. Donne la réponse avec deux chiffres exacts après la virgule.
+    
+    \item (Si tu maîtrises le logarithme.)
+    Trouve l'expression de $x$ en fonction de la surface couverte $S$.
+    Programme une fonction \ci{jour_nenuphar(S)} qui renvoie le nombre de jours écoulés $x$ pour atteindre la surface $S$ donnée. Par exemple
+   \ci{jour_nenuphar(200)} renvoie $x=11.709\ldots$
+    
+    
+  \end{enumerate} 
+\end{activite}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1c - Découverte de l'exponentielle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Demi-vie et datation au carbone 14]
+
+Le carbone 14 est un élément radioactif présent dans le corps de chaque être vivant et qui disparaît peu à peu à sa mort par désintégration. En mesurant le taux de carbone 14 par rapport au taux de carbone ordinaire (qui lui ne se désintègre pas), on peut dater l'époque à laquelle a vécu l'être vivant (jusqu'à 40\,000 ans en arrière).
+
+Le nombre d'atomes de carbone 14 suit une loi exponentielle donnée par la formule :
+$$N(t) = N_0 \exp\left(-\frac{t \ln(2)}{T}\right)$$
+où :
+\begin{itemize}
+  \item $N(t)$ est le nombre d'atomes restant après $t$ années,
+  \item $N_0$ est le nombre d'atomes initial, on prendra ici $N_0 = 1000$,
+  \item $T$ est la période de demi-vie des atomes de carbone 14, $T = 5730$.
+\end{itemize}
+
+\myfigure{1}{
+\tikzinput{fig_exponentielle_02}
+}
+
+
+  \begin{enumerate}
+    \item Programme une fonction \ci{carbone14(t,N0=1000,T=5730)} qui renvoie
+    $N(t)$. Combien reste-t-il d'atomes sur les $1000$ atomes de départ au bout de $100$ ans ?
+    
+    \item 
+    \begin{enumerate}
+      \item Vérifie mathématiquement et expérimentalement que 
+    $$N(t) = N_0 \cdot 2^{-t/T}.$$
+    
+      \item Combien reste-t-il d'atomes au bout de $T=5730$ années ? Justifie le terme de \og{}demi-vie\fg{} pour la durée $T$.
+    
+      \item Combien reste-t-il d'atomes au bout de $2T$ années ? Au bout de $3T$ années ? \ldots
+    
+      \item Saurais-tu trouver de tête environ combien il reste d'atomes au bout d'une période de  $10$ demi-vies ?
+    \end{enumerate}
+    
+    \item On souhaite dater un échantillon à partir de sa teneur en carbone $14$.  
+    
+    \begin{enumerate}
+      \item Vérifie mathématiquement que 
+    $$t = -\frac{T}{\ln(2)}\ln\left(\frac{N(t)}{N_0} \right).$$
+    
+   \item Programme une fonction \ci{datation14(N,N0=1000,T=5730)}
+ qui renvoie la date de l'échantillon en fonction du nombre d'atomes $N$ mesuré.
+
+  \item Vérifie que si on mesure $N=500$ atomes sur les $N_0=1000$ initial, alors l'échantillon a bien l'âge que l'on pense.
+
+  \item Tu as trouvé un échantillon d'une espèce disparue, l'\emph{Animagus Pythoniscus} 
+avec $N=200$ atomes sur les $N_0=1000$ initial. Quand a vécu cet animal ?
+  \end{enumerate}  
+  \end{enumerate}   
+
+\end{activite}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1d - Découverte de l'exponentielle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[La loi de refroidissement de Newton]
+  
+  On place un corps chaud de température initiale $T_0$ (par exemple $T_0 = 100\,{}^\circ C$) dans une pièce plus froide de température $T_\infty$ (par exemple $T_\infty = 25\,{}^\circ C$). Le corps chaud se refroidit progressivement jusqu'à atteindre la température de la pièce (au bout d'un temps infini). 
+  La loi de refroidissement de Newton exprime le température $T(t)$ du corps en fonction du temps $t$ (en minutes) :
+  $$T(t) - T_\infty = (T_0 - T_\infty) e^{-kt}$$
+  où $k$ est une constante que l'on va déterminer expérimentalement.
+  
+\myfigure{1}{
+\tikzinput{fig_exponentielle_03}
+} 
+  
+  \begin{enumerate}
+    \item Vérifie mathématiquement que $T(0)=T_0$ et que $\lim_{t\to+\infty} T(t) = T_\infty$. 
+    
+    \item On fixe $T_0 = 100\,{}^\circ C$, $T_\infty = 25\,{}^\circ C$ et on va déterminer $k$ à l'aide d'une information supplémentaire.
+    On mesure qu'à l'instant $t_1 = 10$ minutes, la température du corps est $T_1 = 65\,{}^\circ C$.
+    
+    Prouve que la constante $k$ est donnée par la formule :
+    $$k = -\frac{1}{t_1} \ln\left(\frac{T_1-T_\infty}{T_0-T_\infty} \right).$$ 
+    
+	\item Maintenant que tu connais $k$, programme une fonction \ci{temperature(t)} qui renvoie la température $T(t)$.
+  Quelle est la température au bout de $20$ minutes de refroidissement ?	
+ 
+     \item Par tâtonnement, par balayage ou en résolvant une équation, trouve au bout de combien de temps (arrondi à la minute près) la température du corps atteint $30\,{}^\circ C$.
+         
+  \end{enumerate}   
+
+\end{activite}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 2 - Définition de l'exponentielle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Définition de l'exponentielle]
+
+\objectifs{Objectifs : programmer le calcul de $\exp(x)$ par différentes méthodes.}
+
+\begin{enumerate}
+  \item \textbf{Limite d'une suite.}
+  On a  
+  $$\exp(x) = \lim_{n\to+\infty} \left(1+\frac xn\right)^n.$$
+   Déduis-en une fonction \ci{exponentielle_limite(x,n)} qui renvoie une valeur approchée de $\exp(x)$ pour une valeur de $n$ (assez grande) fixée.
+   
+   Teste ta fonction pour calculer $\exp(2.8)$, avec $n=10$, puis $100$\ldots{} Compare tes résultats avec la fonction \Python{} \ci{exp()}.
+   
+   \item \textbf{Factorielle.} Programme une fonction \ci{factorielle(n)} qui renvoie 
+   $$n! = 1\times 2 \times 3 \times \cdots \times n.$$
+   \emph{Indications.} Le plus simple est d'initialiser une variable \ci{fact} à $1$ puis de programmer une boucle. Par convention $0! = 1$.  
+   Par exemple $10! = 3\,628\,800$.
+   
+   \item \textbf{Somme infinie.}
+   On note 
+   $$S_n = 1 + \frac{x}{1!} + \frac{x^2}{2!}+ \frac{x^3}{3!} + \cdots + \frac{x^k}{k!}+\cdots + \frac{x^n}{n!} =  \sum_{k=0}^n \frac{x^k}{k!}.$$
+   Alors 
+   $$\exp(x) = \lim_{n\to+\infty} S_n.$$
+   Déduis-en une fonction \ci{exponentielle_somme(x,n)} qui renvoie la valeur de la somme $S_n$   et qui fournit ainsi  une valeur approchée de $\exp(x)$.
+   
+  Teste ta fonction avec $n=10$, $n=15$\ldots   
+   
+   \item \textbf{Méthode de Hörner.} Afin de minimiser les multiplications (du genre $x^k = x \times x \times x \cdots$) voici la formule de Hörner qui est juste une réécriture de la somme $S_n$  définie à la question précédente :
+   $$S_n = 1 + \frac{x}{1} \left(1 + \frac{x}{2} \left(1 + + \frac{x}{3} \left(\cdots  + \frac{x}{n-1}\left(1+\frac{x}{n}\right) \right) \right)\right)$$
+  Et bien sûr :
+  $$\exp(x) = \lim_{n\to+\infty} S_n.$$
+  
+
+  Programme une fonction \ci{exponentielle_horner(x,n)} qui implémente cette méthode et renvoie la valeur de $S_n$. 
+  
+  \emph{Indications.} Il faut partir du terme le plus imbriqué $1+\frac{x}{n}$ puis construire cette expression à rebours à l'aide d'une boucle.
+  
+   \item (Un peu de théorie plus difficile.)  Compare le nombre de multiplications effectuées pour les méthodes des deux questions précédentes pour le calcul de $S_n$. Par exemple le calcul de $\frac{x^3}{3!}$ nécessite deux multiplications pour $x^3 = x \times x \times x$ et deux multiplications pour $3! = 1 \times 2 \times 3$. (Note : on ne compte pas les additions car c'est une opération peu coûteuse, et ici on ne tient pas compte des divisions car il y en a autant pour les deux méthodes.)
+
+
+  \item \textbf{Fraction continue d'Euler.}
+  Voici une nouvelle formule pour $S_n = 1 + \frac{x}{1!} + \frac{x^2}{2!}+ \cdots + \frac{x^n}{n!}$ sous la forme d'une succession de fractions :
+$$S_n = 
+\dfrac{1}{
+  1-\dfrac{x}{
+    1+x-\dfrac{x}{
+      2+x-\dfrac{2x}{
+        3+x-\dfrac{3x}{
+          4+x - \cdots  \dfrac{\ddots}{n-1 + x  - \dfrac{(n-1)x}{n+x}}
+                     }
+                   }
+                }
+            } 
+          } 
+$$  
+On programme cette formule en partant de la fraction tout en bas par l'algorithme suivant :
+  \begin{algorithme}
+  \sauteligne 
+ \begin{itemize}
+   \item Action : calculer la somme $S_n$ en fonction de $x$.
+  
+  \item Initialiser $S \leftarrow 0$.
+  
+  \item Pour $k$ allant de $n$ à $1$ (donc à rebours), faire :
+     $$S \leftarrow \dfrac{x}{k+x-kS}$$ 
+ 
+  \item \`A la fin, faire $S \leftarrow \dfrac{1}{1-S}$.
+  
+  \item Renvoyer $S$.
+ \end{itemize}  
+ \end{algorithme}
+  
+  Programme cet algorithme en une fonction \ci{exponentielle_euler(x,n)}.
+  
+\item \textbf{Exponentielle de grandes valeurs.}
+  Les fonctions précédentes sont valables quel que soit $x$, mais pour de grandes valeurs de $x$ (par exemple $x=100.5$) il faut de grandes valeurs de $n$ pour obtenir une bonne approximation de $\exp(x)$. Pour remédier à ce problème nous allons voir un algorithme qui permet de se ramener au calcul de l'exponentielle d'un réel $f \in [0,1[$ pour lequel les fonctions précédentes sont efficaces.
+  
+  L'idée est de décomposer $x$ en sa partie entière plus sa partie fractionnaire :
+  $$x = k + f \quad \text{ où $k$ est un entier et $0 \le f < 1.$}$$
+  On utilise la propriété de l'exponentielle :
+  $$e^x = e^{k+f} = e^k \times e^f.$$
+  Maintenant :
+  \begin{itemize}
+    \item $e^f = \exp(f)$ s'obtient par le calcul de l'exponentielle d'un petit réel $0\le f < 1$ et se calcule bien par l'une des méthodes précédentes. 
+    \item $e^k = e \times e \times \cdots \times e$ est le produit de plusieurs
+    $e$, c'est donc un simple calcul de puissance (et pas vraiment un calcul d'exponentielle). 
+    \item Il faut au préalable avoir calculé une fois pour toutes la valeur de la constante $e = \exp(1) = 2.718\ldots$ par l'une des méthodes précédentes.
+  \end{itemize}
+  
+  Voici l'algorithme à programmer en une fonction \ci{exponentielle_astuce(x,n)} :
+    \begin{algorithme}
+  \sauteligne 
+ \begin{itemize}
+   \item Action : calculer une approximation de $\exp(x)$.
+  
+  \item Préalable : calculer une fois pour toutes la valeur de $e=\exp(1)$ avec le maximum de précision.
+     
+  \item Poser $k$ la partie entière de $x$ (utiliser \ci{floor()}).
+
+  \item Poser $f = x-k$.
+  
+  \item Calculer une valeur approchée de $\exp(f)$ par l'une des méthodes précédentes en fonction d'un paramètre $n$.
+  
+  \item Calculer $\exp(k)=e^k$ par le calcul de puissance $e\times e \times \cdots$
+  \item Renvoyer l'approximation correspondant au résultat $\exp(x) = \exp(k)\times \exp(f)$. 
+  
+ \end{itemize}  
+ \end{algorithme}    
+\end{enumerate}   
+\end{activite}
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{activite}[]
+%
+%
+%\objectifs{À trouver (si besoin ?) ...}
+%
+%% \objectifs{Objectifs : .}
+%
+%%\begin{enumerate}
+%  \item 
+%\end{enumerate} 
+%
+%\end{activite}
+
+\end{document}

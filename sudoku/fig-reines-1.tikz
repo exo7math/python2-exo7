@@ -1,0 +1,33 @@
+\begin{tikzpicture}[thick,scale=0.6, every node/.style={transform shape}]
+
+
+
+% Echequier
+
+\foreach \y in {0,2,...,6}{
+    \foreach \x in {0,2,...,6}{
+        \fill[black!20] (\x,\y) rectangle (1+\x,1+\y) rectangle (2+\x,2+\y);
+}}
+
+\draw[ultra thick,black!20] (0,0) rectangle ++(8,8);
+
+% Reine : utilise le package skak
+\node[scale=2] at (2.5,3.5) {\symqueen};
+
+% Horizontal
+\draw[red,ultra thick,<-,>=latex] (0.3,3.5) -- (2,3.5);
+\draw[red,ultra thick,<-,>=latex] (7.7,3.5) -- (3,3.5);
+
+% Vertical
+\draw[red,ultra thick,->,>=latex] (2.5,4) -- (2.5,7.7);
+\draw[red,ultra thick,->,>=latex] (2.5,3) -- (2.5,0.3);
+
+% Diagonale 1
+\draw[red,ultra thick,->,>=latex] (3,3) -- (6-0.3,0.3);
+\draw[red,ultra thick,->,>=latex] (2,4) -- (0.3,6-0.3);
+
+% Diagonale 2
+\draw[red,ultra thick,->,>=latex] (3,4) -- (6-0.3,8-0.3);
+\draw[red,ultra thick,->,>=latex] (2,3) -- (0.3,1.3);
+
+\end{tikzpicture}

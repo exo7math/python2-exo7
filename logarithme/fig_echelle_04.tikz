@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+
+\draw[gray] (0,0) grid ++(8,6);
+
+\draw[->,>=latex,very thick,gray] (-0.5,0) -- (9,0) node[below,black]{$x$};
+\draw[->,>=latex,very thick,gray] (0,-0.5) -- (0,7) node[left,black]{$y$};
+
+% \draw[very thick,red!30] (0,1) -- (8,5);
+
+\foreach\x in {1,...,8}{
+\pgfmathsetmacro{\y}{2*\x^0.5)};
+  \fill[red] (\x,\y) circle (3pt);
+}
+
+\node at (4,-1) {\bf Points de coordonn\'ees $(x,y)$};
+
+\end{tikzpicture} 

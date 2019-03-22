@@ -1,0 +1,18 @@
+\begin{tikzpicture}[xscale=2.5]
+
+      \draw[->,>=latex, gray] (-0.5,0)--(2.5,0) node[below,black] {$x$};
+      \draw[->,>=latex, gray] (0,-2.5)--(0,3) node[right,black] {$y$};
+
+\begin{scope}[red]
+	\fill (1,0) ellipse (0.4pt and 1pt) node[above] {$1$};
+	\fill (2,0) ellipse (0.4pt and 1pt)  node[above] {$2$};
+	\fill (1.5,0) ellipse (0.4pt and 1pt)  node[rotate=270,right] {$1.5$};
+	\fill (1.25,0) ellipse (0.4pt and 1pt)  node[rotate=270,left] {$1.25$};
+	\fill (1.375,0) ellipse (0.4pt and 1pt)  node[rotate=270,left] {$1.375$};
+\end{scope}
+
+	\draw[ultra thick,gray,domain=0:2.2,smooth] plot (\x,{\x*\x-2}) node[right] {$x^2-2$};
+	\draw[ultra thick,blue,domain=1:2,smooth] plot (\x,{\x*\x-2});
+
+
+\end{tikzpicture}

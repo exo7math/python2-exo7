@@ -1,0 +1,22 @@
+\begin{tikzpicture}[scale=1]
+
+% Axes
+     \draw[->,>=latex,thick, gray] (-3,-1)--++(14,0) node[below,black] {$x$};
+     \draw[->,>=latex,thick, gray] (-3,-1)--++(0,12) node[right,black] {$y$};  
+
+% Labels
+  \foreach \x in {0,...,10}{
+    \draw[thick, blue] (\x,0) --++ (0,10);
+}
+  \foreach \y in {0,...,10}{
+    \draw[thick, red] (0,\y) --++ (10,0);
+}
+
+\draw[gray] (0,0) --++(0,-1.1)  node[below,black] {$x_{\min}$};
+\draw[gray] (10,0) --++(0,-1.1)  node[below,black] {$x_{\max}$};
+
+
+\draw[gray] (0,0) --++(-3.1,0)  node[left,black] {$y_{\min}$};
+\draw[gray] (0,10) --++(-3.1,0)  node[left,black] {$y_{\max}$};
+
+\end{tikzpicture}

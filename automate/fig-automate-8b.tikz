@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+
+% Automate
+
+% [0, 0, 1, 0, 1] devient [0, 0, 1, 1, 1]
+
+\fill[black!50] (3,0) rectangle ++(1,1);
+\draw[blue,very thick] (0,0) grid ++(7,1);
+\node[black,right] at (8,0.5) {\bf ligne initiale};
+
+
+\draw[|-|,red,ultra thick] (2,-0.2) -- ++(3,0);
+\draw[->,>=latex,red,ultra thick] (3.5,-0.2) -- ++(0,-1.5);
+
+\draw[|-|,orange,ultra thick] (3,-0.4) -- ++(3,0);
+\draw[->,>=latex,orange,ultra thick] (4.5,-0.4) -- ++(0,-1.3);
+
+\begin{scope}[yshift=-3cm]
+
+\fill[black!50] (3,0) rectangle ++(1,1);
+\fill[black!50] (4,0) rectangle ++(1,1);
+\draw[blue,very thick] (0,0) grid ++(7,1);
+
+\node[black,right] at (8,0.5) {\bf premi\`ere \'evolution};
+
+
+\end{scope}
+
+
+
+\end{tikzpicture}

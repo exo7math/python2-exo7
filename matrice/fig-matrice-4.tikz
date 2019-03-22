@@ -1,0 +1,43 @@
+\usetikzlibrary{arrows,matrix,positioning}
+\tikzset{node style ge/.style={circle}}
+
+\begin{tikzpicture}
+
+\def\rien{\phantom{\times}}
+\def\rienn{\times}
+
+
+\matrix (A) [matrix of math nodes,column sep=1 em,row sep=1em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ %left delimiter  = (, right delimiter = )
+]
+{ 
+m_{i-1,j-1} & m_{i-1,j} & m_{i-1,j+1}   \\
+m_{i,j-1}  &m_{i,j}  & m_{i,j+1} \\
+m_{i+1,j-1} & m_{i+1,j} & m_{i+1,j+1} \\
+};
+
+\fill[opacity=.3,fill=black] (A-1-1.north west) rectangle (A-3-3.south east);
+
+
+\begin{scope}[xshift=6cm]
+% les matrices
+\matrix (B) [matrix of math nodes,column sep=1 em,row sep=1em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ %left delimiter  = (, right delimiter = )
+]
+{ 
+m_{(i-1)\%n,(j-1)\%p} & m_{(i-1)\%n,j} & m_{(i-1)\%n,(j+1)\%p}   \\
+m_{i,(j-1)\%p}  &m_{i,j}  & m_{i,(j+1)\%p} \\
+m_{(i+1)\%n,(j-1)\%p} & m_{(i+1)\%n,j} & m_{(i+1)\%n,(j+1)\%p} \\
+};
+
+\fill[opacity=.3,fill=black] (B-1-1.north west) rectangle (B-3-3.south east);
+\end{scope}
+
+
+
+
+\end{tikzpicture}

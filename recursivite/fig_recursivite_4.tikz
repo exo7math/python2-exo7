@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+\def\dx{50pt}
+\def\dy{40pt}
+\node (ng) at (-\dx, 0) {$C_{k-1,n-1}$};
+\node (nd) at (0, 0) {$C_{k,n-1}$};
+\node (n) at (0, -\dy) {$C_{k,n}$};
+\draw [->,>=latex] (ng) -- (n);  
+\draw [->,>=latex] (nd) -- (n);
+\node[blue,scale=1.2] at (-10pt,-18pt) {$+$};
+\end{tikzpicture}

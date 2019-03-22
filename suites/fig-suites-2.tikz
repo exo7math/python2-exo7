@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+
+\draw[ultra thick,gray] (-1,0) -- (17,0);
+
+\foreach \x in {0,...,4}{
+  \fill[blue] (2^\x,0) circle (3pt);
+  \node[above] at (2^\x,0) {$u_\x$};
+}
+\foreach \x in {0,...,3}{
+\draw[->,>=latex,red] (2^\x+0.1,-0.2) to[bend right]node[midway, below]{$\times q$} ++(2^\x-0.2,0) ;
+}
+
+\end{tikzpicture}

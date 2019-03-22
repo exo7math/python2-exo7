@@ -1,0 +1,23 @@
+\begin{tikzpicture}[scale=2]
+
+\begin{scope}[xshift=0cm]
+\draw[red] (0,0,0)--++(1,0,-3)--++(1,2,-1)--++(-1,0,3)--cycle;
+\draw[red] (2,0,1)--++(1,0,-3)--++(1,2,-1)--++(-1,0,3)--cycle;
+
+\draw[red] (0,0,0)--++(2,0,1)--++(1,2,-1)--++(-2,0,-1)--cycle;
+\draw[red] (1,0,-3)--++(2,0,1)--++(1,2,-1)--++(-2,0,-1)--cycle;
+
+\draw[->,>=latex,ultra thick,red] (0,0,0) -- (2,0,1) node[midway,below] {$\vec u$};
+\draw[->,>=latex,ultra thick,red] (0,0,0) -- (1,0,-3) node[midway,above] {$\vec v$};
+\draw[->,>=latex,ultra thick,red] (0,0,0) -- (1,2,-1) node[midway,left] {$\vec w$};
+ \end{scope}
+
+\begin{scope}[xshift=7cm,yshift=0.5cm]
+\draw[->,>=latex,ultra thick,red] (0,0,0) -- (2,0,1) node[midway,below] {$\vec u$};
+\draw[->,>=latex,ultra thick,red] (0,0,0) -- (1,0,-3) node[midway,above] {$\vec v$};
+\draw[->,>=latex,ultra thick,red] (0,0,0) -- (1,2,-1) node[midway,left] {$\vec w$};
+
+\draw[red] (2,0,1)--(1,0,-3)--(1,2,-1)--cycle;
+ \end{scope}
+
+\end{tikzpicture}

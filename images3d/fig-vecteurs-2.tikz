@@ -1,0 +1,15 @@
+\begin{tikzpicture}[scale=1]
+
+\begin{scope}[rotate=10]
+\coordinate (P) at (4,3);
+\draw[->,>=latex,blue,ultra thick] (0,0) to node[midway,above]{$\|\vec u\|$} (P) node[above] {$\vec u$};
+
+\coordinate (Q) at (7,0);
+\draw[->,>=latex,red,ultra thick] (0,0,0) to node[midway,below]{$\|\vec v\|$} (Q) node[above] {$\vec v$};
+
+\draw[gray,dashed] (4,0,0) -- (4,3,0);
+
+\draw[double] (2,0,0) arc  (0:38:2) node[midway,right] {$\theta$};
+\end{scope}
+
+\end{tikzpicture}

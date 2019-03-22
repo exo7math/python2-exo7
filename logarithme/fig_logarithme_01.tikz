@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+
+      \draw[->,>=latex, gray] (-0.5,0)--(5.5,0) node[below,black] {$x$};
+      \draw[->,>=latex, gray] (0,-4)--(0,3.2) node[right,black] {$y$};
+
+	  \draw[ultra thick, color=red,domain=0.02:5,samples=50,smooth] plot (0.01+\x,{ln(\x)}) node[above] {$\ln(x)$};
+
+
+	 \draw[dashed,thick] (2.718,0) node[below] {$e$}-- (2.718,1)  --(0,1);
+
+
+     \fill (2.718,0) circle (1.5pt);
+     \fill (1,0) circle (2pt);
+     \fill (0,1) circle (2pt);
+     \node at (0,1)[left] {$1$};
+     \node at (1,0)[below right] {$1$};
+     \node at (0,0)[below left] {$0$};
+\end{tikzpicture}

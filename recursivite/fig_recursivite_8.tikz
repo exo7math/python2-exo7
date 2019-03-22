@@ -1,0 +1,11 @@
+\begin{tikzpicture}[scale=1]
+
+\node (O) at (0,0) {};
+
+\draw[ultra thick,red] (O.south) --  node[midway, left=1em,black,scale=0.8] {$0$} ++(-3,-1.5) node[below] (A) {$[0]$};
+\draw[ultra thick,red] (O.south) --  node[midway, left,black,scale=0.8] {$1$} ++(0,-1.5) node[below] (B) {$[1]$};
+\draw[ultra thick,red] (O.south) --  node[midway, right=1em,black,scale=0.8] {$2$} ++(+3,-1.5) node[below] (C) {$[2]$};
+
+\node at (0,-3.5) {\bf Arbre pour $n=1$.};
+
+\end{tikzpicture}  

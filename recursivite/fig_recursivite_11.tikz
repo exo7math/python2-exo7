@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=1]
+
+\node (O) at (0,0) {$[ [1,2], 3, [9,8,7,[6,5]], [[1],[2,3]] ]$};
+
+\draw[ultra thick,red] (O.south) -- ++(-4,-1.7) node[below,black] (A) {$[1,2]$};
+
+\draw[ultra thick,red] (A.south) --  ++(-1,-1.7) node[below]  {$1$};
+\draw[ultra thick,red] (A.south) --  ++(+1,-1.7) node[below]  {$2$};
+
+\draw[ultra thick,red] (O.south) --  ++(-2.1,-1.8) node[below] {$3$};
+\draw[ultra thick,red] (O.south) -- ++(-0,-1.7) node[below,black] (C) {$[9,8,7,[6,5]]$};
+
+\draw[ultra thick,red] (C.south) --  ++(-1.5,-1.7) node[below]  {$9$};
+\draw[ultra thick,red] (C.south) --  ++(-1,-1.7) node[below]  {$8$};
+\draw[ultra thick,red] (C.south) --  ++(-0.5,-1.7) node[below]  {$7$};
+\draw[ultra thick,red] (C.south) -- ++(1,-1.7) node[below,black] (E) {$[6,5]$};
+
+\draw[ultra thick,red] (E.south) --  ++(-0.5,-1.7) node[below]  {$6$};
+\draw[ultra thick,red] (E.south) --  ++(0.5,-1.7) node[below]  {$5$};
+
+\draw[ultra thick,red] (O.south) -- ++(3,-1.7) node[below,black] (D) {$[[1],[2,3]]$};
+\draw[ultra thick,red] (D.south) -- ++(-0.5,-1.7) node[below,black] (F) {$[1]$};
+\draw[ultra thick,red] (F.south) --  ++(0,-1.7) node[below]  {$1$};
+\draw[ultra thick,red] (D.south) -- ++(1,-1.7) node[below,black] (G) {$[2,3]$};
+\draw[ultra thick,red] (G.south) --  ++(-0.5,-1.7) node[below]  {$2$};
+\draw[ultra thick,red] (G.south) --  ++(0.5,-1.7) node[below]  {$3$};
+\end{tikzpicture}  

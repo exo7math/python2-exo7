@@ -1,0 +1,25 @@
+%% Pour figure titre \part python1
+\usetikzlibrary{lindenmayersystems}
+% Author: marsupilam
+% tex.stackexchange.com/questions/386964/
+\usetikzlibrary[shadings]
+\pgfdeclarelindenmayersystem{Sierpinski arrow}{
+  \symbol{X}{\pgflsystemdrawforward}
+  \symbol{Y}{\pgflsystemdrawforward}
+  \rule{X -> Y-X-Y}
+  \rule{Y -> X+Y+X}
+};
+%% Fin figure \part python1
+\begin{tikzpicture}
+
+\foreach \k in {2,3,4,5,6,7}
+{\shadedraw [bottom color=red!80, top color=red!10, draw=red!80!black,,xshift=\k*10 cm,rotate=30-30*(-1)^\k]
+ %\draw
+  [lindenmayer system={Sierpinski arrow,angle=60,axiom=X,step=200pt/2^\k,order=\k}]
+ lindenmayer system;
+}
+
+%     \shadedraw [bottom color=red!80, top color=red!10, draw=red!80!black]
+%     [l-system={Hilbert curve, axiom=L, order=5, step=8pt, angle=90}]
+%     lindenmayer system; 
+\end{tikzpicture}

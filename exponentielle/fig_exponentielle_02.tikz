@@ -1,0 +1,21 @@
+\begin{tikzpicture}[scale=1.5]
+
+  \draw[->,>=latex,thick,gray] (-0.5,0) -- (5.3,0) node[below,black] {$t$};
+  \draw[->,>=latex,thick,gray] (0,-0.5) -- (0,2.5) node[left,black] {$N(t)$};
+
+
+  \draw[ultra thick, color=red,domain=0:5, smooth,samples=100] plot (\x,{2*exp(-\x*0.5)});
+
+ \fill[blue] (0,0)  circle (1.2pt)  node[below left]  {$0$};
+
+% \draw[thick, color=blue] (0,2)--(1,0) node[pos=0.8, right] {$(T)$};
+ \fill[blue] (0,2)  circle (1.2pt) node[below, left]  {$N_0$};
+% \fill[blue] (1,0)  circle (1pt) node [below right] {$\tau$};
+
+\draw[dashed, color=green!60!black] (0,1)--(1.4,1)--(1.4,0);
+ \fill[green!60!black] (0,1)  circle (1.2pt) node[below, left] {$\frac{N_0}{2}$};
+ \fill[green!60!black] (1.4,0)  circle (1.2pt)  node[below]  {$T$};
+
+
+
+\end{tikzpicture}

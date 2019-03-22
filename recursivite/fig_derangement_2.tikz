@@ -1,0 +1,13 @@
+\begin{tikzpicture}[scale=1]
+
+\foreach \i/\ii/\j in {0/0/{a_0},1/1/{a_1},2/2/{a_2},3/{\cdots}/{\cdots},4/{\cdots}/{\cdots},5/n-1/{a_{n-1}}}{
+\draw[|->,>=latex,thick,red] (\i*1,0) node[above,black,scale=1.1]{$\ii$} -- ++(0,-1) node[below,blue,scale=1.1]{$\j$};
+};
+
+\draw [->,>=latex,blue!20,line width=5] (6,-1.2) to[bend left=10] ++(3,0);
+
+\begin{scope}[xshift=12cm,yshift=-1.2cm]
+\node[scale=1.2,blue] at (0,0) {$[a_0,\,a_1,\,a_2,\,\ldots,\,a_{n-1}]$};
+\end{scope}
+
+\end{tikzpicture}  

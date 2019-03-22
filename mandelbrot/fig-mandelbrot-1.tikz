@@ -1,0 +1,50 @@
+\begin{tikzpicture}
+
+\begin{scope}
+
+       \draw[->,>=latex,thick,gray] (-4,0) -- (4,0) node[below]{$x$};
+       \draw[->,>=latex,thick,gray] (0,-3) -- (0,3) node[left]{$y$};
+
+       \draw[thick,blue] (-1.5,-1) rectangle ++(6*0.66,4*0.66);
+   
+       \draw[thick,dashed] (-1.5,-1) -- ++(0,-0.5) node[below] {$x_{\min}$};
+       \draw[thick,dashed] (2.46,-1) -- ++(0,-0.5) node[below] {$x_{\max}$};
+
+       \draw[thick,dashed]  (-1.5,-1) -- ++(-0.5,0) node[left] {$y_{\min}$};
+       \draw[thick,dashed]  (-1.5,1.65) -- ++(-0.5,0) node[left] {$y_{\max}$};
+
+	   \draw (-1.5+0.66,1) rectangle ++(0.5*0.66,-0.5*0.66);
+
+%	  \draw[<->,>=latex] (-1.5+0.66,0.5) -- ++(0.5,0) node[midway,below] {pas${}_x$};
+
+       \draw[thick,dashed] (-1.5+0.66,1) -- (-1.5+0.66,2-0.33) node[above] {$x$};
+       \draw[thick,dashed] (-1.5+0.66,1) -- (-1.5,1) node[left] {$y$};
+
+\end{scope}
+
+
+\begin{scope}[xshift=9cm,yshift=2cm]
+
+       \draw[thick,red] (0.1,-0.1) rectangle (6,-4);
+
+       \draw[->,>=latex,thick,gray] (0,0) -- ++(7,0) node[below]{$i$};
+       \draw[->,>=latex,thick,gray] (0,0) -- ++(0,-5) node[left]{$j$};
+
+	\draw[<->,>=latex,red] (0.1,-4.3) -- ++(5.9,0) node[midway,below] {$N_x$};
+	\draw[<->,>=latex,red] (6.3,-0.1) -- ++(0,-3.9) node[midway,right] {$N_y$};
+
+	\draw (1,-1) rectangle ++(0.5,-0.5);
+
+       \draw[thick,dashed] (1,-1) -- (1,0.5) node[above] {$i$};
+       \draw[thick,dashed] (1,-1) -- (0,-1) node[left] {$j$};
+       \draw[thick,dashed] (1.5,-1) -- (1.5,0) node[above] {$i+1$};
+       \draw[thick,dashed] (1,-1.5) -- (0,-1.5) node[left] {$j+1$};
+
+\end{scope}
+
+\draw [->,>=latex,blue!20,ultra thick,line width=5] (4,-2) to[bend right=10] ++(4,0);
+
+\node at (0,-4) {\bf Plan des coordonn\'ees $(x,y)$};
+\node at (12,-4) {\bf \'Ecran des coordonn\'ees $(i,j)$};
+
+\end{tikzpicture} 

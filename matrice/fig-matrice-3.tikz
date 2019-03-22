@@ -1,0 +1,61 @@
+\usetikzlibrary{arrows,matrix,positioning}
+\tikzset{node style ge/.style={circle}}
+
+\begin{tikzpicture}
+
+\def\rien{\phantom{\times}}
+\def\rienn{\times}
+\def\cercle{\Large\circ}
+% les matrices
+
+
+\matrix (A) [matrix of math nodes,column sep=0.125 em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ left delimiter  = (, right delimiter = )]
+{ 
+\rienn & \rienn & \rienn & \rienn & \rienn & \rienn  \\
+ \rienn & \rienn & \rienn & \rienn & \rienn & \rienn\\
+\rienn & \rienn & \rienn & \rienn & \rienn & \rienn \\
+\rienn & \rienn & \cercle & \rienn  &\rienn & \rienn \\
+\rienn & \rienn & \rienn & \rienn  & \rienn & \rienn \\
+};
+
+\fill[opacity=.3,fill=black] (A-3-2.north west) rectangle (A-5-4.south east);
+
+
+\begin{scope}[xshift=5cm]
+\matrix (A) [matrix of math nodes,column sep=0.125 em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ left delimiter  = (, right delimiter = )]
+{ 
+\rienn & \rienn & \rienn & \rienn & \rienn & \rienn  \\
+ \rienn & \rienn & \rienn & \rienn & \rienn & \rienn\\
+\rienn & \rienn & \rienn & \rienn & \rienn & \cercle \\
+\rienn & \rienn & \rienn & \rienn  &\rienn & \rienn \\
+\rienn & \rienn & \rienn & \rienn  & \rienn & \rienn \\
+};
+
+\fill[opacity=.3,fill=black] (A-2-5.north west) rectangle (A-4-6.south east);
+\fill[opacity=.3,fill=black] (A-2-1.north west) rectangle (A-4-1.south east);
+\end{scope}
+
+\begin{scope}[xshift=10cm]
+\matrix (A) [matrix of math nodes,column sep=0.125 em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ left delimiter  = (, right delimiter = )]
+{ 
+\rienn & \rienn & \rienn & \rienn & \rienn & \rienn  \\
+ \rienn & \rienn & \rienn & \rienn & \rienn & \rienn\\
+\rienn & \rienn & \rienn & \rienn & \rienn & \rienn \\
+\rienn & \rienn & \rienn & \rienn  &\rienn & \rienn \\
+\rienn & \rienn & \rienn & \cercle  & \rienn & \rienn \\
+};
+
+\fill[opacity=.3,fill=black] (A-4-3.north west) rectangle (A-5-5.south east);
+\fill[opacity=.3,fill=black] (A-1-3.north west) rectangle (A-1-5.south east);
+\end{scope}
+
+\end{tikzpicture}

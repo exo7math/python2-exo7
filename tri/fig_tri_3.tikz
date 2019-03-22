@@ -1,0 +1,147 @@
+\begin{tikzpicture}
+
+\newcommand{\boites}[1]{
+\draw[gray,ultra thick]  (0,0) -- ++ (#1,0);
+ \foreach \i in {0,...,#1}{
+\draw[gray,ultra thick]  (\i,0) -- ++ (0,0.7);
+};
+ }
+
+\node at (0,3) {\bf Tri \`a bulles};
+
+\node at (-5,1.5) {\bf Premier passage};
+\node at (5,1.5) {\bf Deuxi\`eme passage};
+
+\begin{scope}[xshift=-8cm]
+
+
+\boites{6};
+ \foreach \i/\n in {0/7, 1/5, 2/1, 3/4, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+
+\draw[|-|,red,thick] (0,-0.3)--++(2,0);
+\draw (1,-0.6) to[bend left=10] ++(-2,0) node[left] {\'echange si besoin};
+
+\draw[red,thick] (1,-0.3) -- ++(0,-0.7);
+
+\end{scope}
+
+\begin{scope}[xshift=-8cm,yshift=-2cm]
+\boites{6};
+ \foreach \i/\n in {0/5, 1/7, 2/1, 3/4, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+
+\draw[|-|,red,thick] (0,1)--++(2,0);
+\draw[|-|,red,thick] (1,-0.3)--++(2,0);
+\draw (2,-0.6) to[bend left=10] ++(-3,0) node[left] {\'echange si besoin};
+
+\draw[red,thick] (2,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=-8cm,yshift=-4cm]
+\boites{6};
+ \foreach \i/\n in {0/5, 1/1, 2/7, 3/4, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+
+\draw[|-|,red,thick] (1,1)--++(2,0);
+\draw[|-|,red,thick] (2,-0.3)--++(2,0);
+\draw[red,thick] (3,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=-8cm,yshift=-6cm]
+\boites{6};
+ \foreach \i/\n in {0/5, 1/1, 2/4, 3/7, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+
+\draw[|-|,red,thick] (2,1)--++(2,0);
+\draw[|-|,red,thick] (3,-0.3)--++(2,0);
+\draw[red,thick] (4,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=-8cm,yshift=-8cm]
+\boites{6};
+ \foreach \i/\n in {0/5, 1/1, 2/4, 3/7, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+
+\draw[|-|,red,thick] (3,1)--++(2,0);
+\draw[|-|,red,thick] (4,-0.3)--++(2,0);
+\draw[red,thick] (5,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=-8cm,yshift=-10cm]
+\boites{6};
+ \foreach \i/\n in {0/5, 1/1, 2/4, 3/7, 4/2, 5/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[green!70!black,scale=1.3]  at (5+0.5,0.4) {9};
+
+
+\draw[|-|,red,thick] (4,1)--++(2,0);
+\draw[<-,>=latex] (5.5,-0.2) to[bend left] ++(-1.5,-1) node[left] {est \`a sa place finale};
+\end{scope}
+
+\begin{scope}[xshift=2cm,yshift=0cm]
+\boites{6};
+ \foreach \i/\n in {0/5, 1/1, 2/4, 3/7, 4/2, 5/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[green!70!black,scale=1.3]  at (5+0.5,0.4) {9};
+\draw[|-|,red,thick] (0,-0.3)--++(2,0);
+\draw[red,thick] (1,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=2cm,yshift=-2cm]
+\boites{6};
+ \foreach \i/\n in {0/1, 1/5, 2/4, 3/7, 4/2, 5/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[green!70!black,scale=1.3]  at (5+0.5,0.4) {9};
+\draw[|-|,red,thick] (0,1)--++(2,0);
+\draw[|-|,red,thick] (1,-0.3)--++(2,0);
+\draw[red,thick] (2,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=2cm,yshift=-4cm]
+\boites{6};
+ \foreach \i/\n in {0/1, 1/4, 2/5, 3/7, 4/2, 5/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[green!70!black,scale=1.3]  at (5+0.5,0.4) {9};
+\draw[|-|,red,thick] (1,1)--++(2,0);
+\draw[|-|,red,thick] (2,-0.3)--++(2,0);
+\draw[red,thick] (3,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=2cm,yshift=-6cm]
+\boites{6};
+ \foreach \i/\n in {0/1, 1/4, 2/5, 3/7, 4/2, 5/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[green!70!black,scale=1.3]  at (5+0.5,0.4) {9};
+\draw[|-|,red,thick] (2,1)--++(2,0);
+\draw[|-|,red,thick] (3,-0.3)--++(2,0);
+\draw[red,thick] (4,-0.3) -- ++(0,-0.7);
+\end{scope}
+
+\begin{scope}[xshift=2cm,yshift=-8cm]
+\boites{6};
+ \foreach \i/\n in {0/1, 1/4, 2/5, 3/2, 4/7, 5/9}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[green!70!black,scale=1.3]  at (5+0.5,0.4) {9};
+\node[green!70!black,scale=1.3]  at (4+0.5,0.4) {7};
+\draw[<-,>=latex] (5.5,-0.2) to[bend right] ++(0.5,-1) node[right] {sont \` a leur place finale};
+\draw[<-,>=latex] (4.5,-0.2) to[bend right] ++(1.5,-1);
+\draw[|-|,red,thick] (3,1)--++(2,0);
+
+\draw[|-|] (0,-0.3)--++(4,0);
+\draw (2,-0.3) to[bend left] ++(-0.5,-1) node[left] {encore \`a traiter};
+\end{scope}
+
+
+\end{tikzpicture}  

@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+\draw[] (0,0) -- ++(3,1) node[midway,below,black] {$r$};
+\draw[->,>=latex,thick] (0,-0.1) -- ++(0.2*3,0.2*1) node[below,black,scale=0.8] {$\vec u$};
+\draw[->,>=latex,ultra thick,red] (0,0.05) -- ++(0.4*3,0.4*1) node[midway,above] {$\vec G$};
+\draw[->,>=latex,ultra thick,gray] (3,1.05) -- ++(-0.4*3,-0.4*1) node[midway,above,gray] {$-\vec G$};
+
+\fill[blue] (0,0)  circle (5pt) node[below left=6pt, black] {$m_1$};
+\fill[orange] (3,1)  circle (8pt) node[below right=6pt, black] {$m_2$};
+% \fill[blue] (0,0)  circle (5pt) node[left, black] {$\big(x_1,y_1\big)$};
+% \fill[orange] (3,1)  circle (8pt) node[right=10pt, black] {$\big(x_2,y_2\big)$};
+\end{tikzpicture} 

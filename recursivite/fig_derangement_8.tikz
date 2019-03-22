@@ -1,0 +1,9 @@
+\begin{tikzpicture}[scale=1]
+
+\draw[|->,>=latex,thick,red] (0,0) node[above,black,scale=1.2]{$W_i$} -- ++(0,-1) node[below,blue,scale=1.2]{$S_j$};
+
+\draw [double,blue!20,line width=5,double distance=3pt] (2,-0.5) to ++(2,0);
+
+\draw[|->,>=latex,thick,red] (6,0) node[above,black,scale=1.2]{$i$} -- ++(0,-1) node[below,blue,scale=1.2]{$j$};
+
+\end{tikzpicture}  

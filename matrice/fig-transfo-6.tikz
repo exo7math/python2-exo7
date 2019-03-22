@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+
+\begin{scope}
+       \draw[->,>=latex,thick,gray] (0,0) -- (5,0) node[below]{$x$};
+       \draw[->,>=latex,thick,gray] (0,0) -- (0,3) node[left]{$y$};
+
+       \draw[thick,blue] (0.1,0.1) -- ++ (3,0.5)  -- ++ (2,2.5) -- ++ (-3,-0.5) -- cycle;
+\end{scope}
+
+
+\begin{scope}[xshift=10cm,yshift=3cm]
+       \draw[->,>=latex,thick,gray] (0,0) -- ++(5,0) node[below]{$i$};
+       \draw[->,>=latex,thick,gray] (0,0) -- ++(0,-3) node[left]{$j$};
+
+      \draw[thick,red] (0.1,-0.1) -- ++ (3,-0.5)  -- ++ (2,-2.5) -- ++ (-3,0.5) -- cycle;
+\end{scope}
+
+\draw [->,>=latex,green!70!black,ultra thick,line width=5] (6,1) to[bend left=7] ++(3,0);
+
+\node at (2.5,-1) {\bf Plan des coordonn\'ees $(x,y)$};
+\node at (13,-1) {\bf \'Ecran des coordonn\'ees $(i,j)$};
+
+\end{tikzpicture} 

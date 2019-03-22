@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=1]
+
+\node (O) at (0,0) {};
+
+\draw[ultra thick,red] (O.south) --  node[midway, left=1em,black,scale=0.8] {$0$} ++(-3,-1.5) node[below] (A) {$[0]$};
+\draw[ultra thick,red] (O.south) --  node[midway, left,black,scale=0.8] {$1$} ++(0,-1.5) node[below] (B) {$[1]$};
+\draw[ultra thick,red] (O.south) --  node[midway, right=1em,black,scale=0.8] {$2$} ++(+3,-1.5) node[below] (C) {$[2]$};
+
+\draw[ultra thick,red] (A.south) --  node[midway, left,black,scale=0.8] {$0$} ++(-1,-1.5) node[below] (AA)  {$[0,0]$};
+\draw[ultra thick,red] (A.south) --  node[midway, left,black,scale=0.8] {$1$} ++(0,-1.5) node[below] (AA)  {$[0,1]$};
+\draw[ultra thick,red] (A.south) --  node[midway, left,black,scale=0.8] {$2$} ++(1,-1.5) node[below] (AA)  {$[0,2]$};
+
+\draw[ultra thick,red] (B.south) --  node[midway, left,black,scale=0.8] {$0$} ++(-1,-1.5) node[below] {$[1,0]$};
+\draw[ultra thick,red] (B.south) --  node[midway, left,black,scale=0.8] {$1$} ++(0,-1.5) node[below] {$[1,1]$};
+\draw[ultra thick,red] (B.south) --  node[midway, left,black,scale=0.8] {$2$} ++(1,-1.5) node[below] {$[1,2]$};
+
+\draw[ultra thick,red] (C.south) --  node[midway, left,black,scale=0.8] {$0$} ++(-1,-1.5) node[below] {$[2,0]$};
+\draw[ultra thick,red] (C.south) --  node[midway, left,black,scale=0.8] {$1$} ++(0,-1.5) node[below] {$[2,1]$};
+\draw[ultra thick,red] (C.south) --  node[midway, left,black,scale=0.8] {$2$} ++(1,-1.5) node[below] {$[2,2]$};
+
+\draw[ultra thick,red] (AA.south) --  node[midway, left,black,scale=0.8] {$0$} ++(-1,-1.5) node[below] (AAA)  {$[0,2,0]$};
+\draw[ultra thick,red] (AA.south) --  node[midway, left,black,scale=0.8] {$1$} ++(0,-2) node[below] (AAA)  {$[0,2,1]$};
+\draw[ultra thick,red] (AA.south) --  node[midway, left,black,scale=0.8] {$2$} ++(1,-1.5) node[below] (AAA)  {$[0,2,2]$};
+
+\node at (0,-7.5) {\bf Une partie de l'arbre pour $n=3$.};
+
+\end{tikzpicture}  

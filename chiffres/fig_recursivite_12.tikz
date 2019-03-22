@@ -1,0 +1,33 @@
+\begin{tikzpicture}[scale=1]
+
+\node (O) at (0,0) {$19$};
+
+\draw[ultra thick,red] (O.south) --  node[midway, left,blue,scale=0.8] {$5$} ++(-3,-1.5) node[below,black] (A) {$14$};
+\draw[ultra thick,red] (O.south) --  node[midway, left,black,scale=0.8] {$7$} ++(0,-1.5) node[below,black] (B) {$12$};
+\draw[ultra thick,red] (O.south) --  node[midway, right,black,scale=0.8] {$11$} ++(+3,-1.5) node[below,black] (C) {$8$};
+
+\draw[ultra thick,red] (A.south) --  node[midway, left,black,scale=0.8] {$5$} ++(-1,-1.5) node[below,black] (AA)  {$9$};
+\draw[ultra thick,red] (A.south) --  node[midway, left,blue,scale=0.8] {$7$} ++(0,-1.5) node[below,black] (AB)  {$7$};
+\draw[ultra thick,red] (A.south) --  node[midway, right,black,scale=0.8] {$11$} ++(1,-1.5) node[below,black] (AC)  {$3$};
+
+\draw[ultra thick,red,dashed] (B.south) --  node[pos=0.8, left,black,scale=0.8] {$5$} ++(-0.5,-1.5);
+\draw[ultra thick,red,dashed] (B.south) --  node[pos=0.8, left,black,scale=0.8] {$7$} ++(0,-1.5) ;
+\draw[ultra thick,red,dashed] (B.south) --  node[pos=0.8, right,black,scale=0.8] {$11$} ++(0.5,-1.5);
+
+\draw[ultra thick,red,dashed] (C.south) --  node[pos=0.8, left,black,scale=0.8] {$5$} ++(-0.5,-1.5);
+\draw[ultra thick,red,dashed] (C.south) --  node[pos=0.8, left,black,scale=0.8] {$7$} ++(0,-1.5) ;
+\draw[ultra thick,red,dashed] (C.south) --  node[pos=0.8, right,black,scale=0.8] {$11$} ++(0.5,-1.5);
+
+\draw[ultra thick,red] (AB.south) --  node[midway, left,black,scale=0.8] {$4$} ++(-1,-1.5) node[below,black] (ABA)  {$9$};
+\draw[ultra thick,red] (AB.south) --  node[midway, left,blue,scale=0.8] {$7$} ++(0,-1.5) node[below,red] (ABB)  {$0$};
+\draw[ultra thick,red] (AB.south) --  node[midway, right,black,scale=0.8] {$11$} ++(1,-1.5) node[below,black] (ABC)  {$-4$};
+
+\draw[ultra thick,red, dashed] (AA.south) --   ++(-1.5,-1.5);
+\draw[ultra thick,red,dashed] (AA.south) --   ++(-1,-1.5) ;
+\draw[ultra thick,red,dashed] (AA.south) --  ++(-0.5,-1.5);
+
+\draw[ultra thick,red, dashed] (AC.south) --   ++(1.5,-1.5);
+\draw[ultra thick,red,dashed] (AC.south) --   ++(1,-1.5) ;
+\draw[ultra thick,red,dashed] (AC.south) --  ++(0.5,-1.5);
+
+\end{tikzpicture}  

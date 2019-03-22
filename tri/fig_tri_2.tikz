@@ -1,0 +1,68 @@
+\begin{tikzpicture}
+
+\newcommand{\boites}[1]{
+\draw[gray,ultra thick]  (0,0) -- ++ (#1,0);
+ \foreach \i in {0,...,#1}{
+\draw[gray,ultra thick]  (\i,0) -- ++ (0,0.7);
+};
+ }
+
+\node at (3,2) {\bf Tri par insertion};
+
+\begin{scope}
+\boites{6};
+ \foreach \i/\n in {0/7, 1/5, 2/1, 3/4, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[red,scale=1.3]  at (1+0.5,0.4) {5};
+
+\draw[|-|,red,thick] (0,-0.3)--++(2,0);
+\draw (1,-1) to[bend left=10] ++(5,0) node[right] {on trie les deux premiers};
+
+\draw[red,thick] (1,-0.3) -- ++(0,-1.7);
+\draw[|-|,red,thick] (0,-0.3)--++(2,0);
+\end{scope}
+
+\begin{scope}[yshift=-3cm]
+\boites{6};
+ \foreach \i/\n in {0/5, 1/7, 2/1, 3/4, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[red,scale=1.3]  at (2+0.5,0.4) {1};
+
+\draw[|-|,red,thick] (0,1)--++(2,0);
+\draw[|-|,red,thick] (0,-0.3)--++(3,0);
+\draw (1.5,-1) to[bend left=10] ++(4.5,0) node[right,align=center,text width=7cm] {on trie les trois premiers en ins\'erant le troisi\`eme au bon endroit};
+
+\draw[red,thick] (1.5,-0.3) -- ++(0,-1.7);
+
+\end{scope}
+
+\begin{scope}[yshift=-6cm]
+\boites{6};
+ \foreach \i/\n in {0/1, 1/5, 2/7, 3/4, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+\node[red,scale=1.3]  at (3+0.5,0.4) {4};
+
+\draw[|-|,red,thick] (0,1)--++(3,0);
+\draw[|-|,red,thick] (0,-0.3)--++(4,0);
+\draw (2,-1) to[bend left=10] ++(4,0) node[right,align=center,text width=7cm] {on trie les quatre premiers en ins\'erant le quatri\`eme au bon endroit};
+
+\draw[red,thick] (2,-0.3) -- ++(0,-1.7);
+\end{scope}
+
+\begin{scope}[yshift=-9cm]
+\boites{6};
+ \foreach \i/\n in {0/1, 1/4, 2/5, 3/7, 4/9, 5/2}{
+\node[blue,scale=1.3]  at (\i+0.5,0.4) {\n};
+};
+%\node[red,scale=1.3]  at (3+0.5,0.4) {4};
+
+\draw[|-|,red,thick] (0,1)--++(4,0);
+\draw[|-|] (4,-0.3)--++(2,0);
+\draw (5,-0.3) to[bend right] ++(2,-0.5) node[right] {encore \`a traiter};
+
+\end{scope}
+
+\end{tikzpicture}  

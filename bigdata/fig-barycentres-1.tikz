@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+
+\begin{scope}[rotate=10]
+\draw[thick] (0,0) -- (6,0);
+\fill[black] (0,0)  circle (3pt) node[above, black] {$P_1$} node[below, black] {$(x_1,y_1)$};
+\fill[black] (6,0)  circle (3pt) node[above, black] {$P_2$} node[below, black] {$(x_2,y_2)$};
+\fill[red] (3,0)  circle (3pt)  node[above, black] {$G$} node[below, black] {$(x_G,y_G)$};
+\end{scope}
+
+\begin{scope}[xshift=10cm,yshift=-1cm,rotate=10]
+\usetikzlibrary{calc}
+\coordinate (A) at (0,0);
+\coordinate (B) at (4,0); 
+\coordinate (C) at (1,3); 
+\pgfmathsetmacro\weight{1/3}
+\coordinate (G) at ($\weight*(A)+\weight*(B)+\weight*(C)$);
+
+\draw[thick] (A) -- (B) -- (C) -- cycle;
+
+\fill[black] (C)  circle (3pt) node[above left, black] {$P_1$} node[above right, black] {$(x_1,y_1)$};
+\fill[black] (A)  circle (3pt) node[above left, black] {$P_2$} node[below, black] {$(x_2,y_2)$};
+\fill[black] (B)  circle (3pt) node[above, black] {$P_3$} node[below, black] {$(x_3,y_3)$};
+
+\fill[red] (G)  circle (3pt)  node[above, black] {$G$} node[below, black] {$(x_G,y_G)$};
+\end{scope}
+
+\end{tikzpicture}

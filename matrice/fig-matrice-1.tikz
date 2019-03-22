@@ -1,0 +1,61 @@
+\usetikzlibrary{arrows,matrix,positioning}
+\tikzset{node style ge/.style={circle}}
+
+\begin{tikzpicture}%[baseline=(A.center),font=\normalsize]
+
+\def\rien{\phantom{\times}}
+\def\rienn{\times}
+% les matrices
+\matrix (A) [matrix of math nodes,column sep=0.125 em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ left delimiter  = (, right delimiter = )]
+{ 
+\rienn & \rienn & \rienn & \rienn & \rienn & \rienn  \\
+ \rienn & \rienn & \rienn & \rienn & \rienn & \rienn\\
+\rienn & \rienn & \rienn & m_{ij} & \rienn & \rienn \\
+\rienn & \rienn & \rienn & \rienn  &\rienn & \rienn \\
+\rienn & \rienn & \rienn & \rienn  & \rienn & \rienn \\
+};
+
+\node[left=1em] at (A.west) {$M=$};
+
+\fill[opacity=.3,fill=black] (A-2-3.north west) rectangle (A-4-5.south east);
+
+
+\begin{scope}[xshift=9cm]
+\matrix (B) [matrix of math nodes, column sep=0.1 em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ left delimiter  = (, right delimiter = )]
+{ 
+\rien & \rien & \rien & \rien & \rien & \rien  \\
+ \rien & \rien & \rien & \rien & \rien & \rien\\
+\rien & \rien & \rien & n_{ij} & \rien & \rien \\
+\rien & \rien & \rien & \rien  &\rien & \rien \\
+\rien & \rien & \rien & \rien  & \rien & \rien \\
+};
+\fill[opacity=.1,fill=black] (B-2-3.north west) rectangle (B-4-5.south east);
+
+\node[left=1em] at (B.west) {$N=$};
+\end{scope}
+
+
+\draw [->,>=latex,blue!20,ultra thick,line width=5] (2.5,0) to[bend left=10] ++(3.7,0);
+
+\begin{scope}[xshift=4.5cm,yshift=1.2cm]
+\matrix (C) [matrix of math nodes,column sep=0.1 em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ left delimiter  = (, right delimiter = )]
+{ 
+\rienn & \rienn & \rienn   \\
+ \rienn & \rienn & \rienn \\
+\rienn & \rienn & \rienn  \\
+};
+%\fill[opacity=.1,fill=black] (C-2-3.north west) rectangle (C-4-5.south east);
+\node[left=1em] at (C.west) {$C=$};
+
+\end{scope}
+
+\end{tikzpicture}

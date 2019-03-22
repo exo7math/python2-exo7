@@ -1,0 +1,6 @@
+\begin{tikzpicture}
+\draw[->,>=latex,ultra thick,red] (0,0) -- ++(4,1) node[midway,above=5pt,black] {$(v_x,v_y)$};
+\fill[blue] (0,0)  circle (5pt) node[below=5pt, black] {$\big(x,y\big)$} node[above left=5pt,black] {$m$};
+
+%\fill[black] (3,1)  circle (2pt) node[below right, black] {$\big(x',y'\big)$};
+\end{tikzpicture} 

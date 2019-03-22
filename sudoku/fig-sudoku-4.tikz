@@ -1,0 +1,53 @@
+% Sudoku
+% Author: Roberto Bonvallet
+\begin{tikzpicture}[scale=0.5]
+
+
+\makeatletter
+\ifx\c@row\undefined\newcounter{row}\fi
+\ifx\c@col\undefined\newcounter{col}\fi
+\makeatother
+
+% \newcounter{row}
+% \newcounter{col}
+
+\newcommand\setrow[9]{
+  \setcounter{col}{1}
+  \foreach \n in {#1, #2, #3, #4, #5, #6, #7, #8, #9} {
+    \edef\x{\value{col} - 0.5}
+    \edef\y{9.5 - \value{row}}
+    \node[anchor=center] at (\x, \y) {\n};
+    \stepcounter{col}
+  }
+  \stepcounter{row}
+}
+
+  \begin{scope}
+    \draw (0, 0) grid (9, 9);
+    \draw[very thick, scale=3] (0, 0) grid (3, 3);
+
+    \setcounter{row}{1}
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+    \setrow { }{ }{ }  { }{ }{ }  { }{ }{ }
+
+ %   \node[anchor=center] at (4.5, -1) {Grille de d\'epart};
+
+\draw[<->,>=latex,very thick,blue] (0,-1) -- ++(9,0) node[midway,below,black] {$N$};
+\draw[<->,>=latex,very thick,blue] (10,0) -- ++(0,9) node[midway,right,black] {$N$};
+
+\draw[<->,>=latex,very thick,blue] (0,9.5) -- ++(3,0) node[midway,above,black] {$M_c$};
+\draw[<->,>=latex,very thick,blue] (-0.5,6) -- ++(0,3) node[midway,left,black] {$M_\ell$};
+
+  \end{scope}
+
+
+\end{tikzpicture}

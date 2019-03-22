@@ -1,0 +1,9 @@
+\begin{tikzpicture}[scale=1]
+
+\node (O) at (0,0) {$19$};
+
+\draw[ultra thick,red] (O.south) --  node[midway, left=1em,black,scale=0.8] {$5$} ++(-3,-1.5) node[below,black] (A) {$14$};
+\draw[ultra thick,red] (O.south) --  node[midway, left,black,scale=0.8] {$7$} ++(0,-1.5) node[below,black] (B) {$12$};
+\draw[ultra thick,red] (O.south) --  node[midway, right=1em,black,scale=0.8] {$11$} ++(+3,-1.5) node[below,black] (C) {$8$};
+
+\end{tikzpicture}  

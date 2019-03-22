@@ -1,0 +1,75 @@
+\begin{tikzpicture}[thick,scale=0.6, every node/.style={transform shape}]
+
+
+\begin{scope}[xshift=0cm]
+
+% Echequier
+\foreach \y in {0,2,...,6}{
+    \foreach \x in {0,2,...,6}{
+        \fill[black!20] (\x,\y) rectangle (1+\x,1+\y) rectangle (2+\x,2+\y);
+
+}}
+
+\draw[ultra thick,black!20] (0,0) rectangle ++(8,8);
+
+% Numerotation
+\foreach \x in {0,...,7}{
+  \node[scale=1.2] at (\x+0.5,-0.5) {\x};
+  \node[scale=1.2] at (-0.5,\x+0.5) {\x};
+}
+
+% Reines
+\node[scale=2] at (0.5,2.5) {\symqueen};
+
+% Cases jouables
+\draw[green!70!black,very thick] (1,0) rectangle ++(1,1);
+\draw[green!70!black,very thick] (1,4) rectangle ++(1,1);
+\draw[green!70!black,very thick] (1,5) rectangle ++(1,1);
+\draw[green!70!black,very thick] (1,6) rectangle ++(1,1);
+\draw[green!70!black,very thick] (1,7) rectangle ++(1,1);
+
+% Lignes 
+\draw[red,ultra thick,->,>=latex] (1-0.2,2+0.2) -- ++(0.8,-0.8);
+\draw[red,ultra thick,->,>=latex] (1-0.2,3-0.2) -- ++(0.8,0.8);
+\draw[red,ultra thick,->,>=latex] (1-0.2,2.5) -- ++(1,0);
+
+\end{scope}
+
+
+
+\begin{scope}[xshift=12cm]
+
+% Echequier
+\foreach \y in {0,2,...,6}{
+    \foreach \x in {0,2,...,6}{
+        \fill[black!20] (\x,\y) rectangle (1+\x,1+\y) rectangle (2+\x,2+\y);
+
+}}
+
+\draw[ultra thick,black!20] (0,0) rectangle ++(8,8);
+
+% Numerotation
+\foreach \x in {0,...,7}{
+  \node[scale=1.2] at (\x+0.5,-0.5) {\x};
+  \node[scale=1.2] at (-0.5,\x+0.5) {\x};
+}
+
+% Reines
+\node[scale=2] at (0.5,2.5) {\symqueen};
+\node[scale=2] at (1.5,6.5) {\symqueen};
+
+% Cases jouables
+\draw[green!70!black,very thick] (2,1) rectangle ++(1,1);
+\draw[green!70!black,very thick] (2,3) rectangle ++(1,1);
+
+% Ligne 
+\draw[red,ultra thick,->,>=latex] (2-0.2,6+0.2) -- ++(0.8,-0.8);
+\draw[red,ultra thick,->,>=latex] (2-0.2,7-0.2) -- ++(0.8,0.8);
+\draw[red,ultra thick,->,>=latex] (2-0.2,6.5) -- ++(1,0);
+
+\draw[red,ultra thick,->,>=latex] (1-0.2,2+0.2) -- ++(1+0.8,-1-0.8);
+\draw[red,ultra thick,->,>=latex] (1-0.2,3-0.2) -- ++(1.8,1.8);
+\draw[red,ultra thick,->,>=latex] (1-0.2,2.5) -- ++(2,0);
+\end{scope}
+
+\end{tikzpicture}

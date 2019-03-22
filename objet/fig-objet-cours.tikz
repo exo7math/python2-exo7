@@ -1,0 +1,158 @@
+\usetikzlibrary{positioning}
+\begin{tikzpicture}[scale=1, every node/.style={transform shape}]
+\large
+ \begin{scope}[yshift=0cm]
+ \node[right] (A) at (0,1) {\texttt{class}};
+ \node[right,right=0em of A] (B) {\texttt{Vecteur:}};
+ 
+     \node[right] (BB) at (1,-0.5) {\texttt{def}};
+ \node[right,right=-1.5em of BB] (C) {\texttt{ \_\_init\_\_(}};
+ \node[right,right=0em of C] (D) {\texttt{self}};
+ \node[right,right=0em of D] (E) {\texttt{,x,y,z):}};
+ 
+         \node[right] at (2,-1) {\texttt{self.x = x}};
+         \node[right] at (2,-1.5) {\texttt{self.y = y}};
+         \node[right] at (2,-2) {\texttt{self.z = z}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (A.north) to[bend left] (12,2.5) node[right] {mot reserv\'e \texttt{class}};
+ \draw[<-,>=latex,ultra thick, red]  (B.north) to[bend left] (12,1.75) node[right] {nom de la classe};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (C.north) to[bend left] (12,0) node[right] {m\'ethode d'initialisation \texttt{ \_\_init\_\_()} };
+ \draw[<-,>=latex,ultra thick, red]  (D.north) to[bend left] (12,-0.75) node[right] {\texttt{self} correspond \`a l'objet en cours};
+ 
+ \draw[ultra thick, red] (5.5,-0.75) -- ++(0,-1.5);
+ \draw[ultra thick, red]  (5.5,-1.4) to[bend left=15] (12,-2) node[right]{d\'efinition des attributs \texttt{x}, \texttt{y}, \texttt{z}};
+ 
+ \end{scope}
+
+ \begin{scope}[yshift=-4cm]
+     \node[right] (B) at (1,-0) {\texttt{def}};
+ \node[right,right=-1.5em of B] (C) {\texttt{ \_\_str\_\_}};
+ \node[right,right=0em of C] (D) {\texttt{(self):}};
+ 
+         \node[right] at (2,-0.5) {\texttt{ligne = "("+str(self.x)+","+str(self.y)+","+str(self.z)+")"}};
+         \node[right] at (2,-1) {\texttt{return ligne}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (C.north) to[bend left=15] (12,0.5) node[right] {m\'ethode pour l'affichage par \texttt{print()}};
+ \end{scope}
+ 
+ \begin{scope}[yshift=-7cm]
+     \node[right] (B) at (1,-0) {\texttt{def}};
+ \node[right,right=-0.5em of B] (C) {\texttt{norme}};
+ \node[right,right=0em of C] (D) {\texttt{(self):}};
+ 
+    % \node[right] at (1,0) {\texttt{def norme(self):}};
+ \draw[<-,>=latex,ultra thick, red]  (D.north) to[bend left] (12,1) node[right] {\texttt{self} : objet en cours};
+ 
+         \node[right] (C) at (2,-0.5) {\texttt{N = sqrt(}};
+ 
+ \node[right,right=0em of C] (D) {\texttt{self.x}};
+ \node[right,right=-1em of D] (E) {\texttt{**2 + self.y**2 + self.z**2 )}};
+ 
+         \node[right] (F) at (2,-1) {\texttt{return N}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (D.north east) to[bend left=45] (12,0.5) node[right] {\texttt{self.x} : valeur de l'attribut \texttt{x} de l'objet en cours};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (F.east) to[bend right=10] (12,-1.25) node[right] {renvoie un nombre};
+ 
+ \end{scope}
+ 
+ \begin{scope}[yshift=-9.5cm]
+     \node[right] at (1,0) {\texttt{def produit\_par\_scalaire(self,k):}};
+         \node[right] (A) at (2,-0.5) {\texttt{W = }};
+          \node[right,right=0em of A] (B) {\texttt{Vecteur}};
+          \node[right,right=-0.5em of B] (C) {\texttt{(k*self.x,k*self.y,k*self.z)}};
+ 
+ 
+         \node[right] (F) at (2,-1) {\texttt{return W}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (B.south east) to[bend right=15] (12,-1) node[right] {d\'efinition d'un objet de la classe \texttt{Vecteur}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (F.east) to[bend right=15] (12,-1.5) node[right] {renvoie un objet};
+ \end{scope}
+ 
+ 
+ \begin{scope}[yshift=-13cm]
+ 
+     \node[right] (B) at (1,0) {\texttt{def addition(}};
+ \node[right,right=0em of B] (C) {\texttt{self,}};
+ \node[right,right=0em of C] (D) {\texttt{other):}};
+ 
+ 
+ %\node[right] at (1,0) {\texttt{def addition(self,other):}};
+ 
+         \node[right] at (2,-0.5) {\texttt{W = Vecteur(self.x+other.x,self.y+other.y,self.z+other.z)}};
+     
+         \node[right] (F) at (2,-1) {\texttt{return W}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (C.north) to[bend left] (12,0.5) node[right] {\texttt{self} : objet en cours};
+ \draw[<-,>=latex,ultra thick, red]  (D.north) to[bend left] (12,0) node[right] {\texttt{other} : un autre objet};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (F.east) to[bend right=5] (12,-1) node[right] {renvoie un nouvel objet};
+ \end{scope}
+ 
+\begin{scope}[yshift=-15.5cm]
+     \node[right] (B) at (1,-0) {\texttt{def}};
+ \node[right,right=-0.5em of B] (C) {\texttt{\_\_add\_\_}};
+ \node[right,right=0em of C] (D) {\texttt{(self,other):}};
+
+ % \node[right] at (1,0) {\texttt{def (self,other):}};
+ 
+        \node[right] at (2,-0.5) {\texttt{W = Vecteur(self.x+other.x,self.y+other.y,self.z+other.z)}};
+         \node[right] at (2,-1) {\texttt{return W}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (C.north east) to[bend left=10] (12,0.5) node[right] {m\'ethode \texttt{\_\_add\_\_()} pour l'addition par \texttt{"+"}};
+ \end{scope}
+ 
+ 
+ 
+ \begin{scope}[yshift=-19cm]        
+ \node[right,darkgray] at (0,0) {\texttt{\# Exemple 1}};
+ 
+ \node[right] (A) at (0,-0.75) {\texttt{V = Vecteur(1,2,3)}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (A.east) to[bend left=20] (12,-0) node[right] {un objet \texttt{V} : une instance de la classe \texttt{Vecteur}};
+ 
+ \node[right,red] (AA) at (12,-0.5) {initialis\'ee par des valeurs \texttt{x}, \texttt{y}, \texttt{z}};
+ 
+ \node[right] (B) at (0,-1.5) {\texttt{print("Valeur de x :",}};
+ \node[right,right=0em of B] (C) {\texttt{V.x)}};
+ \draw[<-,>=latex,ultra thick, red]  (C.north) to[bend left=50] (12,-1.5) node[right] {\texttt{V.x} valeur de l'attribut \texttt{x} associ\'e \`a \texttt{V}};
+ 
+ 
+ \node[right] (D) at (0,-2.25) {\texttt{print("Vecteur :", V)}};
+ \draw[<-,>=latex,ultra thick, red]  (D.east) to[bend left=10] (12,-2.25) node[right] {affichage de l'objet \texttt{V} gr\^ace \`a la m\'ethode \texttt{\_\_str\_\_()}};
+ 
+ 
+ \node[right] (E) at (0,-3) {\texttt{print("Norme :", V.norme())}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (E.east) to[bend right] (12,-3) node[right] {appel de la m\'ethode \texttt{norme()}};
+ \node[right,red] at(12,-3.5) {l'argument \texttt{V} correspond au param\`etre \texttt{self}};
+ 
+ % \node[right] at (0,-4.5) {\texttt{print("Fois deux :", V.produit\_par\_scalaire(2))}};
+ 
+ \end{scope}
+ 
+\begin{scope}[yshift=-24cm]
+ \node[right,darkgray] at (0,0) {\texttt{\# Exemple 2}};
+ \node[right] at (0,-0.75) {\texttt{V1 = Vecteur(1,2,3)}};
+ \node[right] at (0,-1.5) {\texttt{V2 = Vecteur(1,0,-4)}};
+ 
+ \draw[ultra thick, red] (7,-0.25) -- ++(0,-1.5);
+ \draw[ultra thick, red]  (7,-1) to[bend left=15] (12,-1) node[right]{d\'efinition de deux objets};
+ 
+ \node[right] (A) at (0,-2.75) {\texttt{V3 = V1.addition(V2)}};
+ \node[right] at (0,-3.5) {\texttt{print(V3)}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (A.east) to[bend left=15] (12,-3) node[right] {appel de la m\'ethode \texttt{addition()}};
+ \node[right,red] at(12,-3.5) {l'argument \texttt{V1} correspond au param\`etre \texttt{self}};
+ \node[right,red] at(12,-4) {l'argument \texttt{V2} correspond au param\`etre \texttt{other}};
+ 
+ 
+ \node[right] (B) at (0,-4.75) {\texttt{V4 = V1 + V2}};
+ \node[right] at (0,-5.5) {\texttt{print(V4)}};
+ 
+ \draw[<-,>=latex,ultra thick, red]  (B.east) to[bend left=15] (12,-5) node[right] {utilisation de \texttt{"+"} par l'appel \`a la m\'ethode \texttt{\_\_add\_\_()}};
+ 
+ \end{scope}
+\end{tikzpicture}

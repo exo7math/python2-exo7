@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+
+\draw[ultra thick,gray] (-1,0) -- (11,0);
+
+\foreach \x in {0,2,5,8,6,4,3.5,10}{
+  \fill[blue] (\x,0) circle (3pt);
+%  \node[above] at (2^\x,0) {$u_\x$};
+}
+
+\draw[<->,>=latex,red] (2+0.1,-0.2) to[bend right]node[midway, below]{$r$} ++(3-0.2,0) ;
+\draw[<->,>=latex,red] (5+0.1,-0.2) to[bend right]node[midway, below]{$r$} ++(3-0.2,0) ;
+
+
+  \node[above] at (2,0) {$u_i$};
+  \node[above] at (5,0) {$u_j$};
+  \node[above] at (8,0) {$u_k$};
+
+\end{tikzpicture}

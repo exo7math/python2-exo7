@@ -1,0 +1,44 @@
+\begin{tikzpicture}[scale=0.8]
+
+\draw[thick] (-1,0) rectangle ++(2,1);
+\node at (0,0.5) {$3$};
+
+\draw[thick] (-1,1) rectangle ++(2,1);
+\node at (0,1.5) {$1$};
+
+\draw[thick] (-1,2) rectangle ++(2,1);
+\node at (0,2.5) {$4$};
+
+
+\node at (0,-1) {\bf Pile 0};
+
+\begin{scope}[xshift=3cm]
+
+\draw[thick] (-1,0) rectangle ++(2,1);
+\node at (0,0.5) {$1$};
+
+\draw[thick] (-1,1) rectangle ++(2,1);
+\node at (0,1.5) {$5$};
+
+\node at (0,-1) {\bf Pile 1};
+\end{scope}
+
+\begin{scope}[xshift=6cm]
+\draw[thick] (-1,0) rectangle ++(2,1);
+\node at (0,0.5) {$2$};
+
+\node at (0,-1) {\bf Pile 2};
+\end{scope}
+
+
+\begin{scope}[xshift=9cm]
+\draw[thick] (-1,0) rectangle ++(2,1);
+\node at (0,0.5) {$7$};
+
+\draw[thick] (-1,1) rectangle ++(2,1);
+\node at (0,1.5) {$8$};
+
+\node at (0,-1) {\bf Pile 3};
+\end{scope}
+
+\end{tikzpicture}

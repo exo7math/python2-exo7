@@ -1,0 +1,46 @@
+\begin{tikzpicture}
+
+\begin{scope}[xshift=-2cm,yshift=-2cm]
+
+       \draw[->,>=latex,thick,gray] (-1,0) -- (5,0) node[below]{$r_1$};
+       \draw[->,>=latex,thick,gray] (0,-1) -- (0,5) node[left]{$r_2$};
+
+       \draw[thick,blue] (0,0) rectangle ++(4,4);
+   
+		\node[blue, below left] at (0,0) {$0$};		
+		\node[blue, below ] at (4,0) {$4$};		
+		\node[blue, left] at (0,4) {$4$};		
+
+	   \draw (1,1) rectangle ++(0.5*0.66,0.5*0.66);
+
+       \draw[thick,dashed] (1,1) -- (1,-0.2) node[below] {$r_1$};
+       \draw[thick,dashed] (1,1) -- (-0.2,1) node[left] {$r_2$};
+
+\end{scope}
+
+
+\begin{scope}[xshift=9cm,yshift=2cm]
+
+       \draw[thick,red] (0.1,-0.1) rectangle (4,-4);
+
+       \draw[->,>=latex,thick,gray] (0,0) -- ++(5,0) node[below]{$i$};
+       \draw[->,>=latex,thick,gray] (0,0) -- ++(0,-5) node[left]{$j$};
+
+	\draw[<->,>=latex,red] (0.1,-4.3) -- ++(3.9,0) node[midway,below] {$N$};
+	\draw[<->,>=latex,red] (4.3,-0.1) -- ++(0,-3.9) node[midway,right] {$N$};
+
+	\draw (1,-1) rectangle ++(0.5,-0.5);
+
+       \draw[thick,dashed] (1,-1) -- (1,0.5) node[above] {$i$};
+       \draw[thick,dashed] (1,-1) -- (0,-1) node[left] {$j$};
+       \draw[thick,dashed] (1.5,-1) -- (1.5,0) node[above] {$i+1$};
+       \draw[thick,dashed] (1,-1.5) -- (0,-1.5) node[left] {$j+1$};
+
+\end{scope}
+
+\draw [->,>=latex,blue!20,ultra thick,line width=5] (4,-2) to[bend right=10] ++(4,0);
+
+\node at (0,-4) {\bf Plan des coordonn\'ees $(r_1,r_2)$};
+\node at (11,-4) {\bf \'Ecran des coordonn\'ees $(i,j)$};
+
+\end{tikzpicture} 

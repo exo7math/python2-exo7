@@ -1,0 +1,24 @@
+\begin{tikzpicture}[thick,scale=0.6, every node/.style={transform shape}]
+
+% Echequier
+
+\foreach \y in {0,2,...,6}{
+    \foreach \x in {0,2,...,6}{
+        \fill[black!20] (\x,\y) rectangle (1+\x,1+\y) rectangle (2+\x,2+\y);
+}}
+
+\draw[ultra thick,black!20] (0,0) rectangle ++(8,8);
+
+% Reines
+\node[scale=2] at (0.5,2.5) {\symqueen};
+\node[scale=2] at (1.5,5.5) {\symqueen};
+\node[scale=2] at (2.5,7.5) {\symqueen};
+\node[scale=2] at (3.5,0.5) {\symqueen};
+
+% Numerotation
+\foreach \x in {0,...,7}{
+  \node[scale=1.2] at (\x+0.5,-0.5) {\x};
+  \node[scale=1.2] at (-0.5,\x+0.5) {\x};
+}
+
+\end{tikzpicture}

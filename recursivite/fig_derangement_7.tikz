@@ -1,0 +1,30 @@
+\begin{tikzpicture}[scale=1]
+
+\foreach \i/\j in {0,1,2,3,4}{
+\draw[ultra thick,red] (\i*2.5-1.5,0) node[above,black]{$(W_\i,S_\i)$};
+};
+
+\node at (3.5,-1) {\bf Avant le bal.};
+
+\draw [->,>=latex,blue!20,line width=5] (3.5,-1.5) to[bend right=10] ++(0,-4);
+
+\begin{scope}[xshift=1.5cm,yshift=-8cm]
+\foreach \i/\j in {0/3,1/4,2/2,3/1,4/0}{
+\draw[|->,>=latex,thick,red] (\i*1,0) node[above,black]{$W_\i$} -- ++(0,-1) node[below,blue]{$S_\j$};
+};
+
+\node at (2,1.5) {\bf Pendant le bal : un exemple de m\'elange.};
+\end{scope}
+
+\draw [double,blue!20,line width=5,double distance=3pt] (7.5,-8.5) to ++(5,0);
+
+
+\begin{scope}[xshift=14cm,yshift=-8cm]
+\foreach \i/\j in {0/3,1/4,2/2,3/1,4/0}{
+\draw[|->,>=latex,thick,red] (\i*1,0) node[above,black]{$\i$} -- ++(0,-1) node[below,blue]{$\j$};
+};
+
+\node at (2,1.5) {\bf Permutation associ\'ee.};
+\end{scope}
+
+\end{tikzpicture}  

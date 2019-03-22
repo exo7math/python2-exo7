@@ -1,0 +1,22 @@
+\newenvironment{3dtikzpicture}[3][]{
+	\pgfmathsetmacro\xx{cos(#3)}
+	\pgfmathsetmacro\xy{cos(#2)*sin(#3)}
+	\pgfmathsetmacro\yx{-sin(#3)}
+	\pgfmathsetmacro\yy{cos(#2)*cos(#3)}
+	\pgfmathsetmacro\zy{sin(#2)}
+	\begin{tikzpicture}[x={(\xx cm,\xy cm)},y={(\yx cm,\yy cm)},z={(0,\zy cm)},#1]
+}{
+	\end{tikzpicture}
+}
+% \begin{3dtikzpicture}{0}{0}
+% 	\draw[->] (0,0,0) -- (1,0,0) node[pos=1.2]{$e{x}$};
+% 	\draw[->] (0,0,0) -- (0,1,0) node[pos=1.2]{$e{y}$};
+% 	\draw (0,0,0) -- (0,0,1) node[anchor=north]{$e{z}$};
+% 	\draw[red] (0.2,0,0) --(0.2,0.2,0)--(0,0.2,0)--(0,0.2,0.2)--(0,0,0.2)-- (0.2,0,0.2) --cycle;
+% \end{3dtikzpicture}	
+\begin{3dtikzpicture}{60}{120}
+	\draw[->] (0,0,0) -- (1,0,0) node[pos=1.2]{$x$};
+	\draw[->] (0,0,0) -- (0,1,0) node[pos=1.2]{$y$};
+	\draw[->] (0,0,0) -- (0,0,1) node[pos=1.2]{$z$};
+	\draw[red] (0.2,0,0) --(0.2,0.2,0)--(0,0.2,0)--(0,0.2,0.2)--(0,0,0.2)-- (0.2,0,0.2) --cycle;
+\end{3dtikzpicture}

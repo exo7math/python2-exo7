@@ -1,0 +1,31 @@
+\usetikzlibrary{matrix}
+\begin{tikzpicture}[scale=2]
+
+\newcommand\mafigure{
+\draw (0,0) rectangle ++(1,2);
+}
+
+\begin{scope}[blue]
+  \mafigure;
+\draw[->,>=latex, gray] (-0.05,-0.05)--++(1,0) ; 
+\draw[->,>=latex, gray] (-0.05,-0.05)--++(0,1);
+\node[fill,circle,scale=0.5]  at (0.7,1.7) {};
+\node[left]  at (0.7,1.7) {$P=(x,y)$};
+\end{scope}
+
+\draw[->,>=latex,line width=4pt,green!70!black] (0.8,1.6) to[bend right] node[black,below]{$T$} ++(1.1,-0.2); 
+\draw[<-,>=latex,line width=4pt,green!70!black] (0.8,1.8) to[bend left] node[black,above right]{$T^{-1}$} ++(1.1,-0.1); 
+
+%  \draw[red] (0,0)--(2,0.5)--(2.333,1.166)--(0.333,0.666)--cycle;
+\begin{scope}[cm={2,0.5,0.333,0.666,(0,0)},red]
+  \mafigure;
+\node[fill,circle,scale=0.5]  at (0.7,1.7) {};
+\node[right]  at (0.7,1.7) {$P'=(x',y')$};
+\end{scope}
+% 
+%  \node at (0,0)[below] {$(0,0)$};  
+%  \node at (1,0)[below] {$(1,0)$};  
+%  \node at (0,1)[left] {$(0,1)$};  
+%  \node at (2,0.5)[below] {$(a,c)$};  
+%  \node at (0.333,0.666)[left] {$(b,d)$}; 
+\end{tikzpicture}

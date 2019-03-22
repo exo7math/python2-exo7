@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+
+\node (A) at (0,0) {$a$};
+\node (B) at (0,-1) {$b$};
+\node (C) at (0,-6) {$a\times b$};
+\node (AA) at (8,0) {$\ln(a)$};
+\node (BB) at (8,-1) {$\ln(b)$};
+\node (CC) at (8,-5.5) {$\ln(a)  + \ln(b)$};
+\node (CCC) at (8,-6) {$= \ln(a \times b)$};
+
+\draw [->,>=latex,blue!20,ultra thick,line width=5] (1,-0.5) to[bend left=10] node[midway,black,above]{table} ++(6,0) ;
+
+\draw [->,>=latex,blue!20,ultra thick,line width=5] (6.5,-6) to[bend left=10] node[midway,black,below]{table} ++(-5.5,0) ;
+
+\draw [->,>=latex,red!20,ultra thick,line width=5] (8,-1.5) to[bend left=10] node[midway,black,right]{addition} ++(0,-3.5) ;
+\end{tikzpicture}

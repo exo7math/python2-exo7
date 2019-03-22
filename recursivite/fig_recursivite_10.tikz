@@ -1,0 +1,24 @@
+\begin{tikzpicture}[scale=1]
+
+\node (O) at (0,0) {};
+
+\draw[ultra thick,red] (O.south) -- node[midway, left=1em,black,scale=0.8] {P}  ++(-3,-1.5) node[below] (P) {P};
+\draw[ultra thick,red] (O.south) -- node[midway, right=1em,black,scale=0.8] {F}  ++(+3,-1.5) node[below] (F) {F};
+
+\draw[ultra thick,red] (P.south) --   ++(-1.5,-1.5) node[below] (PP)  {PP};
+\draw[ultra thick,red] (P.south) --   ++(1.5,-1.5) node[below] (PF)  {PF};
+
+
+\draw[ultra thick,red] (F.south) --  ++(-1.5,-1.5) node[below] (FP) {FP};
+\draw[ultra thick,red] (F.south) --   ++(1.5,-1.5) node[below] (FF) {FF};
+
+\draw[ultra thick,red] (PP.south) --  ++(-0.5,-1.5) node[below]   {PPP};
+\draw[ultra thick,red] (PP.south) --  ++(0.5,-1.5) node[below]   {PPF};
+\draw[ultra thick,red] (PF.south) --  ++(-0.5,-1.5) node[below]   {PFP};
+\draw[ultra thick,red] (PF.south) --  ++(0.5,-1.5) node[below]   {PFF};
+\draw[ultra thick,red] (FP.south) --  ++(-0.5,-1.5) node[below]   {FPP};
+\draw[ultra thick,red] (FP.south) --  ++(0.5,-1.5) node[below]   {FPF};
+\draw[ultra thick,red] (FF.south) --  ++(-0.5,-1.5) node[below]   {FFP};
+\draw[ultra thick,red] (FF.south) --  ++(0.5,-1.5) node[below]   {FFF};
+
+\end{tikzpicture}  

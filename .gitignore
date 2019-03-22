@@ -1,0 +1,100 @@
+# from WinEdt and GitHub
+# ----------------------
+*.aa?
+*.acn
+*.acr
+*.alg
+*.aux
+*.bak
+*.blg
+*.dvi
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.pdf_tex
+*.prj
+*.ps
+*.snm
+*.synctex*
+*.tdo
+*.tmp
+*.toc
+*.vrb
+*.xdy
+
+# le bytecode python
+#-----------------------
+*.pyc
+*.pyo
+
+# ----------------------
+# plus nécéssaire car un .gitignore par répértoire
+# *tikzcach*
+
+# tous les resultats pdf
+# ----------------------
+#*.pdf
+
+# certains resultats pdf
+#-----------------------
+
+#scratch-??.pdf
+#enigme-??.pdf
+
+
+#enigmes_scratch.pdf
+#feuilles.pdf
+#livre-scratch.pdf
+#scratch.pdf
+#profs.pdf
+#enigmes_feuilles/enigmes_feuilles.pdf
+#solutions/solutions_feuilles.pdf
+#solutions/solutions_scratch.pdf
+
+#base_de_donnees/base_de_donnees.pdf
+#binaire/binaire.pdf
+#boucles_1/boucles_1.pdf
+#boucles_2/boucles_2.pdf
+#chercher/chercher.pdf
+#couleurs/couleurs.pdf
+#crypto/crypto.pdf
+#distance_mots/distance_mots.pdf
+#diviser_pour_regner/diviser_pour_regner.pdf
+#graphe/graphe.pdf
+#operations_algebriques_1/operations_algebriques_1.pdf
+#operations_algebriques_2/operations_algebriques_2.pdf
+#pixels/pixels.pdf
+#premiers_pas/premiers_pas.pdf
+#puissances_de_2/puissances_de_2.pdf
+#repeter/repeter.pdf
+#si_alors/si_alors.pdf
+#triangulation/triangulation.pdf
+#vrai_faux/vrai_faux.pdf
+
+
+
+
+# Autres
+# ----------------------
+*.zip
+*.sublime*
+*.auxlock
+*.ptc
+*test*.tex
+#vim
+*~

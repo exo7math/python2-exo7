@@ -1,0 +1,536 @@
+\documentclass[11pt,class=report,crop=false]{standalone}
+\usepackage[screen]{../python}
+
+
+\begin{document}
+
+
+%====================================================================
+\chapitre{Le mot le plus long}
+%====================================================================
+
+\objectifs{La seconde partie du jeu \og{}Des chiffres et des lettres\fg{} est le  \og{}Le mot le plus long\fg{}. Il s'agit simplement de trouver le mot le plus grand à partir d'un tirage de lettres. Pour savoir si un mot est valide, on va utiliser une longue liste des mots français.}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1 - Chercher un mot
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Chercher un mot]
+   
+\objectifs{Objectifs : vérifier si un mot donné est bien un mot de la langue française. On va extraire ces mots d'un fichier afin de créer un répertoire qui contient tous les mots admissibles.}
+ 
+\emph{Préalable.} Il faut récupérer un des deux fichiers suivants qui contient des mots français :
+\begin{itemize}
+  \item \ci{repertoire_francais_simple.txt} qui contient $20\,239$ mots les plus courants (de \mot{ABAISSER} à \mot{ZYGOTE}),
+  \item ou \ci{repertoire_francais_tout.txt} qui contient une liste complète de $131\,896$ mots français de \mot{A} à \mot{ZYGOMATIQUES}.
+\end{itemize}
+
+\smallskip
+
+Ces fichiers sont disponibles ici :
+\mycenterline{\href{https://github.com/exo7math/python2-exo7}{github.com/exo7math/python2-exo7}}
+
+\medskip
+
+Les mots de ce fichier sont classés par ordre alphabétique.
+Ils sont en majuscules, sans accents : les seuls caractères autorisés sont les lettres \mot{A} à \mot{Z}. Des rappels pour lire/écrire un fichier texte sont donnés juste après cette activité.
+
+ 
+\begin{enumerate}
+  \item \textbf{Lecture du répertoire.} Programme une fonction \ci{lire_repertoire(fichier)} qui lit un fichier texte (pour nous un des deux fichiers \ci{repertoire.txt}) et renvoie la (longue) liste de tous ces mots. On appelle \og{}répertoire\fg{} la liste de tous ces mots français.  Vérifie que tu obtiens le nombre de mots annoncé.
+  
+  
+  \bigskip
+  
+  Dans la suite on veut décider si un mot donné est un mot français ou pas. On dit qu'un mot est valide s'il apparaît dans notre répertoire. Par exemple \mot{COUCOU} est français car il apparaît dans le répertoire (c'est le mot numéro $4\,822$ dans la liste simple et le numéro $27\,374$ dans la liste complète, en commençant la numérotation à $0$). Par contre \mot{BOLOSS} n'y est pas et n'est donc pas considéré comme un mot français.
+  
+  Il s'agit donc de décider si un mot donné est présent ou pas dans une liste. \Python{} saurait faire cela très bien, à l'aide de l'opérateur \ci{in} ou de la méthode \ci{index()}. Ici on va programmer deux fonctions.
+  
+  \item \textbf{Recherche séquentielle.}
+  
+  Programme une fonction \ci{recherche_basique(mot,liste)} qui renvoie le rang du mot dans la liste s'il est présent et \ci{None} sinon. Vérifie que ta fonction est correcte en comparant avec la commande \ci{liste.index(mot)}. 
+  
+  \emph{Méthode imposée.} Utilise une boucle \og{}tant que\fg{} qui parcourt un par un les éléments de la liste et les compare au mot cherché. Tu as seulement le droit d'effectuer des tests d'égalité entre deux chaînes de caractères. 
+  
+  \emph{Questions.} Le mot \mot{SERPENT} est-il dans notre répertoire, si oui à quelle place ? Et le mot \mot{PYTHON} ?
+  
+  \emph{Analyse.} Si on cherche le rang d'un mot français alors, en moyenne, il faut parcourir la moitié de la liste avant de le trouver. Il faut donc effectuer en moyenne 
+  $10\,000$ tests dans le cas de la liste simple, ou environ $60\,000$ dans le cas de la liste complète. Si un mot n'appartient pas à la liste, on le sait seulement après avoir testé tous les éléments.
+  
+  
+
+  \item \textbf{Recherche dichotomique.}
+  \index{dichotomie}
+  
+  On va profiter du fait que la liste soit ordonnée pour faire la recherche beaucoup plus rapidement.   
+  Programme une fonction \ci{recherche_dichotomie(mot,liste)} qui renvoie de nouveau le rang du mot dans la liste s'il est présent et \ci{None} sinon. 
+  
+  \emph{Algorithme de la dichotomie.} Pour comprendre l'idée, voir le principe de la dichotomie dans le chapitre \og{}Dérivée -- Zéros de fonctions\fg{}.
+  
+  \begin{algorithme}
+\sauteligne 
+  
+\begin{itemize}
+  \item 
+  \begin{itemize}
+   \item Entrée : un mot à trouver et une liste de mots.
+   
+   \item Sortie : le rang du mot trouvé dans la liste ou \ci{None} en cas d'échec. (Le rang d'une liste commence à $0$.)
+
+  \end{itemize}
+
+   \item $a \leftarrow 0$
+      
+   \item $b \leftarrow n -1$ où $n$ est la longueur de la liste.
+
+   \item Tant que $b \ge a$, faire :
+    \begin{itemize}
+      \item $k \leftarrow (a+b)//2$
+        
+      \item Si \ci{mot} égal \ci{liste[k]} alors renvoyer $k$.
+      \item Si \ci{mot} vient après \ci{liste[k]} dans l'ordre alphabétique alors faire $a\leftarrow k+1$,
+      \item sinon faire $b \leftarrow k-1$.
+    \end{itemize}
+    
+    \item Renvoyer \ci{None} (c'est le cas uniquement si aucun mot n'a été trouvé dans la boucle précédente).
+    
+  \end{itemize}
+ \end{algorithme}     
+  
+  \emph{Ordre alphabétique.} \Python{} connaît l'ordre alphabétique ! Par exemple \og{}\ci{'INDIC' < 'INFO'}\fg{} vaut \og{}Vrai\fg{}.
+  On peut comparer deux chaînes de caractères : 
+  \begin{itemize}
+    \item \ci{mot1 == mot2} vaut \og{}Vrai\fg{} si les chaînes sont égales,
+    \item \ci{mot1 < mot2} vaut \og{}Vrai\fg{} si \ci{mot1} est avant \ci{mot2} dans l'ordre alphabétique,
+    \item \ci{mot1 > mot2} vaut \og{}Vrai\fg{} si \ci{mot1} est après \ci{mot2} dans l'ordre alphabétique.
+   \end{itemize}
+   
+   
+  \bigskip 
+     
+  \emph{Question.} Est-ce que tu obtiens les mêmes résultats qu'auparavant pour les mots \mot{SERPENT} et \mot{PYTHON} ? (La réponse doit être \og{}oui\fg{} !)
+     
+  \bigskip 
+  
+  \emph{Analyse.} Pour chercher un mot, on divise la liste en deux à chaque étape. Donc en $k$ étapes on trouve un mot dans une liste de longueur $2^k$. Ainsi si on a une liste de longueur $n$ alors il faut environ $\log_2(n)$ étapes. Le nombre d'étapes devant être un entier c'est en fait $k = E(\log_2(n))+1$ (où $E(x)$ désigne la partie entière, qui est la commande \ci{floor(x)} de \Python).
+  Si on compare avec la recherche séquentielle, l'amélioration est frappante :
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+Taille de la liste & Nb. max. d'étapes - Séquentielle & Nb. max. d'étapes - Dichotomie \\ \hline\hline
+$n$ & $n$ & $E(\log_2(n))+1$ \\ \hline
+Rép. simple $n=20\,239$ & $20\,239$ & $15$ \\ \hline
+Rép. complet $n = 131\,896$ & $131\,896$ & $18$ \\\hline
+\end{tabular}
+\end{center}    
+
+\end{enumerate}
+
+\end{activite}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Les fichiers]
+	
+\index{fichier}
+\index{open@\ci{open}}
+\index{close@\ci{close}}
+\index{write@\ci{write}}
+	
+Voici un très bref rappel des instructions \Python{} pour lire et écrire un fichier texte.
+
+\textbf{Lire un fichier.} 
+Ici on ouvre un fichier en lecture et on affiche à l'écran chaque ligne.
+\begin{lstlisting}
+fic = open("mon_fichier.txt","r")
+
+for ligne in fic:
+    print(ligne.strip())
+
+fic.close()
+\end{lstlisting}
+
+La commande \ci{ligne.strip()}\index{strip@\ci{strip}} renvoie la chaîne de caractères de la ligne sans les espaces de début et de fin, ni le saut de ligne. 
+
+\medskip
+
+\textbf{\'Ecrire un fichier.} 
+Voici comment écrire un fichier. Ici chaque ligne écrite est de la forme : \ci{Ligne numéro x}.
+\begin{lstlisting}
+fic = open("mon_fichier.txt","w")
+
+for i in range(100):
+	ligne = "Ligne numéro " + str(i) + "\n"
+	fic.write(ligne)
+
+fic.close()
+\end{lstlisting}
+
+\end{cours}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Dictionnaire]
+
+\index{dictionnaire}
+
+Un dictionnaire est un peu comme une liste, mais les éléments ne sont pas indexés par des entiers mais par une \og{}clé\fg{}. 
+Un \defi{dictionnaire} est donc un ensemble de couples clé/valeur : à une \defi{clé} est associée une \defi{valeur}.
+\index{cle@clé}
+
+\bigskip
+
+\textbf{Exemple : un dictionnaire identifiant/mot de passe.}
+
+\begin{itemize}
+  \item Voici l'exemple d'un dictionnaire \ci{dico} qui stocke des identifiants et des mots de passe : 
+\mycenterline{\ci{dico = \{'jean':'rev1789', 'adele':'azerty', 'jasmine':'c3por2d2'\}}}
+
+  \item Par exemple \ci{'adele'} a pour mot de passe \ci{'azerty'}. On obtient le mot de passe
+comme on accéderait à un élément d'une liste par l'instruction :
+\mycenterline{\ci{dico['adele']} \quad qui vaut\quad \ci{'azerty'}.}
+
+  \item Pour ajouter une entrée on écrit : 
+\mycenterline{\ci{dico['lola'] = 'abcdef'}}
+
+  \item Pour modifier une entrée : 
+\mycenterline{\ci{dico['adele'] = 'vwxyz'}}
+ 
+  \item Maintenant la commande \ci{print(dico)} affiche :
+\mycenterline{\ci{\{'jean':'rev1789', 'adele':'vwxyz', 'jasmine':'c3por2d2', 'lola':'abcdef'\}}}
+
+  \item Le parcours d'un dictionnaire se fait par une boucle \og{}pour\fg{}. Par exemple, la boucle suivante affiche l'identifiant et le login de tous les éléments du dictionnaire :
+\begin{lstlisting}
+for prenom in dico:
+    print(prenom + " a pour mot de passe " + dico[prenom])
+\end{lstlisting}
+
+  \item Attention : il n'y a pas d'ordre dans un dictionnaire. Tu ne contrôles pas dans quel ordre les éléments sont traités.
+\end{itemize}
+\bigskip
+
+\textbf{Commandes principales.}
+
+\begin{itemize}
+  \item Définir un dictionnaire \ci{dico = \{cle1:valeur1, cle2:valeur2,...\}}
+  
+  \item Récupérer une valeur : \ci{dico[cle]}
+  
+  \item Ajouter une valeur : \ci{dico[new_cle] = valeur}
+  
+  \item Modifier une valeur : \ci{dico[cle] = new_valeur}
+  
+  \item Taille du dictionnaire : \ci{len(dico)}
+  
+  \item Parcourir un dictionnaire : \ci{for cle in dico:} et dans la boucle on accède aux valeurs par \ci{dico[cle]}
+  
+  \item Tester si une clé existe : \ci{if cle in dico:}
+  
+  \item Dictionnaire vide : \ci{dico = \{\}}, utile pour initialiser un dictionnaire dans le but de le remplir ensuite.
+\end{itemize}  
+
+\bigskip
+
+Des commandes un peu moins utiles :
+\begin{itemize}
+ 
+  \item Liste des clés : \ci{dico.keys()}\index{keys@\ci{keys}}
+  
+  \item Liste des valeurs : \ci{dico.values()}\index{values@\ci{values}}
+  
+  \item On peut récupérer les clés et les valeurs pour les utiliser dans une boucle :
+\begin{lstlisting}
+for cle,valeur in dico.items():
+    print("Clé :", cle, " Valeur :", valeur)
+\end{lstlisting}
+  \index{items@\ci{items}} 
+\end{itemize}
+
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 2 - Dictionnaire avec Python
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Dictionnaire avec Python]
+   
+\objectifs{Objectifs : s'initier à la manipulation des dictionnaires en \Python.}
+
+\begin{enumerate}
+  \item On reprend le dictionnaire des identifiants/mots de passe :
+  \mycenterline{\ci{dico = \{'jean':'rev1789', 'adele':'vwxyz', 'jasmine':'c3por2d2', 'lola':'abcdef'\}}}
+  \begin{enumerate} 
+    \item Ajoute \ci{'angela'} avec le mot de passe \ci{'qwerty'}. Affiche alors le dictionnaire et sa longueur.
+    \item Programme une fonction \ci{affiche_mot_de_passe(prenom)} qui affiche soit \og{}untel a pour mot de passe ...\fg{} ou bien \og{}untel n'a pas de mot passe\fg{}.
+  \end{enumerate}
+  
+  \item Voici les prénoms/âges des enfants d'une classe.
+  
+ \begin{center}
+\begin{tabular}{|c|c|}\hline
+Clé (prénom) & Valeur (âge) \\ \hline\hline
+\ci{'zack'} & 8 \\ \hline  
+\ci{'paul1'} & 5 \\ \hline
+\ci{'eva'} & 7 \\ \hline
+\ci{'paul2'} & 6 \\ \hline
+\ci{'zoe'} & 7 \\ \hline   
+\end{tabular}
+\end{center}  
+  Note que l'on peut avoir deux valeurs identiques, mais pas deux clés identiques (d'où \ci{'paul1'} et \ci{'paul2'}).
+  \begin{enumerate} 
+    \item Définis un nouveau dictionnaire \ci{dico} qui correspond à ces données. Les valeurs sont ici des entiers.
+    \item Programme une boucle qui calcule la somme des âges, puis calcule la moyenne des âges.
+  \end{enumerate}
+    
+  \item Voici les notes d'un élève par matière :
+ \begin{center}
+\begin{tabular}{|c|c|}\hline
+Clé (matière) & Valeur (liste de notes) \\ \hline\hline
+\ci{'maths'} & \ci{[13,15]} \\ \hline 
+\ci{'anglais'} & \ci{[16,12,14]} \\ \hline 
+\ci{'sport'} & \ci{[17]} \\ \hline  
+\end{tabular}
+\end{center}   
+
+  \begin{enumerate} 
+    \item Pars d'un dictionnaire \ci{notes = \{\}} vide, puis complète matière par matière le dictionnaire. Les valeurs sont ici des listes d'entiers.
+    \item Introduis une nouvelle matière \ci{'python'} avec les notes $18$ et $17$.
+    \item Ajoute la note de $16$ en \ci{'maths'}. (Il s'agit juste d'ajouter un élément à la liste \ci{dico['maths']}.)
+  \end{enumerate}  
+\end{enumerate}
+
+\end{activite}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 3 - Anagrammes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Anagrammes]
+   
+\objectifs{Objectifs : trouver tous les anagrammes de la langue française.}
+ 
+ 
+\begin{itemize}
+  \item Deux mots sont des \defi{anagrammes} s'ils ont les mêmes lettres, mais dans des ordres différents. Par exemple \mot{CRIME} et \mot{MERCI} ou bien  \mot{PRIERES} et \mot{RESPIRE}.
+
+  \item L'\defi{indice} d'un mot est la suite ordonnée de ses lettres. Par exemple l'indice du mot \mot{KAYAK} est \mot{AAKKY}.
+  
+  \item Deux mots forment des anagramme exactement lorsqu'ils ont des indices identiques. Par exemple  \mot{CRIME} et \mot{MERCI} ont bien le même indice \mot{CEIMR}.
+\end{itemize}
+
+
+
+
+\begin{enumerate}
+  \item Programme une fonction \ci{calculer_indice(mot)} qui renvoie l'indice du mot.
+  Par exemple \ci{calculer_indice("KAYAK")} renvoie \ci{"AAKKY"}.
+  
+  \emph{Indications minimalistes.} Tu peux utiliser \ci{join()}, \ci{list()}, \ci{sort()} dans le désordre.
+  
+  \item Programme une fonction \ci{sont_anagrammes(mot1,mot2)} qui teste si les deux mots donnés sont des anagrammes. Avec \mot{CHIEN} et \mot{NICHE} la fonction renvoie \og{}Vrai\fg{}.
+  
+  \item Programme une fonction \ci{dictionnaire_indices_mots(liste)} qui à partir d'une liste de mots construit un dictionnaire ; dans ce dictionnaire les clés sont les indices, et à chaque indice
+  est associé les mots de la liste correspondant.
+  
+  \emph{Exemple.} Voici une liste de mots :
+  \mycenterline{\ci{['CRIME', 'COUCOU', 'PRIERES', 'MERCI', 'RESPIRE', 'REPRISE']}}
+  et voici le dictionnaire renvoyé par la fonction :
+\begin{lstlisting}
+{
+'CEIMR': ['CRIME', 'MERCI'], 
+'CCOOUU': ['COUCOU'], 
+'EEIPRRS': ['PRIERES', 'RESPIRE', 'REPRISE']
+}
+\end{lstlisting}
+  Ainsi dans notre dictionnaire les mots sont regroupés par anagrammes et indexés par l'indice.
+  Note que chaque valeur associée à un indice n'est pas un mot mais une liste de mots.
+  
+  \emph{Méthode.}
+  \begin{itemize}
+    \item Partir d'un dictionnaire vide \ci{dico = \{\}}.
+    \item Pour chaque mot de la liste :
+      \begin{itemize}
+        \item calculer l'indice du mot,
+        \item si cet indice n'existe pas déjà dans le dictionnaire, alors ajouter une nouvelle entrée  : \ci{dico[indice] = [mot]},
+        \item si l'indice existe déjà, alors ajouter le mot à la liste existante :
+        \ci{dico[indice].append(mot)}.
+       \end{itemize} 
+  \end{itemize}  
+  
+  \item \`A partir du répertoire (simple ou complet) des mots de la langue française, dresse la liste de tous les anagrammes possibles. Combien trouves-tu de classes d'anagrammes en tout ? Quel est l'anagramme supplémentaire à \mot{PRIERES}, \mot{RESPIRE}, \mot{REPRISE} ? Trouve les anagrammes de \mot{CESAR}.
+  
+  \item \emph{Bonus.} Programme une fonction \ci{fichier_indice_mots(fichier_in,fichier_out)} qui 
+  à partir du fichier de tous les mots français (\ci{fichier_in}), écrit dans un fichier (\ci{fichier_out}) les indices et les mots correspondants. Voici un extrait du fichier obtenu :
+\begin{lstlisting}
+CEHO : ECHO 
+CEHOP : CHOPE POCHE 
+CEHOPR : CHOPER PROCHE 
+CEHOPRS : PROCHES 
+CEHOPS : POCHES
+\end{lstlisting}
+
+\end{enumerate}
+
+\end{activite}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Le mot le plus long : règle du jeu]
+Le jeu \og{}Le mot le plus long\fg{} est très simple. On tire un certain nombre de lettres au hasard (de $7$ à $10$ lettres). Il s'agit de trouver un mot français ayant le plus de lettres possibles.
+
+Par exemple avec les lettres [\mot{G}, \mot{E}, \mot{A}, \mot{T}, \mot{G}, \mot{A}, \mot{N}], on peut former des mots de $5$ lettres \mot{AGENT}, \mot{GAGNE}, \mot{ETANG}, des mots de $6$ lettres comme \mot{GAGENT}, et des mots de $7$ lettres comme \mot{TANGAGE}.
+
+Les lettres sont choisies au hasard, à l'aide d'un tirage sans remise. Certaines lettres (en particulier les voyelles) sont plus présentes que d'autres. 
+Voici une constitution possible avec $59$ plaques  :
+\begin{itemize}
+  \item Voyelles \mot{A,E,I,O,U} : $5$ plaques chacune,
+  \item Consonnes fréquentes \mot{B,C,D,F,G,H,L,M,N,P,R,S,T} : $2$ plaques chacune,
+  \item Consonnes rares \mot{K,J,Q,V,W,X,Y,Z} : $1$ plaque chacune.
+\end{itemize}
+
+\end{cours}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Le mot le plus long : stratégie]
+ 
+\emph{Une mauvaise stratégie.} Commençons par l'idée qui vient en premier pour trouver le mot le plus long. 
+Imaginons que l'on a un tirage de $10$ lettres. Notre idée est la suivante, on génère toutes les combinaisons de mots possibles à partir de ces $10$ lettres, puis on teste un par un s'ils sont présents dans le répertoire des mots français.
+Quel est le problème ? Il y a $10! = 10 \times 9 \times 8 \times \cdots \times 1 = 3\,628\,800$ combinaisons possibles ($10$ choix pour la première lettre, $9$ choix pour la seconde\ldots). En ensuite il faut tester si chaque mot est dans le répertoire, ce qui demande au moins $10$ tests d'égalité (voir la première activité). Donc en tout plus de $30$ millions de tests d'égalité ce qui est beaucoup, même pour \Python{} ! 
+
+\medskip
+
+\emph{Une bonne stratégie.} Il vaut mieux partir des mots connus que des mots possibles, car il y en a moins.
+Voici le principe :
+\begin{itemize}
+  \item Génération du dictionnaire (à faire une fois pour toute, voir l'activité 3) :
+  \begin{itemize}
+    \item on part de la liste des mots existants en français,
+    \item pour chaque mot on calcule son indice,
+    \item on obtient un dictionnaire indexé par les indices et qui contient tous les mots français possibles associés.
+  \end{itemize}
+  \item Trouver le mot le plus long à partir d'une suite de lettres :
+  \begin{itemize}
+    \item on commence par ordonner ces lettres,
+    \item puis voir si cela correspond à un indice de notre dictionnaire, 
+    \item si c'est non il n'y a pas de mot, 
+    \item si c'est oui la valeur associée à l'indice donne le ou les mots français.
+  \end{itemize}
+\end{itemize}
+
+\bigskip
+
+\emph{Exemple.}
+Avec le tirage de lettres \mot{N}, \mot{E}, \mot{C}, \mot{O}, \mot{I}, on ordonne les lettres pour obtenir le candidat indice \mot{CEINO}. On cherche dans le dictionnaire des indices/mots si cet indice existe, et ici on trouve qu'il existe et qu'il est associé au mot \mot{ICONE}.
+\bigskip
+
+\emph{Analyse.}
+La génération du dictionnaire n'est faite qu'une seule fois et nécessite $20\,000$ (ou $130\,000$) étapes.
+\`A chaque tirage, chercher est très simple, il s'agit juste de chercher si un indice existe dans la liste des $20\,000$ (ou $130\,000$) indices. Si la liste est ordonnée, on a vu que cela se fait en moins de $20$ étapes. C'est donc quasi-immédiat.
+
+\bigskip
+
+\emph{Une difficulté.} Prenons le tirage \mot{X}, \mot{E}, \mot{C}, \mot{S}, \mot{I}, le candidat indice est \mot{CEISX}, mais il n'est associé à aucun mot français. Il faut donc chercher des mots moins longs, par exemple sans le \mot{X}, les lettres restantes forment l'indice \mot{CEIS} qui est l'indice du mot \mot{SCIE}.
+Conclusion : pour un tirage donné il faut aussi considérer tous les sous-tirages possibles.
+ 
+\end{cours}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 4 - Le mot le plus long
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Le mot le plus long]
+   
+\objectifs{Objectifs : gagner à tous les coups au jeu \og{}Le mot le plus long\fg{}}
+ 
+ 
+\begin{enumerate}
+  \item Programme une fonction \ci{tirage_lettres(n)} qui renvoie une liste de $n$ lettres tirées au hasard.
+  
+  \item Programme une fonction \ci{liste_binaire(n)} qui renvoie toutes les listes possibles formées de $n$ zéros et uns. Par exemple avec $n=4$, la fonction renvoie la liste :
+  \mycenterline{\ci{[ [1,1,1,1], [1,1,1,0], [1,1,0,1],..., [0,0,1,0], [0,0,0,1], [0,0,0,0] ]}}
+  
+  \emph{Indications.} Tu peux utiliser l'écriture binaire des entiers.
+  Pour $k$ variant de $0$ à $2^n-1$ :
+  \begin{itemize}
+    \item calculer l'écriture binaire de $k$ (exemple \ci{bin(7)} renvoie \ci{'0b111'}),
+	\index{binaire}
+	\index{bin@\ci{bin}}
+	
+    \item supprimer le préfixe \ci{'0b'} et transformer le reste en une liste d'entier (ex. on obtient \ci{[1,1,1]}),
+    
+    \item rajouter éventuellement des zéros pour obtenir la longueur souhaitée (ex. avec $n=5$, on obtient \ci{[0,0,1,1,1]}).
+  \end{itemize}
+  
+  \item Reprends et modifie la fonction précédente pour obtenir une fonction \ci{indices_depuis_tirage(tirage)} qui à partir d'une liste de lettres forme tous les indices possibles.
+  
+  Par exemple avec le tirage \ci{['A','B','C','L']} de $n=4$ lettres, la fonction renvoie les $15=2^n-1$ indices possibles (qui correspondent à tous les sous-tirages possibles) : 
+  \mycenterline{\ci{['ABCL','ABC','ABL','ACL','BCL','AB','AC','BC','AL','BL','CL','A','B','C','L']}}
+  
+  \emph{Indication.} Une liste de $0$ et de $1$ indique quelles lettres du tirage on conserve : on garde les lettres correspondant aux $1$. Avec les lettres de départ \ci{['A','B','C','L']} :
+  \begin{itemize}
+    \item \ci{[1,1,1,1]} donne l'indice \ci{'ABCL'} (on garde toutes les lettres),
+    \item \ci{[1,1,1,0]} donne l'indice \ci{'ABC'},
+    \item \ci{[1,1,0,1]} donne l'indice \ci{'ABL'},
+    \item \ldots
+    \item \ci{[0,0,0,1]} donne l'indice \ci{'L'}.  
+  \end{itemize} 
+  Il est important d'avoir ordonné les lettres du tirage par ordre alphabétique pour obtenir des indices valides.
+  
+  \item Programme une fonction \ci{mot_le_plus_long(tirage,dico)} qui permet de gagner au jeu. \ci{tirage} est une liste de lettres et \ci{dico} est un dictionnaire qui associe à des indices les mots français correspondant (c'est le dictionnaire de l'activité 3).
+  
+  \bigskip
+  
+  \emph{Indications.}
+  \begin{itemize}
+    \item Calcule la liste des indices possibles à partir du tirage (c'est la question précédente).
+    
+    \item Ne conserve que les indices valides. Ce sont ceux qui apparaissent dans le dictionnaire (utilise le test \ci{if indice in dico:}).
+    
+    \item \`A partir des indices valides, trouve les mots français réalisables (ils sont directement donnés par \ci{dico[indice]}).
+   \end{itemize}
+  
+  \bigskip
+      
+    \emph{Exemple.} Avec notre tirage \ci{['A','B','C','L']}, on trouve par exemple :
+    \begin{itemize}
+      \item indice valide \ci{'ABC'}, mot associé \ci{'BAC'},
+      
+      \item indice valide \ci{'ABL'}, mot associé \ci{'BAL'},
+      
+      \item indice valide \ci{'ACL'}, mots associés \ci{'CAL'} et \ci{'LAC'}.
+    \end{itemize}  
+    Comme aucun mot n'est associé à l'indice \ci{'ABCL'}, il n'y a pas de mots français de longueur $4$ avec ce tirage, les meilleurs mots possibles sont donc de longueur $3$.
+    
+ \bigskip
+
+Voici des exemples à traiter :
+\begin{itemize}
+	\item Trouve des mots avec le tirage de $7$ lettres \ci{['Z','M','O','N','U','E','G']}.
+	\item Trouve des mots avec le tirage de $8$ lettres \ci{['H','O','I','P','E','U','C','R']}.
+	\item Trouve des mots avec le tirage de $9$ lettres \ci{['H','A','S','T','I','D','O','I','T']}.
+	\item Trouve des mots avec le tirage de $10$ lettres \ci{['E','T','N','V','E','U','Z','O','V','N']}.	
+	
+\end{itemize}
+ 
+ 
+ 
+   
+\end{enumerate}
+
+\end{activite}
+
+
+\end{document}

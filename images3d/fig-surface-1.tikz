@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+
+\pgfmathsetmacro{\h}{0.5}; 
+
+  \draw[->,>=latex,thick,gray] (-1,0)--(4,0);
+ \draw[->,>=latex,thick,gray] (0,-1)--(0,5);
+
+\foreach \i in {0,\h,...,1.5}{
+   \draw[red,thick] (1+\i,0.5+\i*\i) -- (1+\i+\h,0.5+\i*\i+2*\h*\i+\h*\h);
+   \draw (1+\i,0)--(1+\i,0.5+\i*\i) ;
+   \draw (1+\i+\h,0)--(1+\i+\h,0.5+\i*\i+2*\h*\i+\h*\h) ;
+}
+
+\node[below right,gray] at (0,0) {$0$};
+\node[below ,gray] at (1,0) {$x_{\min}$};
+\node[below ,gray] at (3,0) {$x_{\max}$};
+
+\end{tikzpicture}

@@ -1,0 +1,48 @@
+\usetikzlibrary{arrows,matrix,positioning}
+\tikzset{node style ge/.style={circle}}
+
+\begin{tikzpicture}
+
+\def\rien{\phantom{\times}}
+\def\rienn{\times}
+% les matrices
+\matrix (A) [matrix of math nodes,column sep=0.5 em,row sep=0.9em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ %left delimiter  = (, right delimiter = )
+]
+{ 
+a_{00} & a_{01} & a_{02}   \\
+a_{10}  &a_{11}  & a_{12} \\
+a_{20} & a_{21} & a_{22} \\
+};
+
+\node[above] at (A.north) {sous-matrice de $M$};
+% \node[left=1em] at (A.west) {$M=$};
+
+\fill[opacity=.3,fill=black] (A-1-1.north west) rectangle (A-3-3.south east);
+
+
+\begin{scope}[xshift=9cm]
+\node at (0,0) {$n_{ij} = c_{00} \cdot a_{00} + c_{01}\cdot a_{01} + \cdots + c_{22} \cdot a_{22}$}; 
+\end{scope}
+
+
+\draw [->,>=latex,blue!20,ultra thick,line width=5] (2,0) to[bend left=10] ++(4,0);
+
+\begin{scope}[xshift=4cm,yshift=1.3cm]
+\matrix (C) [matrix of math nodes,column sep=0.1 em,
+%row sep=-0.75 em,
+%inner sep = 0 em,%
+ left delimiter  = (, right delimiter = )]
+{ 
+c_{00} & c_{01} & c_{02}   \\
+c_{10}  &c_{11}  & c_{12} \\
+c_{20} & c_{21} & c_{22} \\
+};
+%\fill[opacity=.1,fill=black] (C-2-3.north west) rectangle (C-4-5.south east);
+\node[left=1em] at (C.west) {$C = $};
+
+\end{scope}
+
+\end{tikzpicture}

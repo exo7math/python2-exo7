@@ -1,0 +1,13 @@
+\begin{tikzpicture}[scale=1]
+
+\node (O) at (0,0) {};
+
+\draw[ultra thick,red] (O.south) --  node[midway, left=1ex,black,scale=0.8] {$0$} ++(-2,-1.5) node[below] (A) {$\mathcal{A}_{n-1}$};
+\draw[ultra thick,red] (O.south) --  node[midway, left,black,scale=0.8] {$1$} ++(0,-1.5) node[below] (B) {$\mathcal{A}_{n-1}$};
+\draw[ultra thick,red] (O.south) --  node[midway, right=1em,black,scale=0.8] {$2$} ++(+2,-1.5) node[below] (C) {$\mathcal{A}_{n-1}$};
+
+\draw[|-|,ultra thick, blue] (-3.5,0.05) -- ++(0,-2.5) node[midway,left]{$\mathcal{A}_n$};
+
+\node at (0,-2.75) {\bf Construction r\'ecursive de l'arbre $\mathcal{A}_n$.};
+
+\end{tikzpicture}  

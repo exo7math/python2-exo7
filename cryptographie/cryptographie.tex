@@ -1,0 +1,510 @@
+\documentclass[11pt,class=report,crop=false]{standalone}
+\usepackage[screen]{../python}
+
+
+\begin{document}
+
+\definecolor{coul_prive}{rgb}{0.93,0.26,0}
+\definecolor{coul_public}{rgb}{0.06,0.63,0}
+
+\newcommand{\prive}[1]{\relax\ifmmode{\color{coul_prive} #1}\else{\bf\color{coul_prive} #1}\fi}
+\newcommand{\public}[1]{\relax\ifmmode{\color{coul_public} #1}\else{\bf\color{coul_public} #1}\fi}
+
+
+%====================================================================
+\chapitre{Cryptographie}
+%====================================================================
+
+\index{cryptographie}
+
+\objectifs{Tu vas jouer le rôle d'un espion qui intercepte des messages secrets et tente de les décrypter.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Chiffre de César]
+
+\index{cryptographie!chiffre de Cesar@chiffre de César}
+
+Le \defi{chiffre de César} est une façon simple de coder un message afin de conserver le secret du contenu jusqu'à son destinataire. Il s'agit tout simplement de décaler chaque lettre du message. Voyons l'exemple d'un décalage de trois lettres : \prive{A} devient \public{D} ; \prive{B}
+devient \public{E} ; etc.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\prive {A\ B\ C\ D\ E\ F\ G\ H\ I\ J\ K\ L\ M\ N\ O\ P\ Q\ R\ S\ T\ U\ V\ W\ X\ Y\ Z} \qquad lettres du message en clair
+
+\public{D\ E\ F\ G\ H\ I\ J\ K\ L\ M\ N\ O\ P\ Q\ R\ S\ T\ U\ V\ W\ X\ Y\ Z\ A\ B\ C} \qquad lettres du message codé
+\end{minipage}
+\end{center}
+
+Par exemple le message :
+\mycenterline{\prive{CAPTUREZ IDEFIX}}
+se chiffre en :
+\mycenterline{\prive{FDSWXUHC LGHILA}}
+
+Une autre façon de présenter le décalage est de placer les alphabets en clair (anneau extérieur\couleurnb{ en rouge}{}) et codé (anneau intérieur\couleurnb{ en vert}{}) sur deux roues concentriques. À gauche un décalage avec $k=3$ et à droite un décalage avec $k=10$.
+
+\myfigure{0.6}{
+\tikzinput{fig-crypto-1}\qquad\qquad
+\tikzinput{fig-crypto-2}
+}
+Pour chiffrer des messages tu passes des lettres \couleurnb{rouges }{}à l'extérieur aux lettres \couleurnb{vertes }{}à l'intérieur.
+Pour déchiffrer des messages il suffit de faire l'opération inverse\couleurnb{ : passer des lettres vertes aux lettres rouges !}{!}
+
+Déchiffre à la main les messages suivants :
+\begin{itemize}
+  \item \public{EORTXHC DVWHULA} chiffré avec un décalage $k=3$.
+%  BLOQUEZ ASTERIX
+
+  \item \public{YE OCD ZKXYBKWSH} chiffré avec un décalage $k=10$. 
+%OU EST PANORAMIX
+ 
+\end{itemize}  
+
+\end{cours}
+
+
+\begin{cours}[Passer d'un caractère à un nombre et inversement]
+
+On préfère travailler avec des nombres qu'avec des lettres !
+
+
+\begin{itemize}
+
+  \item \textbf{Alphabet.} Tu vas définir une constante globale \ci{Alphabet} qui contient toutes les lettres de l'alphabet : 
+\mycenterline{\ci{Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}}
+
+
+  \item \textbf{Numérotation.} On numérote chaque lettre : 
+  $0$ pour \mot{A}, 
+  $1$ pour \mot{B},
+  $2$ pour \mot{C},
+  \ldots,
+  $25$ pour \mot{Z}.
+  
+  \begin{center}
+  \begin{tabular}{*{26}{p{1.1ex}}}
+  A&B&C&D&E&F&G&H&I&J&K&L&M&N&O&P&Q&R&S&T&U&V&W&X&Y&Z \\
+  0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&19&20&21&22&23&24&25\\
+  \end{tabular}
+  \end{center}
+   
+
+  \item \textbf{D'un numéro vers une lettre.}
+  Pour récupérer la lettre correspondant au rang $i$, il suffit d'écrire : 
+  \mycenterline{\ci{Alphabet[i]}}
+  
+  Par exemple \ci{Alphabet[2]} vaut \ci{'C'}. 
+  
+  \item \textbf{D'une lettre vers son numéro.}
+  Pour récupérer le rang d'une lettre, notée \ci{car}, il suffit d'écrire :  
+  \mycenterline{\ci{Alphabet.index(car)}}
+  \index{index@\ci{index}}
+  
+  Par exemple \ci{Alphabet.index('D')} vaut \ci{3}.   
+  
+  \item \textbf{César.} Le chiffrement de César de décalage $k$ correspond juste à une addition :
+  le numéro $j$ du caractère chiffré est égal au numéro $i$ du caractère en clair auquel on ajoute le décalage $k$, le tout modulo $26$ :
+  $$j = (i+k) \ \% \ 26$$
+  
+  Par exemple avec un décalage $k=3$ :
+  \begin{itemize}
+    \item le caractère numéro $0$ (\mot{A}) est chiffré en le caractère numéro $0+3=3$ (\mot{D}),
+    \item le caractère numéro $1$ (\mot{B}) est chiffré en le caractère numéro $1+3=4$ (\mot{E}),
+    \item \ldots
+    \item  le caractère numéro $25$ (\mot{Z}) est chiffré en le caractère numéro $25+3=28$ qui vaut $2$ modulo $26$ (c'est donc bien \mot{C}).   
+     
+  \end{itemize}
+\end{itemize}
+
+
+ 
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Chiffre de César]
+
+\objectifs{Objectifs : programmer le chiffrement et le déchiffrement du chiffre de César.}
+
+
+\begin{enumerate}
+  \item Programme une fonction \ci{chiffre_cesar_caractere(car,k)}
+  qui renvoie le caractère de l'alphabet situé $k$ rang après (modulo $26$).
+  
+  \emph{Indications.}
+  \begin{itemize}
+    \item Récupère le rang $i$ dans \ci{Alphabet} du caractère à chiffrer.
+    \item Ajoute $k$ modulo $26$ par la formule : $j = (i + k) \ \% \ 26$.
+    \item Renvoie le caractère correspondant au rang $j$ de \ci{Alphabet}.
+  \end{itemize}
+  
+  \emph{Exemple.}
+  Avec un décalage de $k=3$, \mot{A} devient \mot{D} et \mot{Z} devient \mot{C}.
+  
+  \item Programme une fonction \ci{chiffre_cesar_phrase(phrase,k)} qui renvoie la phrase codée par un décalage de César $k$. 
+  
+  \emph{Indication.} Si un caractère n'est pas une lettre majuscule alors conserve-le tel quel dans la phrase chiffrée. Le test se fait par :
+  \mycenterline{\ci{if car not in Alphabet:}}
+  
+   \emph{Exemple.}
+  Avec un décalage de $k=3$, \mot{CAPTUREZ IDEFIX !} devient \mot{FDSWXUHC LGHILA !}
+   
+  \item Programme une fonction \ci{dechiffre_cesar_phrase(phrase,k)} pour le déchiffrement.
+  
+  \emph{Indication.} Deux solutions : soit tu recommences tout, mais au lieu d'ajouter $k$ (modulo $26$) tu soustrais $k$ (modulo $26$) ou bien tu chiffres le message avec un décalage de $-k$ (au lieu de $+k$).  
+  
+  Vérifie que, après avoir chiffré un message, tu le retrouves par déchiffrement !
+  
+  \item Tu te places dans la peau d'un espion qui a intercepté un message codé par un chiffre de César, mais qui ne connaît pas la clé $k$. Programme une fonction \ci{attaque_cesar(phrase)} qui affiche les déchiffrements, en testant toutes les clés $k$ possibles.
+
+Tu as intercepté le message envoyé par le camp Babaorum à Jules César:
+\mycenterline{\mot{HSFGJSEAP F S HDMK VW HGLAGF}}
+Que va maintenant faire César ?  
+    
+\end{enumerate}  
+ 
+\end{activite}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Chiffrement par substitution]
+
+Le chiffre de César est trop facile à attaquer, même si on ne connaît pas le décalage. 
+Pour compliquer la tâche d'un espion, on introduit le \defi{chiffrement par substitution}.
+À chaque lettre de l'alphabet en clair (ici \couleurnb{en rouge, }{}en majuscule), on associe une lettre au hasard (ici \couleurnb{en vert, }{}en minuscule). Voici un exemple :
+
+\begin{center}
+  \begin{tabular}{*{26}{p{1ex}}}
+\prive A&\prive B&\prive C&\prive D&\prive E&\prive F&\prive G&\prive H&\prive I&\prive J&\prive K&\prive L&\prive M&\prive N&\prive O&\prive P&\prive Q&\prive R&\prive S&\prive T&\prive U&\prive V&\prive W&\prive X&\prive Y&\prive Z  \\
+\public y&\public k&\public c&\public o&\public d&\public m&\public f&\public j&\public g&\public z&\public a&\public x&\public r&\public n&\public b&\public u&\public t&\public q&\public i&\public p&\public h&\public w&\public e&\public s&\public v&\public l 
+  \end{tabular}
+\end{center}
+
+
+\begin{itemize}
+  \item \textbf{Chiffrement.} On remplace chaque caractère du message par sa lettre substituée. Le message \prive{BONJOUR} devient \public{kbnzbhq}. 
+  Exercice : chiffre la phrase \prive{AU REVOIR}.
+  
+  
+  \item\textbf{Déchiffrement.} On fait l'opération inverse : \public{kbnkbn} donne \prive{BONBON}.   
+Exercice : déchiffre \public{ywd cdiyq}.
+  
+  \item Bien évidemment pour les lettres d'arrivée on aurait pu choisir un autre mélange. L'expéditeur et le destinataire du message doivent au préalable se mettre d'accord sur la substitution choisie.
+\end{itemize}  
+
+ 
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Chiffrement par substitution]
+
+\index{cryptographie!chiffrement par substitution}
+
+\objectifs{Objectifs : programmer le codage et le décodage d'un chiffrement par substitution.}
+
+On se donne une substitution par un alphabet de départ suivi de son remplacement. On prendra l'exemple suivant, défini par deux constantes globales :
+\mycenterline{\ci{Alphabet  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}}
+\mycenterline{\ci{\ Melange = "ykcodmfjgzaxrnbutqiphwesvl"}}
+
+\begin{enumerate}
+  \item Programme une fonction \ci{chiffre_substitution_caractere(car)}
+  qui renvoie le caractère de l'alphabet chiffré par substitution.
+  
+  \emph{Indications.}
+  \begin{itemize}
+    \item Récupère le rang $i$ dans \ci{Alphabet} du caractère à chiffrer.
+    \item Renvoie le caractère correspondant au rang $i$ de \ci{Melange}.
+  \end{itemize}
+  
+  \emph{Exemple.}
+  \mot{A} devient \mot{y} et \mot{B} devient \mot{k}.
+  
+  \item Programme une fonction \ci{chiffre_substitution_phrase(phrase)} qui renvoie la phrase codée par substitution.
+    
+   \emph{Exemple.}
+  Après substitution \mot{PAS DE POTION POUR OBELIX !} devient \mot{uyi od ubpgbn ubhq bkdxgs !}
+   
+  \item Programme une fonction \ci{dechiffre_substitution_phrase(phrase)} pour le déchiffrement.
+   
+\end{enumerate}  
+    
+\end{activite}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{cours}[Attaque statistique]
+
+\index{cryptographie!attaque}
+
+Pour un espion qui intercepterait un message codé, sans connaître la substitution choisie, il n'est plus  possible de tester toutes les possibilités.
+En effet, il y a $26\times 25 \times 24 \times \cdots \times 2 \times 1$ choix possibles pour l'alphabet mélangé, ce qui fait environ $4 \times 10^{26}$ clés !
+
+\bigskip
+
+\textbf{Statistiques.}
+
+Pour un texte assez long, les lettres n'apparaissent pas toutes avec la même fréquence. En français, les lettres les plus rencontrées sont dans l'ordre :
+\mycenterline{\prive{E S A I N T R U L O D C P M V Q G F H B X J Y Z K W}}
+
+La \defi{fréquence d'apparition d'une lettre} est donnée par la formule :
+ $$\text{fréquence d'apparition d'une lettre} = \frac{\text{nombre d'occurrences de la lettre}}{\text{nombre total de lettres}} \times 100$$
+
+Dans un texte en français les fréquences sont proches de :
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\prive{E}&\prive{S}&\prive{A}&\prive{I}&\prive{N}&\prive{T}&\prive{R}&\prive{U}&\prive{L}&\prive{O}&\prive{D}\\
+\hline
+%14.699\%&8.012\%&7.540\%&7.184\%&6.895\%&6.888\%&6.496\%&6.129\%&5.636\%&5.298\%&3.661\%\\
+14.69\%&8.01\%&7.54\%&7.18\%&6.89\%&6.88\%&6.49\%&6.12\%&5.63\%&5.29\%&3.66\%\\
+\hline
+\end{tabular}
+\end{center}
+
+
+\bigskip
+
+\textbf{Attaque.}
+
+On a intercepté un message, mais on ne connaît pas la substitution.
+Comment utiliser les statistiques pour décrypter le message ?
+Voici une méthode d'attaque : dans le texte chiffré, on cherche la lettre qui apparaît le plus, et si le texte est assez long, cela devrait être le chiffrement du \prive{E}, la lettre qui apparaît ensuite dans l'étude des fréquences devrait être le chiffrement du \prive{S},
+puis le chiffrement du \prive{A}, \prive{I}, \prive{N}, \prive{T}... 
+On obtient ainsi un déchiffrement partiel du message, 
+sous la forme d'un texte à trous et il faut ensuite deviner les lettres manquantes.
+
+\bigskip
+
+\textbf{Un exemple.}
+
+Par exemple, déchiffrons la phrase :
+\mycenterline{\public{jm \  dw \  ug \  jddbhbwm \  y \  jmlj \  cjtljtdjd}}
+On compte les apparitions des lettres :
+\mycenterline{\public{j} : 7  \quad 
+\public{d} : 5 \quad
+\public{m} : 3 \quad 
+\public{b}, \public{l}, \public{t}, \public{w} : 2}
+
+On suppose donc que le \public{j} crypte la lettre \prive{E}, le \public{d} la lettre \prive{S},
+ce qui donne :
+\mycenterline{\prive{E}*  \ \prive{S}* \ ** \ \prive{ESS}***** \ * \ \prive{E}**\prive{E} \ *\prive{E}**\prive{E}*\prive{SES}}
+
+
+Ensuite la lettre qui apparaît le plus est le \public{m}. D'après les fréquences, elle devrait correspondre à \prive{A}, \prive{I}, \prive{N} ou \prive{T}.
+Ainsi le premier mot serait \prive{EA}, \prive{EI}, \prive{EN} ou \prive{ET}. Seuls les deux derniers sont des mots valides.
+
+Si \public{m} $\rightarrow$ \prive{N}, la phrase se déchiffre en :
+\mycenterline{\prive{EN}  \ \prive{S}* \ ** \ \prive{ESS}****\prive{N} \ * \ \prive{EN}*\prive{E} \ *\prive{E}**\prive{E}*\prive{SES}}
+ce qui n'est pas très clair, alors qu'avec \public{m} $\rightarrow$ \prive{T} c'est mieux !
+\mycenterline{\prive{ET}  \ \prive{S}* \ ** \ \prive{ESS}****\prive{T} \ * \ \prive{ET}*\prive{E} \ *\prive{E}**\prive{E}*\prive{SES}}
+
+En cherchant où placer les lettres les plus fréquentes suivantes (\prive{A}, \prive{I}, \prive{N}) puis les autres, avec un peu de patience et de bon sens, on décrypte le message :
+\mycenterline{\prive{ET \ SI \ ON \ ESSAYAIT \ D \ ETRE \ HEUREUSES}}
+ 
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Attaque statistique]
+
+\objectifs{Objectifs : utiliser la fréquence d'apparition des lettres pour décrypter un message en essayant de deviner la substitution.}
+
+
+\begin{enumerate}
+  \item \textbf{Substitution.} Programme une fonction :  
+  \mycenterline{\ci{substitution(phrase,Alphabet_depart,Alphabet_arrivee)}}
+  qui substitue dans la phrase donnée les lettres de l'alphabet de départ par celles de l'alphabet d'arrivée.
+
+  \emph{Indications.}
+  \begin{itemize}
+    \item C'est presque la même fonction que l'activité précédente, sauf qu'ici on a plus de souplesse sur les alphabets qui sont passés en paramètres.
+    
+    \item En particulier \ci{substitution(phrase,Alphabet,Melange)} fait la même chose que \ci{chiffre_substitution_phrase(phrase)} alors que 
+ \ci{substitution(phrase,Melange,Alphabet)} fait la même chose que \ci{dechiffre_substitution_phrase(phrase)}.
+ 
+   \item En particulier la fonction \ci{substitution()} doit permettre un déchiffrement partiel d'une phrase. Voir l'exemple ci-dessous.
+  \end{itemize}
+  
+ 
+  \begin{exemple}[Utilisation pour un décryptage partiel.]
+  \sauteligne
+  \begin{itemize}
+    \item On veut décrypter :
+  \mycenterline{\public{jdolwt jd tm vb ?}}
+  \item Admettons que l'on ait identifié que 
+  \public{j} codait \prive{E}, \public{d} codait \prive{S}, \public{m} codait \prive{T}.
+  \item On définit donc un alphabet de départ et celui (partiel) d'arrivée : 
+\mycenterline{\ci{\ Alphabet_depart = "abcdefghijklmnopqrstuvwxyz"}}
+\mycenterline{\ci{ Alphabet_arrivee = "...S.....E..T............."}} 
+
+  \item Alors avec \ci{phrase = "jdolwt jd tm vb ?"}, la commande 
+  \mycenterline{\ci{substitution(phrase,Alphabet_depart,Alphabet_arrivee)}}
+   renvoie :  
+ \mycenterline{\ci{"ES...T ES T. .. ?"}} 
+ \item Il reste à deviner \prive{ESPRIT ES TU LA ?}
+  \end{itemize}
+  \end{exemple}
+
+  
+  \item \textbf{Statistiques.}
+  
+  Programme une fonction \ci{statistiques(phrase)} qui calcule et renvoie 
+  le nombre d'apparitions des lettres dans une phrase.
+  
+  \emph{Indications.}
+  \begin{itemize}
+    \item On suppose que la phrase est écrite en minuscules, on ne tient pas compte des autres caractères.
+    \item La fonction renvoie la liste des nombres correspondant à chaque lettre de l'alphabet. Par exemple $[3,0,2,...]$ signifie qu'il y a $3$ lettres \mot{a}, pas de lettres \mot{b}, $2$ lettres \mot{c}, etc.
+  \end{itemize}
+  
+  Déduis-en une fonction \ci{affiche_statistiques(phrase)} qui affiche proprement  les lettres qui apparaissent dans la phrase avec leur nombre d'apparitions.
+
+  
+  \item \textbf{Fréquences.}
+  Modifie tes fonctions précédentes pour écrire deux fonctions
+  \ci{frequences(phrase)} et \ci{affiche_frequences(phrase)}
+  qui calculent et affichent les fréquences d'apparitions des lettres (on ne tient compte que des lettres en minuscules).
+  
+
+ 
+  
+  \item \textbf{\'Enigmes.} 
+  Essaie de décrypter les trois citations suivantes. Chacune a été chiffrée par une substitution différente.
+  
+  Les frères Goncourt :
+  \begin{center}
+  \mot{ay dmymndmnxlv vdm ay shvjnvhv fvd dznvgzvd ngvcyzmvd}
+  \end{center}
+  
+  Charles Darwin :
+  \begin{center}
+ \mot{apy pywpfpy tdv ydjsvspng np ybng woy apy pywpfpy apy wady lbjgpy nv apy wady vngpaavzpngpy movy fpaapy tdv y okowgpng ap mvpdc odc fionzpmpngy}
+  \end{center}
+  
+  Albert Einstein :
+  \begin{center}
+ \mot{kw yjnzfcn, i nmy lqwpx zp mwcy yzqy ny lqn fcnp pn azpiyczppn. kw ofwyclqn, i nmy lqwpx yzqy azpiyczppn ny lqn onfmzppn pn mwcy ozqflqzc. cic, pzqm wszpm fnqpc yjnzfcn ny ofwyclqn : fcnp pn azpiyczppn ny onfmzppn pn mwcy ozqflqzc !}
+  \end{center}
+\end{enumerate}  
+
+ 
+\end{activite}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{cours}[Chiffrement de Vigenère]
+	
+\index{cryptographie!chiffrement de Vigenere@chiffrement de Vigenère}
+
+ Un des principaux défauts du chiffre de César (et du chiffrement par substitution) est qu'une lettre (par exemple \mot{A}) est toujours chiffrée par la même lettre (par exemple \mot{D}). Le chiffrement de Vigenère est une version améliorée du chiffre de César.
+ 
+On regroupe d'abord les lettres de notre message par blocs, par exemple ici par blocs de longueur $3$ :
+\mycenterline{\prive{IL \ ETAIT \ UNE \ FOIS}}
+devient
+\mycenterline{\prive{ILE \  TAI \  TUN \  EFO \ IS}}
+(les espaces sont purement indicatifs, dans la première phrase ils séparent les mots, dans la seconde ils séparent les blocs).
+
+
+Si $n$ est la longueur d'un bloc, alors on choisit une clé constituée de $n$ nombres de $0$ à $25$ :
+$[k_1,k_2,\ldots,k_n]$. Le chiffrement consiste à effectuer un chiffrement de César, dont le décalage dépend du rang de la lettre dans le bloc :
+\begin{itemize}
+  \item un décalage de $k_1$ pour la première lettre de chaque bloc,
+  \item un décalage de $k_2$ pour la deuxième lettre de chaque bloc,
+  \item ...
+  \item un décalage de $k_n$ pour la $n$-ème et dernière lettre de chaque bloc.
+\end{itemize}
+
+\bigskip
+
+Pour notre exemple, si on choisit comme clé $[4,2,3]$ alors
+pour le premier bloc \og{}\prive{ILE}\fg{} :
+\begin{itemize}
+  \item un décalage de $4$ pour \prive{I} donne \public{M},
+  \item un décalage de $2$ pour \prive{L} donne \public{N},
+  \item un décalage de $3$ pour \prive{E} donne \public{H},
+\end{itemize}
+
+Ainsi \og{}\prive{ILE}\fg{} devient \og{}\public{MNH}\fg{}.
+On recommence avec le bloc \og{}\prive{TAI}\fg{} qui devient \og{}\public{XCL}\fg{}. Le chiffrement complet donne :
+\mycenterline{\public{MNH XCL XWQ IHR MU}}
+autrement dit la phrase chiffrée est :
+\mycenterline{\public{MN \ HXCLX \ WQI \ HRMU}}
+
+
+\bigskip
+
+\emph{Exercice.} Chiffre la phrase \prive{UNE PRINCESSE GEEK} avec le chiffrement de Vigenère et la même clé $[4,2,3]$.
+
+\bigskip
+
+\emph{Déchiffrement.} Pour déchiffrer, il suffit d'inverser la clé. C'est-à-dire que c'est la même procédure que le chiffrement mais avec la clé $[-k_1,-k_2,\ldots,-k_n]$.
+Par exemple l'opposé de la clé $[4,2,3]$ est la clé $[-4,-2,-3]$. Comme on travaille modulo $26$, cette dernière clé vaut aussi $[22,24,23]$.
+
+\emph{Exercice.} Déchiffre la phrase \public{QKOSW HX VLRVLR}, chiffrée avec la même clé $[4,2,3]$.
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Chiffrement de Vigenère]
+
+\objectifs{Objectifs : programmer le chiffrement de Vigenère et éventuellement trouver une attaque.}
+
+
+
+Programme une fonction \ci{chiffre_vigenere(phrase,cle)} qui chiffre la phrase donnée selon le chiffrement de Vigenère, pour la clé donnée sous la forme d'une liste de décalages, \ci{cle = } $[k_1,k_2,\ldots,k_n]$.
+
+\medskip
+
+\emph{Exemple.}
+La phrase \mot{AAA ABC} avec la clé $[1,2,3] $ renvoie la phrase \mot{BCD BDF}.
+
+\medskip
+
+\emph{Indications.} 
+\begin{itemize}
+  \item Il faut décaler chaque lettre selon un décalage $k_i$ comme pour le chiffre de César.
+  \item Pour savoir quel indice $i$ convient, tu peux utiliser un compteur $i$, initialisé à $0$, auquel tu ajoutes $1$ à chaque lettre de l'alphabet rencontrée, compteur qui prend ses valeurs modulo $n$ (qui est la longueur de la clé).
+  
+\end{itemize}
+
+\bigskip
+
+\textbf{Bonus. Attaque du chiffrement de Vigenère.}
+
+Essaie de décrypter le message suivant (et trouve son auteur) qui a été codé par un chiffrement de Vigenère avec une clé (inconnue !) de longueur $4$.
+ 
+\begin{center}
+\mot{
+DL ZHGIVUEL OD UL LQK TYDVL OIL XEU DLC YEIOSASOI KVXJ KBBI WA PYWYC T WBH QDVBI IBO BWZ QUFZ SDLLVBANODLZ CEFA OCHSSI VL NEMAOI
+}
+\end{center} 
+
+\end{activite}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

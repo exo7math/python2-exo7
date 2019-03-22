@@ -1,0 +1,17 @@
+﻿\begin{tikzpicture}[thick,>=stealth]
+
+\draw[->,>=latex,thick,gray] (-0.8,0) -- (7,0) node[below]{$n$};
+\draw[->,>=latex,thick,gray] (0,-0.25) -- (0,3.5) node[left]{$u_n$};
+
+\draw[red, thick, densely dashed] (-0.8,2.2) node[ left] {$\ell$} -- (7,2.2);
+
+
+\draw[red, thin] (-0.8,2.6) node[ left] {$\ell+\epsilon$} -- (7,2.6);
+\draw[red, thin] (-0.8,1.8) node[ left] {$\ell-\epsilon$} -- (7,1.8);
+
+\foreach \x/\y in {0/0.5,1/0.125,2/0.054,3/0,4/0,5/0,6/0,7/0,8/0,9/0}{
+  \node[blue] at (\x,\y) {+};
+}
+% 0.5, 0.125, 0.0546875, 0.025848388671875, 0.012590124737471342, 0.006215806748283127, 0.0030885852473755623, 0.0015395229442726282, 0.0007685764066883431, 0.00038399284849771257
+
+\end{tikzpicture}

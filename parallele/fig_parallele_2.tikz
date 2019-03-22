@@ -1,0 +1,30 @@
+\begin{tikzpicture}[scale=1]
+
+
+\draw[ultra thick,rounded corners] (0,0) rectangle ++(14,4) node[midway,scale=1.2] {m\'emoire partag\'ee};
+
+\draw[ultra thick,rounded corners,red] (0,-1.5) rectangle ++(2,-2);
+\draw[ultra thick,rounded corners,blue] (3,-1.5) rectangle ++(2,-2);
+\draw[ultra thick,rounded corners,orange] (6,-1.5) rectangle ++(2,-2);
+
+\draw[dotted,ultra thick] (9,-2.5)-- ++(2,0);
+
+\draw[ultra thick,rounded corners,green!70!black] (12,-1.5) rectangle ++(2,-2);
+
+\node[red,scale=1] at (1,-4)  {processeur 1};
+\node[blue,scale=1] at (4,-4)  {processeur 2};
+
+\node[green!70!black,scale=1] at (13,-4)  {processeur $N$};
+
+\draw[->,>=latex,ultra thick,line width=2] (0.8,-0.25) -- ++(0,-1);
+\draw[<-,>=latex,ultra thick,line width=2] (1.2,-0.25) --++(0,-1);
+
+\draw[->,>=latex,ultra thick,line width=2] (3+0.8,-0.25) -- ++(0,-1);
+\draw[<-,>=latex,ultra thick,line width=2] (3+1.2,-0.25) --++(0,-1);
+
+\draw[->,>=latex,ultra thick,line width=2] (6+0.8,-0.25) -- ++(0,-1);
+\draw[<-,>=latex,ultra thick,line width=2] (6+1.2,-0.25) --++(0,-1);
+
+\draw[->,>=latex,ultra thick,line width=2] (12+0.8,-0.25) -- ++(0,-1);
+\draw[<-,>=latex,ultra thick,line width=2] (12+1.2,-0.25) --++(0,-1);
+\end{tikzpicture}  

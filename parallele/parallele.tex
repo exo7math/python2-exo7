@@ -1,0 +1,776 @@
+\documentclass[11pt,class=report,crop=false]{standalone}
+\usepackage[screen]{../python}
+
+
+\begin{document}
+
+
+%====================================================================
+\chapitre{Calculs en parallèle}
+%====================================================================
+
+\index{calcul parallele@calcul parallèle}
+
+\objectifs{Comment profiter d'avoir plusieurs processeurs (ou plusieurs c\oe urs dans chaque processeur) pour calculer plus vite ? C'est simple, il suffit de partager les tâches à réaliser afin que tout le monde travaille en même temps, puis de regrouper les résultats. Dans la pratique, ce n'est pas si facile.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Calculs en parallèle : motivation]
+
+Tu as trouvé un vaccin contre les zombies qui ravagent le monde. Comment distribuer le plus rapidement possible les pilules à $100$ personnes, sachant qu'on ne peut être en contact qu'avec une seule personne à la fois ? Méthode séquentielle (un seul processeur) : distribuer les pilules une par une. S'il faut $1$ minute pour chaque distribution, il te faudra en tout $100$ minutes.
+Méthode à deux processeurs : donne la moitié des pilules à un camarade (1 minute), puis chacun distribue ses pilules. Au total cela prend environ $50$ minutes donc deux fois plus rapide.
+Peux-tu faire mieux ?
+
+\bigskip
+
+Habituellement on effectue un calcul de façon séquentielle : le calcul est divisé en plusieurs tâches, chacune est exécutée tour à tour pour à la fin donner le résultat. 
+
+Dans le calcul en parallèle : on répartit les tâches entre plusieurs processeurs, qui calculent simultanément. 
+
+
+Par exemple : comment calculer $7+5+9+4$ ? De façon séquentielle on fait $7+5=12$ (1 seconde)
+puis on fait $12+9=21$ (1 seconde), et enfin $21+4=25$, pour un total de trois secondes.
+On peut faire mieux avec deux processeurs : le premier calcule $7+5=12$, le second calcule $9+4=13$ (cela fait en tout une seule seconde), puis le premier calcule $12+13=25$. Au total cela a pris deux secondes.
+
+\myfigure{0.6}{
+\tikzinput{fig_parallele_1}
+}
+
+
+Attention, ce n'est pas toujours possible d'effectuer les calculs en parallèle : par exemple pour calculer $(7+5)\times 3 + 2$, il n'y pas d'autre choix que de calculer séquentiellement, car on a besoin des résultats partiels pour continuer les calculs.
+\end{cours}
+
+
+\begin{cours}[Calculs en parallèle : un modèle]
+
+\textbf{Modèle.}
+
+Voici le modèle d'ordinateur avec lequel nous travaillerons ici :
+\begin{itemize}
+  \item une mémoire partagée qui contient les données, stocke les résultats,
+  \item plusieurs processeurs qui fonctionnent simultanément et ont accès à la mémoire.
+\end{itemize}
+
+\myfigure{0.6}{
+\tikzinput{fig_parallele_2}
+}
+
+\bigskip
+
+\textbf{Nombre de calculs/temps des calculs.}
+
+On souhaite mesurer l'efficacité des algorithmes en parallèle.
+Un algorithme est divisé en calculs élémentaires.
+Pour un algorithme séquentiel (avec un seul processeur) chaque tâche est exécutée une par une donc le temps des calculs est égal au nombre de calculs à effectuer.
+Pour un ordinateur qui effectue des calculs en parallèle, on distingue les deux notions :
+\begin{itemize}
+    \item le \defi{nombre de calculs} $C$ est le nombre de tâches élémentaires,
+    \item le \defi{temps des calculs} $T$ est le temps total pour effectuer tous les calculs.  
+  \end{itemize}
+  Un calcul correspond à une unité de temps. Deux calculs peuvent être faits successivement pour un temps des calculs $T=2$, mais si les deux calculs sont effectués en parallèle alors $T=1$.
+
+\bigskip
+
+\emph{Exemple 1.}
+  
+On veut multiplier tous les éléments d'une liste $(x_0,x_1,\ldots,x_{n-1})$ par $2$, pour obtenir $(2x_0,2x_1,\ldots,2x_{n-1})$.
+\begin{itemize}
+  \item Si le nombre de processeurs est $N=1$, alors il faut effectuer successivement chacune des opérations $2x_i$, $i=0,\ldots,n-1$. Le nombre de calculs est $C=n$ et le temps des calculs est $T=n$.
+   
+  \item Si on dispose de $N=2$ processeurs, alors on peut effectuer les calculs 
+  $2x_0$ et $2x_1$ en même temps, puis $2x_2$ et $2x_3$. Au final, le nombre total de calculs reste $C=n$, mais par contre le temps des calculs est divisé par $2$ : $T=n//2$ (en supposant $n$ pair, ou bien $T=n//2+1$ si $n$ est impair).
+  
+  \item Avec $N=4$ processeurs, on a toujours $C=n$ et $T \simeq n//4$.
+  
+  \item Si on a beaucoup de processeurs ($N \ge n$) alors $C=n$ et $T=1$ car tous les calculs peuvent être effectués en même temps.
+\end{itemize}
+
+\bigskip
+
+\emph{Exemple 2.}
+  
+\myfigure{0.6}{
+\tikzinput{fig_parallele_3}
+}
+
+Reprenons l'exemple vu plus haut du calcul $7+5+9+4$. 
+\begin{itemize}
+  \item Calculs séquentiels ($N=1$).
+  Le nombre d'opérations est $C=3$ : c'est le nombre d'additions (notées $\oplus$\couleurnb{ en rouge}{}). Le temps des calculs est $T=3$ (c'est le nombre d'étapes symbolisées par les flèches verticales\couleurnb{ bleues}{}).
+  
+  \item Calculs en parallèle avec $N=2$. Le nombre de calculs est toujours $C=3$ (il y a autant d'additions $\oplus$ effectuées), par contre le temps des calculs est cette fois $T=2$ car lors de la première étape deux calculs sont effectués en parallèle.
+  
+\end{itemize}
+
+%\emph{Note.} Le temps des calculs s'appelle aussi la \defi{profondeur} et correspond sur justement à la hauteur de notre diagramme.
+
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 1 - 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Modèle et premiers calculs en parallèle]
+
+\objectifs{Objectifs : simuler le travail d'un ordinateur avec plusieurs processeurs calculant en parallèle et programmer nos premiers algorithmes de calculs en parallèle.}
+
+
+On simule le travail d'un ordinateur effectuant des calculs en parallèle.
+Notre ordinateur reçoit une liste de $n$ instructions sous la forme d'une chaîne de caractères. L'ordinateur possède $N$ processeurs. Alors :
+\begin{itemize}
+  \item le nombre de calculs est $C = n$,
+  \item le temps des calculs est $T = n/N$ (arrondi à l'entier supérieur).
+\end{itemize}
+Exemple : si les instructions sont \ci{['2+2','3*4','10+1','8-5']} alors l'ordinateur renvoie
+\ci{[4,12,11,3]}, le nombre de calculs est toujours $C=n=4$, le temps des calculs dépend du nombre de processeurs. Par exemple avec $N=2$, le temps des calculs est $T=2$, mais si $N=4$ le temps des calculs est $T=1$.
+
+  \begin{enumerate}
+    \item \textbf{Notre modèle.}
+    
+    Programme une fonction \ci{calcule_en_parallele(liste_instructions,N)}
+    qui reçoit une liste d'instructions (sous la forme de chaînes de caractères). La fonction renvoie
+    d'abord la liste des résultats mais aussi le nombre de calculs $C$ et le temps des calculs $T$ nécessaires aux $N$ processeurs.
+    
+    \emph{Exemple.}
+    Avec les instructions :  
+    \mycenterline{\ci{['2+3','6*7','8-2','5+4','4*3','12//3']}}
+    et $N=2$ processeurs la fonction renvoie :    
+    \mycenterline{\ci{[5, 42, 6, 9, 12, 4], 6, 3}}
+    	Le nombre de calculs est $C=6$, le temps des calculs est $T=3$. Teste d'autres valeurs de $N$.
+    
+    \emph{Indications.}
+    \begin{itemize}
+      \item \ci{eval(chaine)} permet d'évaluer une expression donnée sous la forme d'une chaîne de caractères. Par exemple \ci{eval('8*3')} renvoie $24$.
+      
+      \item \ci{ceil(x)} (du module \ci{math}) renvoie la partie entière supérieure d'un nombre. Exemple \ci{ceil(3.5)} vaut $4$.
+    \end{itemize}
+    
+    \item \textbf{Addition de deux vecteurs.}
+    
+    On se donne deux vecteurs $\vec v_1 = (x_0,x_1,x_2,\ldots,x_{n-1})$ et 
+    $\vec v_2 = (y_0,y_1,y_2,\ldots,y_{n-1})$ (autrement dit deux listes de nombres). Il s'agit de calculer la somme 
+    $\vec v_1 + \vec v_2 = (x_0+y_0,x_1+y_1,\ldots,x_{n-1}+y_{n-1})$.
+    
+    Programme une fonction \ci{addition_vecteurs(v1,v2)} qui prend en entrée deux listes de nombres et renvoie le vecteur somme $\vec v_1 + \vec v_2$.
+    
+    \emph{Méthode.} Cette fonction doit effectuer les calculs en parallèle en utilisant ta fonction 
+     \ci{calcule_en_parallele()}. Il y a un calcul à faire pour chaque composante des vecteurs.
+     En plus cette fonction peut renvoyer le nombre de calculs et le temps des calculs.
+    
+    \emph{Exemple.} Avec \ci{v1 = [1, 2, 3, 4]} et \ci{v2 = [10, 11, 12, 13]}, la commande 
+    \ci{addition_vecteurs(v1,v2)} renvoie d'une part le résultat \ci{[11, 13, 15, 17]}
+    et si on fixe par exemple le nombre de processeurs à $N=2$ alors le nombre de calculs est $C=4$ et le temps des calculs est $T=2$.
+    
+    \emph{Indications.} Il faut transformer chaque calcul en une instruction sous la forme d'une chaîne de caractères. Par exemple la chaîne obtenue par la commande \og{}\ci{str(x) + '*' + str(y)}\fg{} sert pour le calcul \og{}$x \times y$\fg{}.
+    
+    \item \textbf{Somme des termes.} 
+    
+    On se donne un vecteur $\vec v$ sous la forme d'une liste de nombres $(x_0,x_1,x_2,\ldots,x_{n-1})$. Il s'agit de calculer la somme :
+    $$S = x_0+x_1+x_2+\cdots+x_{n-1} = \sum_{i=0}^{n-1} x_i$$
+    
+    On propose la méthode suivante :
+    \begin{itemize}
+      \item on calcule en parallèle la somme de deux termes consécutifs :
+      $$y_0 = x_0 + x_1\qquad y_1 = x_2+x_3 \qquad y_2 = x_4+x_5 \quad \ldots$$
+      et de façon générale
+      $$y_i = x_{2i}+x_{2i+1}.$$
+      On obtient une nouvelle liste $(y_0,y_1,y_2,\ldots)$ deux fois plus courte.
+      \item Puis on recommence avec la liste obtenue : $z_0 = y_0+y_1$, $z_1=y_2+y_3$,\ldots{} jusqu'à obtenir un seul élément qui est la somme $S$ voulue.
+    \end{itemize}
+ 
+Voici l'algorithme sur l'exemple de la somme $1+2+3+\cdots+10$. 
+Les termes sont regroupés par paires (s'il reste un élément isolé à la fin, il est reporté sur la ligne d'après). Le nombre de calculs est $C=9$ (le nombre d'opérations $\oplus$ soulignées) et si on dispose de $N=5$ processeurs alors le temps des calculs est $T=4$ (le nombre de flèches). 
+\myfigure{0.7}{
+\tikzinput{fig_parallele_4}
+} 
+ 
+    
+    Voici le détail de l'algorithme qui en entrée reçoit une liste $\vec v = (x_0,x_1,\ldots,x_{n-1})$ :
+    \begin{itemize}
+      \item Tant que la longueur $n$ de la liste $\vec v$ est strictement plus grande que $1$ :
+      \begin{itemize}
+        \item Définir une liste $\vec w$ dont les composantes $y_i$ sont $y_i = x_{2i}+x_{2i+1}$
+        pour $i$ variant de $0$ à $n//2$.
+        \item Si $n$ est impair rajouter à $\vec w$ le dernier élément de $\vec v$.
+        \item Faire $\vec v \leftarrow \vec w$.
+      \end{itemize}
+      
+      \item \`A la fin la liste est de longueur $1$, l'unique terme donne la somme $S$ cherchée. 
+     \end{itemize}
+     
+     \medskip
+     
+     Programme cet algorithme en une fonction \ci{somme(v)}. Cette fonction doit faire appel à la fonction \ci{calcule_en_parallele()} pour le calcul simultané des $y_i$. Pour cela il faut transformer les opérations
+     $x_{2i}+x_{2i+1}$ en une chaîne de caractères.
+     
+     En plus de la somme, programme dans un deuxième temps ta fonction de sorte qu'elle renvoie aussi le nombre total de calculs, ainsi que le temps total des calculs (ce sont les sommes de tous les nombres et temps des calculs intermédiaires).
+     
+     \emph{Exemple.} Avec $N=4$ processeurs et $\vec v = (1,2,3,4,5,6,7,8)$ une liste de longueur $n=8$ alors on trouve une somme de $S=36$, le nombre de calculs est $C = 7$ (c'est le nombre de signes \og{}$+$\fg{} dans la somme $1+2+3+4+5+6+7+8$) et un temps des calculs de $T = 3$. Avec $N=2$ processeurs, le temps des calculs devient $T=4$.
+    
+      \item \textbf{Somme des termes par un algorithme récursif (facultatif).} 
+    
+      L'idée est de séparer notre liste en une partie droite et une partie gauche, puis d'itérer le processus. Voici le schéma sur l'exemple de la somme $1+2+3+\cdots+8$. Sur la figure de gauche, à lire de haut en bas, les divisions successives en partie droite et partie gauche. Sur la figure de droite l'arbre des calculs, à lire depuis le bas vers le haut.
+      
+  \myfigure{0.5}{
+\tikzinput{fig_parallele_5}
+}       
+
+\begin{algorithme}
+\sauteligne 
+\begin{itemize}
+ 
+  \item 
+  \begin{itemize}
+    \item Entête : \ci{somme_recursive(v)}
+    \item Entrée : $\vec v  = (x_0,x_1,\ldots,x_{n-1})$ une liste de $n$ nombres.
+    \item Sortie : la somme $S$ de ses termes
+    \item Action : fonction récursive.
+  \end{itemize} 
+  
+  \item \textbf{Cas terminaux.}
+  \begin{itemize}
+    \item Si $n=0$, renvoyer $0$.     
+    \item Si $n=1$, renvoyer le seul élément de la liste.    
+  \end{itemize}   
+  
+  \item \textbf{Cas général où $n\ge2$.}
+  
+ 
+  \begin{itemize}
+
+    \item Séparer la liste $\vec v$ en deux sous-listes (à l'aide du rang $n//2$) une sous-liste des termes de gauche \ci{v_gauche}
+    et une sous-liste des termes de droite \ci{v_droite}.
+     
+    \item Calculer la somme $S_g$ des termes de gauche par l'appel récursif \ci{somme_recursive(v_gauche)}.
+    
+    \item Calculer la somme $S_d$ des termes de droite par l'appel récursif \ci{somme_recursive(v_droite)}.
+    
+    \item Renvoyer la somme $S=S_g + S_d$. 
+    
+  \end{itemize}   
+   
+\end{itemize}  
+\end{algorithme}
+
+\bigskip
+Programme cet algorithme en une fonction \ci{somme_recursive(v)}.
+
+\emph{Zombies.} C'est cette méthode qui s'apparente le plus à la distribution efficace de nos pilules pour contrer les zombies.
+
+\emph{Plus difficile.} Dans un second temps, modifie ta fonction afin qu'elle renvoie aussi le nombre de calculs et le temps des calculs nécessaires (en supposant qu'il y a suffisamment de processeurs).
+
+
+  \item \textbf{Produit scalaire.} 
+  
+  Programme une fonction \ci{multiplication_vecteurs(v1,v2)} calquée sur le modèle \ci{addition_vecteurs()} qui renvoie le produit terme à terme  $(x_0 \times y_0,x_1 \times y_1,\ldots,x_{n-1} \times y_{n-1})$. 
+  de deux vecteurs $\vec v_1 = (x_0,x_1,x_2,\ldots,x_{n-1})$ et 
+    $\vec v_2 = (y_0,y_1,y_2,\ldots,y_{n-1})$.
+    
+    \`A l'aide de la fonction \ci{somme()} déduis-en une fonction 
+    \ci{produit_scalaire(v1,v2)} qui calcule le produit scalaire :
+    $$\langle\vec v_1 \mid \vec v_2\rangle = x_0 \times y_0  + x_1 \times y_1 + \cdots  + x_{n-1} \times y_{n-1}$$
+    
+    \emph{Calculs.} Le produit scalaire nécessite $n$ multiplications, puis $n-1$ additions, donc un total de $C = 2n-1$ calculs.    
+    On prend l'exemple de deux vecteurs de longueur $n=16$. Avec un seul processeur il faudra un temps des calculs $T =31$.
+    Combien de temps faut-il si on dispose de $N=8$ processeurs ?
+    
+    Vérifie expérimentalement que si $n$ est grand, alors on a $T \simeq C/N$.
+    
+\end{enumerate}
+   
+\end{activite}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 2 - Doublons
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Doublons]
+
+\objectifs{Objectifs : retirer les doublons d'une liste à l'aide d'algorithmes adaptés aux calculs en parallèle.}
+
+\textbf{Première méthode : indexation.}
+    
+Pour cette méthode la liste est une liste d'entiers, par exemple des entiers entre $0$ et $99$ :
+\mycenterline{\ci{liste = [59, 72, 8, 37, 37, 8, 21, 22, 37, 59]}}
+
+On souhaite retirer les doublons, c'est-à-dire obtenir la liste :
+\mycenterline{\ci{[59, 72, 8, 37, 21, 22]}}
+
+L'idée est de remplir petit à petit une grande table d'indexation :
+\begin{itemize}
+  \item au départ la table contient $100$ zéros (un pour chaque entier possible entre $0$ et $99$),
+  
+  \item pour chaque élément $i$ de la liste initiale on regarde la table au rang $i$ :
+  \begin{itemize}
+    \item s'il y a un $0$ c'est que l'élément est nouveau, on le conserve dans une nouvelle liste et on place un $1$ au rang $i$ de la table,
+    
+    \item s'il y a déjà un $1$ dans la table c'est que l'élément $i$ a déjà été indexé, on ne le conserve pas dans la nouvelle liste.
+  \end{itemize}  
+\end{itemize}
+
+\bigskip
+
+Programme cet algorithme en une fonction
+\ci{enlever_tous_doublons(liste)}.
+
+\bigskip
+
+\emph{Exemple.} 
+Prenons un exemple plus simple avec des entiers de $0$ à $9$ et la liste :
+\mycenterline{\ci{liste = [3, 5, 4, 5, 8, 8, 4]}}
+La table d'indexation au départ ne contient que des $0$ :
+\mycenterline{\ci{table = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}}
+
+Puis on parcourt la liste :
+\begin{itemize}
+  \item le premier élément est $3$ : on place un $1$ au rang $3$, la table d'indexation est maintenant \ci{[0, 0, 0, 1, 0, 0, 0, 0, 0, 0]} (la numérotation commence au rang $0$).
+  
+  \item les éléments suivants sont $5$ puis $4$, on place des $1$ au rang $5$ puis au rang $4$, la table est maintenant \ci{[0, 0, 0, 1, 1, 1, 0, 0, 0, 0]},
+  
+  \item ensuite on retrouve l'élément $5$, on sait qu'on a déjà pris en compte cet élément car au rang $5$ de la table il y a un $1$, on ne fait donc rien,
+  
+  \item ensuite l'élément est $8$, la table devient \ci{[0, 0, 0, 1, 1, 1, 0, 0, 1, 0]}, puis on retrouve $8$ qui ne change rien,
+  
+  \item enfin on trouve $4$ que l'on a déjà rencontré et qui ne change pas la table.  
+\end{itemize}
+
+On ne retient que les éléments lors de leur première apparition, la liste sans doublons est donc :
+\mycenterline{\ci{[3, 5, 4, 8]}}
+
+\bigskip
+
+\emph{Calculs en parallèle.}
+Cet algorithme est facile à implémenter en parallèle : la table est située dans la mémoire globale et le parcours des éléments se fait en parallèle, s'il y a un $0$ dans la table on conserve l'élément, s'il y a un déjà $1$ on l'oublie.
+
+\bigskip
+
+\emph{Inconvénients.}
+La méthode présente deux gros inconvénients : d'une part elle n'est valable que pour des listes d'entiers et surtout il faut construire une table qui peut être immense comparée à la liste initiale, par exemple même pour une petite liste d'entiers  entre $0$ et $999\,999$ il faut commencer par construire une table de longueur un million. La seconde méthode va remédier à ces deux problèmes. 
+ 
+ \bigskip
+    
+    
+ \textbf{Seconde méthode : table de hachage.}
+ \index{table de hachage}
+  
+ On souhaite enlever les doublons de la liste :
+ \mycenterline{\ci{['LAPIN','CHAT','ZEBRE','CHAT','CHIEN','TORTUE','CHIEN','SINGE','SINGE','CHAT']}}
+ 
+ 
+\begin{enumerate}
+  \item \textbf{Fonction de hachage.}
+  À une chaîne de caractères et un entier $p$, on va associer un entier $h$ avec $0 \le h < p$ ; $h$ sera appelé le \emph{hachage} du mot modulo $p$. La méthode est la suivante :
+  \begin{itemize}
+    \item on attribue à chaque lettre une valeur : \mot{A} vaut $0$, \mot{B} vaut $1$,\ldots, \mot{Z} vaut $25$,
+    \item on prend la valeur de la lettre de rang $0$ dans le mot, on multiplie par $26^0$,
+    \item auquel on ajoute la valeur de la lettre de rang $1$, multipliée par $26^1$,
+    \item \ldots
+    \item auquel on ajoute la valeur de la lettre de rang $k$, multipliée par $26^k$,
+    \item \ldots
+    \item de plus les calculs se font modulo l'entier $p$ donné, donc la somme totale est un entier $h$ avec $0 \le h < p$.
+  \end{itemize}
+
+
+Programme une fonction \ci{hachage(mot,p)} qui renvoie le hachage du mot donné modulo $p$.
+
+\bigskip
+
+\emph{Exemples.}
+Voici le détail des calculs du hachage de \mot{LAPIN} modulo $p=10$ :
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+  \hline
+  lettre & {\bf L} & {\bf A} & {\bf P} & {\bf I} & {\bf N}  \\ 
+  \hline\hline
+  valeur & 11 & 0  & 15 & 8 & 13  \\\hline
+  facteur & $26^0$ & $26^1$ & $26^2$ & $26^3$ & $26^4$ \\\hline  
+  produit & 11 & 0 & 10\,140 & 140\,608 & 5\,940\,688  \\\hline
+  modulo $p=10$ & 1 & 0 & 0 & 8 & 8 \\
+  \hline
+\end{tabular}
+\end{center}
+Donc le hachage de \mot{LAPIN} modulo $10$ est $h= 1+0+0+8+8 \pmod{10} = 17 \pmod{10} = 7$.
+
+Autre exemple avec \mot{CHIEN} :
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+  \hline
+  lettre & {\bf C} & {\bf H} & {\bf I} & {\bf E} & {\bf N}  \\ 
+  \hline\hline
+  valeur & 2 & 8  & 8 & 4 & 13  \\\hline
+  facteur & $26^0$ & $26^1$ & $26^2$ & $26^3$ & $26^4$ \\\hline  
+  produit & 2 & 182 & 5\,408 & 70\,304 & 5\,940\,688  \\\hline
+  modulo $p=10$ & 2 & 2 & 8 & 4 & 8 \\
+  \hline
+\end{tabular}
+\end{center}
+Donc le hachage de \mot{CHIEN} modulo $10$ est $h= 2+2+8+4+8 \pmod{10} = 24 \pmod{10} = 4$.
+
+Vérifie que le hachage de \mot{SINGE} modulo $10$ vaut aussi $h=4$.
+
+\emph{Important.} Il peut donc y avoir deux mots différents qui ont la même valeur de hachage.
+
+
+\bigskip
+
+\emph{Indications.} Pour récupérer le rang d'une lettre, définis une chaîne contenant toutes les lettres :
+ \mycenterline{\ci{ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}}
+ Puis utilise la méthode \ci{index()}, pour déterminer le rang d'un caractère stocké dans la variable \ci{c} :
+ \mycenterline{\ci{ALPHABET.index(c)}}
+ Par exemple \ci{ALPHABET.index('D')} renvoie $3$ (la numérotation commence à $0$).
+
+  
+  \item \textbf{Table de hachage et élimination de certains doublons.}
+  Maintenant que l'on a associé un entier à chaque élément de la liste alors le principe est assez similaire à la première méthode, mais avec une table (dite table de hachage) beaucoup plus petite.
+  
+Voici l'algorithme :
+\begin{itemize}
+  \item on fixe un entier $p$,
+
+  \item au départ on définit une table \ci{table} qui contient $p$ chaînes vides \ci{''} (une pour chaque valeur de hachage possible entre $0$ et $p-1$),
+  
+  \item pour chaque \ci{mot} de la liste initiale on calcule son hachage $h$ (qui dépend du mot et de $p$) et on regarde \ci{table[h]}, la valeur de la table au rang $h$ :
+  \begin{itemize}
+    \item s'il y a une chaîne vide \ci{''} c'est que le mot est nouveau, on le conserve dans une nouvelle liste et en plus on place ce mot au rang $h$ de la table : \ci{table[h] = mot} ;
+    
+    \item s'il y a déjà une chaîne non-vide :
+    \begin{itemize}
+      \item soit c'est la même chaîne que \ci{mot}, auquel cas \ci{mot} est un doublon que l'on ne conserve pas,
+      
+      \item soit c'est une chaîne différente, auquel cas on conserve le mot.
+    \end{itemize}  
+
+  \end{itemize}  
+\end{itemize}  
+
+Programme cet algorithme en une fonction \ci{enlever_des_doublons(liste,p)} qui renvoie la liste originale des mots sans les doublons détectés par la fonction de hachage modulo $p$.
+
+
+\bigskip
+Prenons l'exemple de la liste \ci{['CHIEN', 'LAPIN', 'CHIEN', 'SINGE', 'SINGE']} avec les calculs modulo $p=10$.
+\begin{itemize}
+  \item Au départ la table de hachage contient $10$ chaînes vides :
+ \mycenterline{\ci{['', '', '', '', '', '', '', '', '', '']}}
+  \item La hachage de \mot{CHIEN} modulo $10$ vaut $h=4$ (voir la question précédente), donc on place ce mot dans la table au rang $4$, la table est maintenant :
+ \mycenterline{table : \ci{['', '', '', '', 'CHIEN', '', '', '', '', '']}} 
+ \mycenterline{et la nouvelle liste : \ci{['CHIEN']}}
+ 
+ \item La hachage de \mot{LAPIN} modulo $10$ vaut $h=7$, donc on place ce mot dans la table au rang $7$, la table est maintenant : 
+ \mycenterline{table : \ci{['', '', '', '', 'CHIEN', '', '', 'LAPIN', '', '']}}
+ \mycenterline{nouvelle liste :\ci{['CHIEN', 'LAPIN']}}
+  
+  \item Le mot suivant est encore \mot{CHIEN}, de hachage $h=7$. Il y a déjà un mot au rang $7$, et comme c'est déjà \mot{CHIEN} alors on ne change pas la table et on ne retient pas ce mot (rien ne change) :   
+ \mycenterline{table : \ci{['', '', '', '', 'CHIEN', '', '', 'LAPIN', '', '']}}
+ \mycenterline{nouvelle liste :\ci{['CHIEN', 'LAPIN']}} 
+ 
+ \item Le mot suivant est \mot{SINGE}, de hachage $h=4$. Il y a déjà un mot au rang $4$, mais c'est le mot \mot{CHIEN}, comme ces deux mots sont différents alors on ne change pas la table mais on conserve le mot \mot{SINGE} :    
+ \mycenterline{table : \ci{['', '', '', '', 'CHIEN', '', '', 'LAPIN', '', '']}}
+ \mycenterline{nouvelle liste :\ci{['CHIEN', 'LAPIN', 'SINGE']}} 
+ 
+  \item Le mot suivant est encore \mot{SINGE}, de hachage $h=4$. Pour la même raison on conserve encore le mot \mot{SINGE} :    
+ \mycenterline{table : \ci{['', '', '', '', 'CHIEN', '', '', 'LAPIN', '', '']}} 
+ \mycenterline{nouvelle liste :\ci{['CHIEN', 'LAPIN', 'SINGE', 'SINGE']}} 
+\end{itemize} 
+ 
+ Notre méthode a donc supprimé un doublon de \mot{CHIEN}, mais pas le doublon de \mot{SINGE}. L'explication est simple : deux mots identiques ont bien la même valeur de hachage, mais il se peut que cela se produise aussi pour deux mots différents ! En choisissant $p$ assez grand, ces accidents deviennent assez rares.
+
+Par exemple ici \mot{CHIEN} et \mot{SINGE} ont la même valeur de hachage $h=4$ pour $p=10$,
+mais si on fixe $p=11$ alors le hachage de \mot{CHIEN} vaut $h=2$ et celui de \mot{SINGE} vaut $h=5$.
+  
+  
+  \item \textbf{Itération et élimination de tous les doublons.}
+  
+  Programme une fonction \ci{iterer_enlever_des_doublons(liste,nb_iter)} qui itère la fonction précédente avec différentes valeurs de $p$ :
+  \begin{itemize}
+    \item commence avec $p$ qui vaut deux fois la longueur de la liste,
+    \item applique la fonction précédente avec cette valeur de $p$,
+    \item à partir de la liste renvoyée, retire les doublons avec cette fois $p\leftarrow p+1$,
+    \item itère en incrémentant $p$ à chaque fois.
+  \end{itemize}
+  
+  En général, avec trois itérations il y a peu de chance qu'il reste des doublons !
+  
+  \emph{Exemple.}
+  Reprenons la liste :  
+  \mycenterline{\ci{['CHIEN','LAPIN','CHIEN','SINGE','SINGE']}}
+  
+  Il y a $5$ mots, donc on fixe $p=10$.
+  On retire d'abord les doublons modulo $p=10$, on obtient la liste : 
+  \mycenterline{\ci{['CHIEN','LAPIN','SINGE','SINGE']}}
+  
+  On repart de cette liste et on retire maintenant les doublons modulo $p=11$, on obtient une liste sans doublons :
+  \mycenterline{\ci{['CHIEN','LAPIN','SINGE']}}   
+  
+\end{enumerate}
+     
+     
+Encore une fois, il serait facile d'effectuer le travail en parallèle sur les éléments :
+calcul du hachage et test s'il est présent dans la table.
+
+\end{activite}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 3 - Listes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Calculs en parallèle sur les listes]
+
+\objectifs{Objectifs : voir des algorithmes bien adaptés aux calculs en parallèle pour les listes. Les fonctions de cette activités sont des fonctions récursives.}
+
+
+  \begin{enumerate}
+    \item \textbf{Maximum d'une liste.}
+    
+    Il est facile de trouver le maximum d'une liste est parcourant la liste du début à la fin. 
+    On suppose ici que l'on a deux processeurs (ou plus). Voici l'idée pour profiter des calculs en parallèle : on divise la liste en deux, on cherche le maximum de la partie gauche (avec des processeurs), on cherche le maximum de la partie droite (avec d'autres processeurs) et on compare les deux maximums pour renvoyer le résultat. 
+    
+    Voici l'algorithme qui définit une fonction récursive \ci{maximum()} renvoyant le maximum d'une liste de nombre.
+    
+\begin{algorithme}
+\sauteligne 
+\begin{itemize}
+ 
+  \item 
+  \begin{itemize}
+    \item Entête : \ci{maximum(liste)}
+    \item Entrée : \ci{liste}, une liste de $n$ nombres.
+    \item Sortie : le maximum de la liste.
+    \item Action : fonction récursive.
+  \end{itemize} 
+  
+  \item \textbf{Cas terminaux.}
+  \begin{itemize}
+     \item Si $n=0$, renvoyer une très grande valeur négative (par exemple $-1000$).
+     \item Si $n=1$, renvoyer le seul élément de la liste.
+   \end{itemize}   
+   
+   
+  \item \textbf{Cas général où $n\ge2$.}
+  
+  \begin{itemize}
+     \item Diviser la liste en deux parties : une partie gauche \ci{liste_gauche} et une partie droite \ci{liste_droite}.
+     
+     \item Calculer le maximum de la partie gauche par un appel récursif \ci{maximum(liste_gauche)}.  
+     
+    \item Calculer le maximum de la partie droite par un appel récursif \ci{maximum(liste_droite)}.
+     
+    \item Renvoyer le plus grand de ces deux maximums (à l'aide de la fonction habituelle \ci{max(a,b)}).
+    
+  \end{itemize}   
+\end{itemize}  
+\end{algorithme}
+ 
+\emph{L'infini.} La valeur $-1000$ du cas terminal est une valeur qui doit être plus petite que toute les valeurs de la liste. Il n'est donc pas sûr que $-1000$ soit suffisant. La bonne solution est d'utiliser la valeur infinie \ci{inf}\index{infini} (qui correspond à $+\infty$) disponible depuis le module \ci{math}. Par exemple \og{}\ci{3 < inf}\fg{} vaut \og{}Vrai\fg{}. De même pour $-\infty$, \og{}\ci{3 > -inf}\fg{} vaut \og{}Vrai\fg{}.
+
+
+    \item \textbf{Termes pairs d'une liste.}
+    
+    Il s'agit de ne conserver que les termes pairs d'une liste d'entiers. Par exemple à partir de la liste $[7,2,8,12,5,8]$, on ne conserve que $[2,8,12,8]$.
+    L'idée pour profiter des calculs en parallèle est similaire à celle de la question précédente : on divise la liste en deux, on cherche les termes pairs de la partie gauche, on cherche les termes pairs de la partie droite et on concatène ces deux listes.
+    
+    Écris en détails l'algorithme récursif correspondant à cette idée. Réfléchis-bien aux cas terminaux (si la liste est vide bien sûr, on renvoie la liste vide, si la liste ne contient qu'un élément, que renvoie-t-on ?).
+    
+    Programme ton algorithme en une fonction \ci{extraire_pairs(liste)}.
+    
+    \item \textbf{Premier rang non nul.}
+    
+    On considère une liste qui contient beaucoup de $0$. Il s'agit de trouver le rang du premier terme non nul. Par exemple pour la liste $[0,0,0,0,0,1,0,1,1,0]$ le rang du premier terme non nul est $5$ (on commence à compter à partir du rang $0$). 
+    
+    Voici l'idée pour profiter des calculs en parallèle : 
+    \begin{itemize} 
+      \item on sépare la liste en une partie gauche et une partie droite,
+      \item par un appel récursif sur la partie gauche, on sait s'il y a un élément non nul dans la partie gauche, si c'est le cas on renvoie le rang et c'est fini, si ce n'est pas le cas on passe à la suite avec la partie droite,
+      \item si l'étude de la partie gauche n'a rien donné, on effectue un appel récursif sur la partie droite,  s'il y a un élément non nul dans la partie droite, on renvoie le rang augmenté de la longueur de la liste de gauche et c'est fini.
+      
+      Écris en détails l'algorithme et programme une fonction \ci{premier_rang(liste)}.
+      
+      \emph{Indications.}
+      \begin{itemize}
+        \item La fonction renvoie \ci{None} si tous les éléments sont nuls.
+        \item Cas terminaux : si la liste est vide, on renvoie \ci{None} ; si la liste ne contient qu'un élément, on renvoie \ci{None} si cet élément est nul, et le rang $0$ sinon.
+        \item Si l'étude de la sous-liste de gauche n'a rien donné il ne faut pas oublier de décaler le rang du premier terme non nul de la sous-liste de droite. 
+        \item Par exemple pour la liste  
+ $[0,0,0,0,0,1,0,1,1,0]$, la partie gauche $[0,0,0,0,0]$ (de longueur $5$) a tous ses termes nuls,  pour la partie droite $[1,0,1,1,0]$ le premier terme non nul est de rang $0$, mais dans la liste de départ ce terme est de rang $5+0=5$.
+      \end{itemize}
+   \end{itemize}   
+  \end{enumerate}
+     
+\end{activite}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{cours}[Sommes partielles]
+
+Soit une suite d'éléments :
+$$\big[x_0,\ x_1,\ x_2,\ \ldots,\ x_{n-1}\big],$$
+la liste des \defi{sommes partielles} est :
+$$\big[x_0,\ x_0+x_1,\ x_0+x_1+x_2,\ \ldots,\ \ x_0+x_1+x_2 + \cdots + x_{n-1}\big]$$
+
+\emph{Exemples.} La liste $\big[1, 2, 3, 4, 5, 6, 7, 8\big]$
+a pour sommes partielles 
+$$\big[1, 3, 6, 10, 15, 21, 28, 36 \big].$$
+
+Autre exemple, la liste $\big[10,4,0,2,1,0,3,21\big]$
+a pour sommes partielles $\big[10, 14, 14, 16, 17, 17, 20, 41\big]$.
+
+\bigskip
+
+La $k$-ème somme partielle est donc :
+$$S_k = x_0+x_1+x_2+\cdots+x_k$$
+et s'obtient à partir de la précédente par la formule
+$$S_k = S_{k-1} + x_k$$
+en initialisant $S_0 = x_0$ (ou mieux $S_{-1} = 0$).
+
+
+\textbf{Calculs en parallèle}.
+
+Il existe une méthode astucieuse pour effectuer les calculs en parallèle. Le principe est expliqué sur la figure ci-dessous.
+
+\myfigure{1}{
+\tikzinput{fig_prefix_sum1}
+}
+Le schéma se lit de haut en bas. En haut il y a les entrées, ici une liste de $16$ éléments. En bas la liste des sommes partielles. 
+Chaque n\oe ud $\oplus$ signifie l'addition des deux nombres issus des arêtes au-dessus. Tout ce qui sort vers le bas du n\oe ud est le résultat de cette addition.
+
+\myfigure{0.8}{
+\tikzinput{fig_prefix_sum3}
+}
+
+\emph{Exemple.}
+Voici le début des calculs, à toi de les finir !
+
+\myfigure{0.8}{
+\tikzinput{fig_prefix_sum2}
+}
+
+% D'après image Wikipédia/David Eppstein libre de droit
+
+\end{cours}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Activité 4 - 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{activite}[Sommes partielles]
+
+
+\objectifs{Objectifs : il est très facile de calculer les sommes partielles par un algorithme séquentiel, cependant il existe un algorithme récursif qui permet de faire ces calculs en parallèle.}
+
+
+  \begin{enumerate}
+    \item \textbf{Algorithme séquentiel.} Programme une fonction \ci{sommes_partielles(liste)} qui renvoie la liste des sommes partielles après avoir parcouru (une seule fois !) la liste élément par élément.
+    
+        
+    \item \textbf{Algorithme parallèle.} Implémente l'algorithme suivant (qui correspond aux explications données  ci-dessus) en une fonction récursive \ci{sommes_partielles_recursif(liste)}.
+On suppose que la longueur de la liste est une puissance de $2$.    
+\begin{algorithme}
+\sauteligne 
+\begin{itemize}
+ 
+  \item 
+  \begin{itemize}
+    \item Entête : \ci{sommes_partielles_recursif(liste)}
+    \item Entrée : \ci{liste}$=[x_0,x_1,\ldots,x_{n-1}]$ une liste de $n$ nombres
+    ($n$ est une puissance de $2$).
+    \item Sortie : la liste de ses sommes partielles.
+    \item Action : fonction récursive.
+  \end{itemize} 
+  
+  \item \textbf{Cas terminal.}
+  
+  Si $n=1$, renvoyer la liste (qui ne contient qu'un élément).
+  
+
+   
+  \item \textbf{Cas général où $n\ge2$.}
+  
+  \textbf{Remontée.}
+  
+  
+  
+  \begin{itemize}
+
+    \item Former la liste \ci{sous_liste} de taille $n//2$ constituée de l'addition d'un terme de rang pair et d'un terme de rang impair :
+  $$[x_0+x_1,x_2+x_3,\ldots]$$
+     
+    \item Avec cette \ci{sous_liste}, faire un appel récursif  :    
+     \mycenterline{\ci{sommes_partielles_recursif(sous_liste)}}
+     et nommer le résultat \ci{liste_remontee} qui est une liste $[y_0,y_1,\ldots,y_{n//2-1}$].
+    
+  \end{itemize}       
+     
+   \textbf{Descente.}
+   
+  \begin{itemize}
+
+    \item Initialiser une liste \ci{liste_descente} qui contient seulement $x_0$.
+     
+    \item Pour $i$ allant de $1$ à $n-1$ :
+    \begin{itemize}
+      \item Si $i$ est pair, ajouter à \ci{liste_descente} l'élément 
+      $$y_{i//2-1}+x_i,$$
+      \item sinon, ajouter à \ci{liste_descente} l'élément
+      $$y_{(i-1)//2}.$$
+    \end{itemize}
+        
+    
+  \end{itemize}   
+    
+ 
+  
+  \item Renvoyer la liste \ci{liste_descente}.
+\end{itemize}  
+\end{algorithme}
+        
+    
+    
+    
+    \item \textbf{Applications : sélection des éléments par un filtre.}
+    
+    Imaginons une liste quelconque, par exemple :  
+    \mycenterline{\ci{liste = [15, 18, 16, 11, 15, 19, 13, 12]}}
+    dont on souhaite ne conserver que certains éléments. Pour cela on définit un filtre :  
+    \mycenterline{\ci{filtre = [0, 0, 1, 0, 1, 0, 0, 1]}}
+    On ne retient que ceux qui sont en correspondance avec un $1$ :    
+    \mycenterline{\ci{selec = [16, 15, 12]}}
+   
+    C'est très facile à programmer de façon séquentielle (fais-le) et même en parallèle si on ne se préoccupe pas de l'ordre des éléments (on autorise la sortie \ci{[15, 12, 16]} par exemple). Voici un algorithme pour le faire en parallèle en préservant l'ordre des éléments.   
+    
+
+    
+    \begin{itemize}
+      \item On calcule la liste des sommes partielles du filtre. Sur notre exemple, cela donne :     
+      \mycenterline{\ci{sommes = [0, 0, 1, 1, 2, 2, 2, 3]}}      
+      Le dernier élément $n$ (ici $n=3$) donne la taille de la liste finale \ci{selec}. On initialise donc une liste \ci{selec} de taille $n$.
+      
+      \item Les sommes partielles donnent le rang des éléments à conserver dans la liste finale (avec un décalage de $1$). Comment ? 
+      Par exemple on sait qu'il faut conserver l'élément de rang $2$ de la liste initiale, en effet pour $i=2$ on a \ci{filtre[i]=1} (et pas $0$), donc il faut garder l'élément \ci{liste[i]} qui vaut $16$. La somme partielle au rang $2$, \ci{sommes[i]}, vaut $1$, alors $16$ aura comme rang final $0$ (il y a un décalage de $1$). Pour $15$, sa somme partielle associée est $2$, il sera donc au rang $1$ ; pour $12$, sa somme partielle est $3$ il sera donc au rang $2$.      
+      
+      \item Ainsi pour $i$ indexant les éléments de la liste initiale, si on doit conserver l'élément de rang $i$, alors il sera au rang \ci{sommes[i]-1} dans la liste finale. Autrement dit :
+      \mycenterline{\ci{selec[sommes[i]-1] = liste[i]}}
+      
+      \item Les éléments à conserver sont maintenant dans la liste \ci{selec}.
+                 
+      
+     \end{itemize}    
+     
+     Programme cet algorithme en une fonction \ci{selection(liste,filtre)}. (Si tu utilises la fonction de la question précédente, les longueurs des listes doivent être des puissances de $2$.)
+  \end{enumerate}
+  
+  
+     
+\end{activite}
+
+
+\end{document}

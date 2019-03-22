@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+
+% Automate
+
+\draw[blue,very thick] (0,0) grid ++(3,1);
+
+\node[scale=1.5] at  (0.5,0.43) {\bf a};
+\node[scale=1.5] at  (1.5,0.5) {\bf b};
+\node[scale=1.5] at  (2.5,0.43) {\bf c};
+
+\draw[->,>=latex,gray,very thick,line width=2pt] (1.5,-0.3) -- ++(0,-1.3);
+
+\node[scale=1.5] at  (1+0.5,-2.5) {\bf ?};
+\draw[blue,very thick] (1,-3) grid ++(1,1);
+
+\end{tikzpicture}
