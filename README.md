@@ -18,10 +18,10 @@ Fichiers à télécharger
 'personnes.csv' - chapitre "Big data 1"
 ---------------------------------------
 
-* 'personnes_100.csv' (100 identités) [fichier](bigdata/personnes100.csv)
-* 'personnes_1000.csv' (1000 identités) [fichier](bigdata/personnes1000.csv)
-* 'personnes_10000.csv' (10 000 identités) [fichier](bigdata/personnes10000.csv)
-* 'personnes_100000.csv' (100 000 identités) [fichier](bigdata/personnes100000.csv)
+* 'personnes_100.csv' (100 identités) [fichier](bigdata/personnes_100.csv)
+* 'personnes_1000.csv' (1000 identités) [fichier](bigdata/personnes_1000.csv)
+* 'personnes_10000.csv' (10 000 identités) [fichier](bigdata/personnes_10000.csv)
+* 'personnes_100000.csv' (100 000 identités) [fichier](bigdata/personnes_100000.csv)
 
 
 Vidéos
@@ -39,8 +39,7 @@ Vous pouvez aussi le télécharger sur ce site : [Livre 'Python au lycée - tome
 Activités
 =========
 
-* Premiers pas [Activités](premiers_pas/premiers_pas.pdf)
-* Suites arithmétiques - Suites géométriques [Activités](suites>/suites.pdf)
+* Suites arithmétiques - Suites géométriques [Activités](suites/suites.pdf)
 * Nombres complexes I  [Activités](complexes/complexes-1.pdf)
 * Nombres complexes II [Activités](complexes/complexes-2.pdf)
 * Dérivée - Zéros de fonctions [Activités](derivee/derivee.pdf)
