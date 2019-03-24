@@ -116,9 +116,10 @@ où :
   \item $E_0 = 1.6 \times 10^{-5}$ joules est une énergie de référence.
 \end{itemize}  
   
- {\small
+{
+\small
 \begin{center}
-\begin{tabular}{|l|c|p{8cm}|c|}
+\begin{tabular}{|l|c|p{6cm}|c|}
 \hline
 Description &	Magnitude &	Effets &Fréquence moyenne \\ \hline\hline
 Micro &	moins de 1.9 &	Micro tremblement de terre, non ressenti. &	8 000 par jour\\ \hline
@@ -227,7 +228,7 @@ Si on trace les points directement sous la forme $(x,y)$ on ne voit rien de spé
 
 Ci-dessous des points vérifiant la relation $y = 10^{\tfrac15 x -1}$.
 \myfigure{0.65}{
-\tikzinput{fig_echelle_02}\qquad
+\tikzinput{fig_echelle_02}\quad
 \tikzinput{fig_echelle_03}
 }
 
@@ -313,7 +314,7 @@ Ci-dessous des points vérifiant la relation $y = 2x^{\frac12}$ (c'est-à-dire $
 
 \emph{Utiliser Matplolib.} Voici un bref programme qui affiche un point rouge de coordonnées $(2,5)$ et un point bleu de coordonnées $(7,2)$. 
 
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.45\textwidth}
 \begin{lstlisting}
 import matplotlib.pyplot as plt
 plt.scatter(2,5,color="red")
@@ -325,7 +326,7 @@ plt.grid()
 plt.show()
 \end{lstlisting}
 \end{minipage}\quad
-\begin{minipage}{0.55\textwidth}
+\begin{minipage}{0.5\textwidth}
 \includegraphics[scale=\myscale,scale=0.4]{ecran_logarithme_1}
 \end{minipage}
 \end{activite}

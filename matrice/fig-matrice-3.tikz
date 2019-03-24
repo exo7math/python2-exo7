@@ -5,7 +5,7 @@
 
 \def\rien{\phantom{\times}}
 \def\rienn{\times}
-\def\cercle{\Large\circ}
+\def\cercle{\circ}
 % les matrices
 
 

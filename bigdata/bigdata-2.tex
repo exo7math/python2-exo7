@@ -447,7 +447,7 @@ $$(x_G,y_G) = \left(\frac{x_1+x_2+x_3}{3},\frac{y_1+y_2+y_3}{3}\right).$$
 		Déduis-en une fonction \ci{couleurs_barycentres_proches(points,barycentres)}
 		qui à partir d'une liste de points renvoie la liste des couleurs attribuées à chaque point (selon le rang du barycentre le plus proche, c'est-à-dire la couleur).
 		
-		\emph{Exemple.} Reprenons nos barycentres \ci{barycentres = [(80,40),(20,80),(60,60)]} avec chacun une couleur donnée par son rang : $G_0=(80,40)$ est de couleur $0$ (rouge), $G_1=(20,80)$ est de couleur $1$ (bleu),
+		\emph{Exemple.} Reprenons nos barycentres \ci{barycentres = [(80,40), (20,80), (60,60)]} avec chacun une couleur donnée par son rang : $G_0=(80,40)$ est de couleur $0$ (rouge), $G_1=(20,80)$ est de couleur $1$ (bleu),
 		$G_2=(60,60)$ est de couleur $2$ (vert). Fixons aussi une liste de points \ci{points = [(40,40),(20,40),(80,70),(50,10)]} pour l'instant sans couleur (\couleurnb{en noir sur la }figure de gauche ci-dessous). Alors la fonction \ci{couleurs_barycentres_proches()} renvoie la liste \ci{[2, 1, 2, 0]}. Cela signifie que le point $P_0=(40,40)$ doit être colorié par la couleur $2$ car le plus proche barycentre est $G_2$, le point $P_1=(20,40)$ doit être colorié par la couleur $1$ car le plus proche barycentre est $G_1$\ldots{} Cela permet de colorier les quatre points (figure de droite).
 		
 		\begin{center}

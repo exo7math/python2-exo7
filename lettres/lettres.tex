@@ -108,15 +108,16 @@ Ils sont en majuscules, sans accents : les seuls caractères autorisés sont les
    \end{itemize}
    
    
-  \bigskip 
+  \medskip 
      
   \emph{Question.} Est-ce que tu obtiens les mêmes résultats qu'auparavant pour les mots \mot{SERPENT} et \mot{PYTHON} ? (La réponse doit être \og{}oui\fg{} !)
      
-  \bigskip 
+  \smallskip 
   
   \emph{Analyse.} Pour chercher un mot, on divise la liste en deux à chaque étape. Donc en $k$ étapes on trouve un mot dans une liste de longueur $2^k$. Ainsi si on a une liste de longueur $n$ alors il faut environ $\log_2(n)$ étapes. Le nombre d'étapes devant être un entier c'est en fait $k = E(\log_2(n))+1$ (où $E(x)$ désigne la partie entière, qui est la commande \ci{floor(x)} de \Python).
   Si on compare avec la recherche séquentielle, l'amélioration est frappante :
 \begin{center}
+\couleurnb{}{\small}
 \begin{tabular}{|c|c|c|}\hline
 Taille de la liste & Nb. max. d'étapes - Séquentielle & Nb. max. d'étapes - Dichotomie \\ \hline\hline
 $n$ & $n$ & $E(\log_2(n))+1$ \\ \hline
@@ -155,7 +156,7 @@ fic.close()
 
 La commande \ci{ligne.strip()}\index{strip@\ci{strip}} renvoie la chaîne de caractères de la ligne sans les espaces de début et de fin, ni le saut de ligne. 
 
-\medskip
+\bigskip
 
 \textbf{\'Ecrire un fichier.} 
 Voici comment écrire un fichier. Ici chaque ligne écrite est de la forme : \ci{Ligne numéro x}.
@@ -165,10 +166,8 @@ fic = open("mon_fichier.txt","w")
 for i in range(100):
 	ligne = "Ligne numéro " + str(i) + "\n"
 	fic.write(ligne)
-
 fic.close()
 \end{lstlisting}
-
 \end{cours}
 
 
@@ -184,7 +183,7 @@ Un dictionnaire est un peu comme une liste, mais les éléments ne sont pas inde
 Un \defi{dictionnaire} est donc un ensemble de couples clé/valeur : à une \defi{clé} est associée une \defi{valeur}.
 \index{cle@clé}
 
-\bigskip
+\medskip
 
 \textbf{Exemple : un dictionnaire identifiant/mot de passe.}
 
@@ -477,7 +476,8 @@ Conclusion : pour un tirage donné il faut aussi considérer tous les sous-tirag
   \item Reprends et modifie la fonction précédente pour obtenir une fonction \ci{indices_depuis_tirage(tirage)} qui à partir d'une liste de lettres forme tous les indices possibles.
   
   Par exemple avec le tirage \ci{['A','B','C','L']} de $n=4$ lettres, la fonction renvoie les $15=2^n-1$ indices possibles (qui correspondent à tous les sous-tirages possibles) : 
-  \mycenterline{\ci{['ABCL','ABC','ABL','ACL','BCL','AB','AC','BC','AL','BL','CL','A','B','C','L']}}
+  \mycenterline{\ci{['ABCL','ABC','ABL','ACL','BCL','AB','AC','BC',}}
+  \mycenterline{\qquad\qquad\ci{'AL','BL','CL','A','B','C','L']}}
   
   \emph{Indication.} Une liste de $0$ et de $1$ indique quelles lettres du tirage on conserve : on garde les lettres correspondant aux $1$. Avec les lettres de départ \ci{['A','B','C','L']} :
   \begin{itemize}
@@ -520,8 +520,8 @@ Voici des exemples à traiter :
 \begin{itemize}
 	\item Trouve des mots avec le tirage de $7$ lettres \ci{['Z','M','O','N','U','E','G']}.
 	\item Trouve des mots avec le tirage de $8$ lettres \ci{['H','O','I','P','E','U','C','R']}.
-	\item Trouve des mots avec le tirage de $9$ lettres \ci{['H','A','S','T','I','D','O','I','T']}.
-	\item Trouve des mots avec le tirage de $10$ lettres \ci{['E','T','N','V','E','U','Z','O','V','N']}.	
+	\item Trouve des mots avec les $9$ lettres \ci{['H','A','S','T','I','D','O','I','T']}.
+	\item Trouve des mots avec les $10$ lettres \ci{['E','T','N','V','E','U','Z','O','V','N']}.	
 	
 \end{itemize}
  

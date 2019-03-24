@@ -71,11 +71,14 @@ N = \begin{pmatrix}
 \smallskip
 
 Par exemple voici le calcul du coefficient $n_{11}$ :
-$$n_{11} = c_{00}m_{00} + c_{01}m_{01} + \cdots + c_{22}m_{22}
-= 0\times 1 + 1\times 2 + 0 \times 3 
+\begin{align*}
+n_{11} 
+& = c_{00}m_{00} + c_{01}m_{01} + \cdots + c_{22}m_{22} \\
+& = 0\times 1 + 1\times 2 + 0 \times 3 
 + 1\times 5 + 2\times 6 + 1 \times 7   
-+ 0\times 9 + 1\times 10 + 0 \times 11 = 36
-$$
++ 0\times 9 + 1\times 10 + 0 \times 11 \\
+& = 36
+\end{align*}
 
 \end{itemize}
 \end{cours}
@@ -127,14 +130,14 @@ $$
 	Voici un exemple d'affichage :
 	
 \begin{center}
-	\begin{minipage}{0.55\textwidth}
+	\begin{minipage}{0.6\textwidth}
 	\begin{center}
 	\begin{lstlisting}
 	M = [[1,2,3], [4,5,6], [7,8,9]]	
 	\end{lstlisting}		
 	\end{center}	
-	\end{minipage}\qquad\qquad
-	\begin{minipage}{0.4\textwidth}
+	\end{minipage}
+	\begin{minipage}{0.3\textwidth}
 	\begin{center}
 	\begin{lstlisting}
 	1   2   3 
@@ -500,7 +503,7 @@ $$C =
 
 Trouve la convolution qui décale l'image d'un pixel vers le haut et permet d'obtenir l'image suivante par itération.
 \begin{center}
-		\includegraphics[scale=\myscale,scale=0.55]{png/monde_conv_decal}
+		\includegraphics[scale=\myscale,scale=0.52]{png/monde_conv_decal}
 		
 		Décalage itéré vers le haut
 \end{center}
@@ -528,7 +531,7 @@ Voici de brefs rappels sur les matrices en se limitant aux matrices $2\times 2$.
 	\right.$$	
 
 
-\myfigure{0.8}{\tikzinput{fig-transfo-1}}	
+\myfigure{0.75}{\tikzinput{fig-transfo-1}}	
 
 \medskip
 
@@ -679,8 +682,10 @@ N = \begin{pmatrix}
 	
 	\begin{center}
 	\begin{minipage}{0.5\textwidth}
+	\centering
 		\textbf{Dilatation} (avec constantes quelconques).
-		$$T = \begin{pmatrix}k_x&0\\0&k_y\end{pmatrix} \quad \text{ avec } k_x=\pi=3.14\ldots,\  k_y = 1$$	
+		$$T = \begin{pmatrix}k_x&0\\0&k_y\end{pmatrix}$$
+		avec $k_x=\pi=3.14\ldots$, $k_y = 1$	
 	\end{minipage}
 	\begin{minipage}{0.4\textwidth}\center
 		\includegraphics[scale=\myscale,scale=0.3]{png/chat_dilatation}

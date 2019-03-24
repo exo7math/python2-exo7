@@ -59,7 +59,7 @@ def f(x):
 \end{minipage}
 \end{center}
 
-\bigskip
+\medskip
 
 Une fonction est un objet \Python{} comme un autre. Elle peut donc être utilisée dans le programme comme dans l'exemple suivant qui teste si $f(a)>f(b)$ :
 
@@ -84,7 +84,6 @@ renvoie \og{}Faux\fg{}.
 \mycenterline{\ci{est_plus_grand(lambda x:1/x,1,2)}}
 qui renvoie \og{}Vrai\fg{} (\ci{lambda x:1/x} joue le rôle de \ci{f}).
 \end{cours}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -289,7 +288,6 @@ On cherche \og{}à la main\fg{} une valeur approchée de $\sqrt{2}$.
   $\frac54 = 1.25 \le \sqrt{2} \le \frac32 = 1.5$.
   
   \item On continue ainsi, on obtient des intervalles $[a_i,b_i]$ de plus en plus petits qui encadrent $\sqrt2$ :
-
 $$
 \begin{array}{ll}
   a_0 = 1      & b_0 = 2 \\
@@ -307,7 +305,7 @@ $$
 Donc en $8$ étapes on prouve que $1.4140625 \le \sqrt2 \le 1.41796875$. En particulier on obtient les deux premières décimales de $\sqrt2$ : $\sqrt2 = 1.41\ldots$
 \end{itemize}
 
-\myfigure{1}{
+\myfigure{0.8}{
 \tikzinput{fig_zeros05}
 }
 
@@ -315,7 +313,7 @@ Donc en $8$ étapes on prouve que $1.4140625 \le \sqrt2 \le 1.41796875$. En part
 
 \end{cours}
 
-
+\bigskip
 
 
 

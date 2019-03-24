@@ -2,7 +2,7 @@
 
 % Automate
 
-% RÃÂÃÂÃÂÃÂ©gle  [0,0,1,0,1,1,0,1]
+% Regle  [0,0,1,0,1,1,0,1]
 
 \begin{scope}[yshift=0cm,scale=0.5]
 
@@ -85,7 +85,7 @@
 
 }
 
-\draw[->,>=latex,red!50,line width=5pt] (-3,-4) node[red,left]{r\`egle du codage}  -- ++(3,0);
+\draw[->,>=latex,red!50,line width=5pt] (-3,-4) node[red,left,text width=1.5cm,align=center]{r\`egle du codage}  -- ++(3,0);
 
 
 \end{scope}

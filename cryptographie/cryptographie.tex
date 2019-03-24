@@ -84,12 +84,12 @@ On préfère travailler avec des nombres qu'avec des lettres !
   $25$ pour \mot{Z}.
   
   \begin{center}
-  \begin{tabular}{*{26}{p{1.1ex}}}
+  \begin{tabular}{*{26}{p{\couleurnb{1.1ex}{0.5ex}}}}
   A&B&C&D&E&F&G&H&I&J&K&L&M&N&O&P&Q&R&S&T&U&V&W&X&Y&Z \\
   0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&19&20&21&22&23&24&25\\
   \end{tabular}
   \end{center}
-   
+  
 
   \item \textbf{D'un numéro vers une lettre.}
   Pour récupérer la lettre correspondant au rang $i$, il suffit d'écrire : 
@@ -181,7 +181,7 @@ Pour compliquer la tâche d'un espion, on introduit le \defi{chiffrement par sub
 À chaque lettre de l'alphabet en clair (ici \couleurnb{en rouge, }{}en majuscule), on associe une lettre au hasard (ici \couleurnb{en vert, }{}en minuscule). Voici un exemple :
 
 \begin{center}
-  \begin{tabular}{*{26}{p{1ex}}}
+  \begin{tabular}{*{26}{p{\couleurnb{1.1ex}{0.5ex}}}}
 \prive A&\prive B&\prive C&\prive D&\prive E&\prive F&\prive G&\prive H&\prive I&\prive J&\prive K&\prive L&\prive M&\prive N&\prive O&\prive P&\prive Q&\prive R&\prive S&\prive T&\prive U&\prive V&\prive W&\prive X&\prive Y&\prive Z  \\
 \public y&\public k&\public c&\public o&\public d&\public m&\public f&\public j&\public g&\public z&\public a&\public x&\public r&\public n&\public b&\public u&\public t&\public q&\public i&\public p&\public h&\public w&\public e&\public s&\public v&\public l 
   \end{tabular}
@@ -266,6 +266,7 @@ La \defi{fréquence d'apparition d'une lettre} est donnée par la formule :
 
 Dans un texte en français les fréquences sont proches de :
 \begin{center}
+\couleurnb{}{\small}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 \prive{E}&\prive{S}&\prive{A}&\prive{I}&\prive{N}&\prive{T}&\prive{R}&\prive{U}&\prive{L}&\prive{O}&\prive{D}\\

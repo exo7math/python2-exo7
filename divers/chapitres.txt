@@ -1,3 +1,58 @@
+
+Python au lycée (tome 2)
+Algorithmes et programmation
+Livres Exo7 5
+
+
+Ce second tome est parfait pour approfondir votre connaissance de Python, des algorithmes et de la programmation.
+
+Ce livre vous guide pas à pas à travers des activités mathématiques et informatiques originales adaptées au lycée. Il se complète par des ressources en ligne : tous les codes Python, des vidéos et des fiches en couleurs. Vous avez tout en main pour réussir ! 
+
+
+ • Suites arithmétiques – Suites géométriques
+ • Nombres complexes I & II
+ • Dérivée – Zéros de fonctions
+ • Exponentielle
+ • Logarithme
+ • Intégrale
+ • Programmation objet
+ • Mouvement de particules
+ • Algorithmes récursifs
+ • Tri – Complexité
+ • Calculs en parallèle
+ • Automates
+ • Cryptographie
+ • Le compte est bon
+ • Le mot le plus long
+ • Images et matrices
+ • Ensemble de Mandelbrot
+ • Images 3D 
+ • Sudoku
+ • Fractale de Lyapunov
+ • Big data I & II
+
+Mathématiques
+Algorithmes
+Programmation
+Python
+Lycée
+
+Non-fiction > Ordinateurs > Langages de programmation > Python
+Scolaire et Ouvrages de référence > Éducation > Ordinateurs et Technologies
+
+Code ISBN : 9781091414808
+Marque éditoriale : Independently published 
+
+
+Date de publication ~ 25/03/2019
+
+intérieur nb avec papier blanc
+
+taille de coupe 7.5 x 9.25 pouces
+
+Absence de fond perdu
+
+couv brillante
 Suites arithmétiques – Suites géométriques
 Nombres complexes I & II
 Dérivée – Zéros de fonctions

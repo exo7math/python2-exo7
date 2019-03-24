@@ -185,7 +185,7 @@ Hauteur = 600
 from tkinter import *
 
 root = Tk()      
-canvas = Canvas(root, width=Largeur, height=Hauteur, background="white")
+canvas=Canvas(root,width=Largeur,height=Hauteur,background="white")
 canvas.pack(side=LEFT, padx=5, pady=5)
 
 p = Particule(-300,10,5,2,10)
@@ -255,7 +255,7 @@ La fonction \ci{xy_vers_ij(x,y)} transforme les coordonnées réelles $(x,y)$ en
 
 Voici un lancé de plusieurs particules (on utilise le module \ci{time}).
 \begin{lstlisting}
-liste_particules = [TkParticule(-300,0,10,j,5,couleur=hasard_couleur()) 
+liste_particules=[TkParticule(-300,0,10,j,5,couleur=hasard_couleur()) 
                     for j in range(10)]
 for k in range(200):
     for p in liste_particules:
