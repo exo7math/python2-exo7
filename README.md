@@ -32,7 +32,7 @@ Les vidéos du tome 1 sont visibles depuis la chaîne *Youtube* [Python au lycé
 Livre
 =====
 
-Le livre est en vente sur Amazon.fr à prix coûtant. [Commander le livre sur Amazon.fr]( https://www.amazon.fr/).
+Le livre est en vente sur Amazon.fr à prix coûtant. [Commander le livre sur Amazon.fr]( https://www.amazon.fr/dp/1091414807).
 
 Vous pouvez aussi le télécharger sur ce site : [Livre 'Python au lycée - tome 2' (10 Mo)](livre-python2.pdf).
 
