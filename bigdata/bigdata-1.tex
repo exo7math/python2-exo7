@@ -11,8 +11,8 @@
 \index{big data@\emph{big data}}
 
 
-\objectifs{\emph{Big data}, intelligence artificielle, \emph{deep learning}, réseau de neurones,  \emph{machine learning}\ldots{} plein de mots compliqués ! Le but commun est de faire exécuter à un ordinateur de tâches de plus en plus complexes : \emph{choisir} (par exemple trouver un bon élément parmi des milliards selon plusieurs critères), \emph{décider} (séparer des photos de chats de photos de voitures), \emph{prévoir} (un malade a de la fièvre et le nez qui coule, quelle maladie est la plus probable ?).
-Dans cette première partie on va utiliser des outils classiques de statistique et de probabilité pour résoudre des problèmes amusants.}
+\objectifs{\emph{Big data}, intelligence artificielle, \emph{deep learning}, réseau de neurones,  \emph{machine learning}\ldots{} plein de mots compliqués ! Le but commun est de faire exécuter à un ordinateur des tâches de plus en plus complexes : \emph{choisir} (par exemple trouver un bon élément parmi des milliards selon plusieurs critères), \emph{décider} (séparer des photos de chats de photos de voitures), \emph{prévoir} (un malade a de la fièvre et le nez qui coule, quelle maladie est la plus probable ?).
+Dans cette première partie, on va utiliser des outils classiques de statistique et de probabilité pour résoudre des problèmes amusants.}
 
 \bigskip
 
@@ -77,7 +77,7 @@ Chaque ligne désigne une personne et ses caractéristiques :
 	Compare l'âge moyen calculé à partir de l'échantillon avec l'âge moyen de toute la liste. Quelle taille de l'échantillon permet d'avoir une estimation à $1$ an près ?
 	
 	\item Programme une fonction \ci{probabilite_initiale(lettre,debut,fin,fichier)}
-	qui estime la probabilité que le nom d'une personne commence par la lettre donnée à partir d'un échantillon.
+	qui estime la probabilité que le nom d'une personne commence par la lettre donnée à partir d'un échantillon de la liste.
 	Pour cela on approche la probabilité par la formule :
 	$$\text{probabilité} \quad \simeq \quad \frac{\text{nombre d'occurences}}{\text{nombre total d'éléments}}$$
 	
@@ -460,7 +460,7 @@ eleves = [ (0.25,5), (0.5,4), (0.75,7), (1,6), (1,7),
 	\item \textbf{Travailler plus pour gagner plus.}
 	
 	\'Ecris un petit programme qui demande à l'utilisateur \og{}Quelle note aimerais-tu avoir ?\fg{}
-	et à partir de la réponse donnée affiche une phrase du type \og{}Tu dois travailler au moins 2 heures et 30 minutes.\fg{} 
+	et à partir de la réponse donnée affiche une phrase du type \og{}Tu dois travailler au moins 2 heures et 30 minutes.\fg{}. 
 	
 	\emph{Indications.} 
 	\begin{itemize}
@@ -536,7 +536,7 @@ On obtient donc deux densités de probabilité : $p_f(x)$ pour les hommes et $p_
 \textbf{Classification.}
 
 On veut savoir si quelqu'un de taille $x=169$ cm est plutôt un homme ou une femme ?
-On a donc deux densités de probabilité : on calcule $p_h(x)$ (comme si c'était un homme) et $p_f(x)$ (comme si c'était une femme) et on compare c'est deux valeurs.
+On a donc deux densités de probabilité : on calcule $p_h(x)$ (comme si c'était un homme) et $p_f(x)$ (comme si c'était une femme) et on compare ces deux valeurs.
 Si $p_h(x)>p_f(x)$ alors c'est plus probablement un homme, sinon c'est plutôt une femme. 
 
 Ici on calcule $p_h(x) \simeq 0.035$ et $p_f(x) \simeq 0.061$, donc avec nos données, quelqu'un de $169$ cm est plus probablement une femme.
@@ -575,7 +575,7 @@ On peut aussi le voir graphiquement ci-dessous : pour $x=169$ la courbe des femm
 
 	\item \textbf{Homme ou femme par la taille.}
 	
-	On donne une taille $x$, par exemple $x=170$, on souhaite savoir si c'est plus probablement un homme ou une femme. 
+	On donne la taille $x$ d'une personne, par exemple $x=170$, on souhaite savoir si cette personne est plus probablement un homme ou une femme. 
 	Pour cela calcule la densité de probabilité $p_h(x)$ associée à $\mu_h$ et $\sigma^2_h$ et la densité de probabilité $p_f(x)$ associée à $\mu_f$ et $\sigma^2_f$.
 	
 	Si $p_h(x)>p_f(x)$ alors il est plus probable que ce soit un homme, sinon c'est plutôt une femme. 
@@ -583,7 +583,7 @@ On peut aussi le voir graphiquement ci-dessous : pour $x=169$ la courbe des femm
 	\emph{Remarques.}
 	\begin{itemize}
 		\item Ce n'est bien sûr pas une certitude ! On va faire mieux dans la question suivante en prenant aussi en compte le poids.
-		\item Les nombres sont très petits, il peut être plus parlant de regarder si
+		\item Les nombres étant très petits, il peut être plus parlant de regarder si
 		$p_h(x)/p_f(x)$ est plus grand ou plus petit que $1$.
 	\end{itemize}
 
@@ -600,14 +600,14 @@ On peut aussi le voir graphiquement ci-dessous : pour $x=169$ la courbe des femm
 	
 		\mycenterline{\ci{(164,68),(162,52),(170,68),(161,76),(167,67)]}}
 	
-	Pour une taille $x$, on a maintenant une probabilité $p_h^{\text{taille}}(x)$ et $p_f^{\text{taille}}(x)$. En calculant des moyennes et des variances on obtient 
+	Pour une taille $x$, on a maintenant une probabilité $p_h^{\text{taille}}(x)$ et $p_f^{\text{taille}}(x)$. En calculant des moyennes et des variances, on obtient 
 	pour un poids $y$ une probabilité $p_h^{\text{poids}}(y)$ et $p_f^{\text{poids}}(y)$.
 	On multiplie les probabilités pour déterminer si une donnée correspond plutôt à un homme ou une femme. On prend une personne de (taille,\,poids) = $(x,y)$. Si on a :\\
 	$$p_h^{\text{taille}}(x) \cdot p_h^{\text{poids}}(y) \ \  >  \ \  
 	p_f^{\text{taille}}(x) \cdot p_f^{\text{poids}}(y)$$
-	alors c'est plus probablement un homme, sinon c'est plutôt une femme.  
+	alors c'est plus probablement un homme, sinon c'est plus probablement une femme.  
 	
-	Une personne de taille $176$ cm pesant $64$ kg est plutôt un homme ou une femme ?	
+	Une personne de taille $176$ cm pesant $64$ kg est-elle plutôt un homme ou une femme ?	
 	
 	
 \end{enumerate}
@@ -622,7 +622,6 @@ On peut aussi le voir graphiquement ci-dessous : pour $x=169$ la courbe des femm
 	\objectifs{Objectifs : classer des phrases dans une catégorie en fonction des mots qu'elle contient.}
 
 Voici une liste de titres de sport :
-
 \begin{center}
 \begin{minipage}{0.7\textwidth}
 \begin{lstlisting}
@@ -648,7 +647,7 @@ titres_passport = [
 \end{minipage}	
 \end{center}
 
-\`A partir de ces titres déjà classés sport/pas sport tu vas faire déterminer par l'ordinateur si les phrases suivantes parlent de sport ou pas :
+\`A partir de ces titres déjà classés sport/pas sport, tu vas faire déterminer par l'ordinateur si les phrases suivantes parlent de sport :
 \mycenterline{\ci{"victoire de Marseille"}}
 \mycenterline{\ci{"un beau chien"}}
 \mycenterline{\ci{"Paris écrase Barcelone en finale"}}
@@ -687,7 +686,7 @@ titres_passport = [
  	
  	Pour savoir si la phrase \ci{"la finale de Paris"} parle de sport ou pas :
  	\begin{itemize}
- 		\item on calcule la probabilité $p(\text{phrase}|\text{sport})$ de la phrase donnée par rapport à la liste des mots de sport,
+ 		\item on calcule la probabilité $p(\text{phrase}|\text{sport})$ de la phrase donnée par rapport à la liste des mots des titres parlant de sport,
  		\item  on calcule la probabilité $p(\text{phrase}|\text{pas sport})$ de la phrase donnée mais cette fois par rapport à la liste des mots des titres ne parlant pas de sport,
  		\item si $p(\text{phrase}|\text{sport}) > p(\text{phrase}|\text{pas sport})$ alors il probable que la phrase concerne le sport. 
  	\end{itemize}
@@ -706,7 +705,7 @@ titres_passport = [
 	
 		
 	\item \textbf{Probabilité modifiée d'un mot.}
-	On a un problème avec la phrase \ci{"le coach perd la finale"} car le mot \ci{"perd"} n'apparaît pas dans nos titres, donc la probabilité de ce mot est $p(m) = 0$.
+	On a un problème avec la phrase \ci{"le coach perd la finale"} car le mot \ci{"perd"} n'apparaît pas dans nos titres, la probabilité de ce mot est donc $p(m) = 0$.
 	Aussi lorsque l'on calcule la probabilité de la phrase, on obtient
 	$p(\text{phrase}|\text{sport}) = 0$ et $p(\text{phrase}|\text{pas sport})=0$ (car on a à chaque fois un facteur nul).
 	

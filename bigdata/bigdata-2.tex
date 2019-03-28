@@ -11,7 +11,7 @@
 \index{big data@\emph{big data}}
 
 
-\objectifs{L'essor des \emph{big-data} et de l'intelligence artificielle est dû à l'apparition de nouveaux algorithmes adaptés à la résolution de problèmes complexes : reconnaissance d'images, comportement des électeurs, conduite autonome des voitures\ldots{} Dans cette seconde partie tu vas programmer quelques algorithmes emblématiques et innovants.}
+\objectifs{L'essor des \emph{big-data} et de l'intelligence artificielle est dû à l'apparition de nouveaux algorithmes adaptés à la résolution de problèmes complexes : reconnaissance d'images, comportement des électeurs, conduite autonome de voitures\ldots{} Dans cette seconde partie tu vas programmer quelques algorithmes emblématiques et innovants.}
 
 \bigskip
 
@@ -65,7 +65,7 @@ Le but de l'activité suivante est de colorier tous les points d'une zone grâce
 \begin{enumerate}
 	\item \textbf{Préparation.}
 	Programme des fonctions qui permettent d'afficher des points en couleur.
-	On définit un points coloré, appelé \emph{cpoint}, par $(x,y,c)$
+	On définit un point coloré, appelé \emph{cpoint}, par $(x,y,c)$
 	où $x$ et $y$ sont des entiers avec $x_{\min} \le x \le x_{\max}$ et $y_{\min} \le y \le y_{\max}$
 	et $c$ représente la couleur : $c=0$ pour du rouge et $c=1$ pour du bleu.
 	
@@ -123,7 +123,7 @@ Le but de l'activité suivante est de colorier tous les points d'une zone grâce
 	\`A partir d'une liste de points colorés, on colorie tous les points : chaque point prend la couleur du voisin le plus proche. 	
 	Programme ceci en une fonction \ci{colorier_par_un_voisin_proche(cpoints)}.
 	
-	Ci-dessous à gauche des points colorés initiaux et à droite le coloriage obtenu par le plus proche voisin. 
+	Ci-dessous à gauche des points colorés initiaux et à droite le coloriage obtenu par la méthode du plus proche voisin. 
 	\begin{center}
 	\includegraphics[scale=\myscale,scale=0.25]{ecran-voisins-4} \quad
 	\includegraphics[scale=\myscale,scale=0.25]{ecran-voisins-5}
@@ -188,8 +188,8 @@ Voici des exemples d'expressions bien et mal parenthésées :
 \end{itemize}
 
 
-Dans le chapitre \og{}Calculatrice polonaise – Piles\fg{} du premier tome, nous avions étudié un algorithme qui vérifie si une expression a ses parenthèses correctes. 
-Cette méthode résout complètement le problème mais nécessite beaucoup de mémoire. En effet la taille de la pile peut être de l'ordre de grandeur de la longueur de l'expression, ce qui pose des problèmes pour des expressions ayant des millions de caractères. Par contre avec la méthode de l'activité suivante tu ne stockes que les valeurs de deux entiers ($h$ et $S$), l'inconvénient c'est que la réponse renvoyée est probablement vraie,
+Dans le chapitre \og{}Calculatrice polonaise – Piles\fg{} du premier tome, nous avions étudié un algorithme qui vérifie si une expression a ses parenthèses bien agencées. 
+Cette méthode résout complètement le problème mais nécessite beaucoup de mémoire. En effet la taille de la pile peut être de l'ordre de grandeur de la longueur de l'expression, ce qui pose des problèmes pour des expressions ayant des millions de caractères. Par contre, avec la méthode de l'activité suivante tu ne stockes que les valeurs de deux entiers ($h$ et $S$), l'inconvénient c'est que la réponse renvoyée est probablement vraie,
 mais ce n'est pas une certitude. 
 Cette méthode permet aussi de vérifier si un fichier (par exemple un fichier \og{}xml\fg{}) a un balisage correct.
 \end{cours}
@@ -203,7 +203,7 @@ Cette méthode permet aussi de vérifier si un fichier (par exemple un fichier \
 
 \begin{activite}[Parenthèses correctes ?]
 	
-\objectifs{Objectifs : tester si une expression a ses parenthèses et ses crochets bien placés.}
+\objectifs{Objectifs : tester si une expression a ses parenthèses et ses crochets bien agencés.}
 
 
 \textbf{Partie A. Parenthèses seules.}
@@ -260,7 +260,7 @@ On considère une expression avec des parenthèses et des crochets (tous les aut
 $h=0$, on augmente $h$ de $1$ \emph{avant} une parenthèse ou un crochet ouvrant, \ci{"("} ou \ci{"["}, on diminue $h$ de $1$ \emph{après} une parenthèse ou un crochet fermant, \ci{")"} ou  \ci{"]"}.
 
 On fixe un nombre premier $p$ assez grand (par exemple $p=11$ ou $p=101$) et on pose $a=2$ et $b=3$.
-\`A chaque parenthèse on associe comme avant un entier modulo $p$ :
+\`A chaque parenthèse on associe comme auparavant un entier modulo $p$ :
 $$ \text{\ci{"("}} \mapsto 2^h \pmod{p} \quad \text{ et }\quad \text{\ci{")"}} \mapsto -2^h \pmod{p}.$$
 \`A chaque crochet on associe aussi un entier modulo $p$ :
 $$ \text{\ci{"["}} \mapsto 3^h \pmod{p} \quad \text{ et }\quad \text{\ci{"]"}} \mapsto -3^h \pmod{p}.$$
@@ -390,7 +390,7 @@ $$(x_G,y_G) = \left(\frac{x_1+x_2+x_3}{3},\frac{y_1+y_2+y_3}{3}\right).$$
 	\end{center}
 	
 	Voici comment programmer une fonction \ci{generer_points(k,n,d)}
-	qui affiche $k$ groupes, de $n$ points chaque, selon une dispersion $d$.
+	qui affiche $k$ groupes, de $n$ points chacun, selon une dispersion $d$.
 	
 	Répéter $k$ fois :
 	\begin{itemize}
@@ -402,7 +402,7 @@ $$(x_G,y_G) = \left(\frac{x_1+x_2+x_3}{3},\frac{y_1+y_2+y_3}{3}\right).$$
 			\item Choisir un rayon $r$ au hasard selon la formule $r = d \rho^2$ où $\rho$ est un réel tiré au hasard entre $0$ et $1$.
 			\item Ajoute le point $(x,y)$ à la liste des points, où :
 			$$x = x_c + r \cos \theta \qquad \text{ et } \qquad y = y_c + r \sin \theta$$
-			(vérifie quand même que $(x,y)$ est bien dans la fenêtre voulue).
+			(vérifie que $(x,y)$ est bien dans la fenêtre voulue).
 		\end{itemize}
 	\end{itemize}
 	
@@ -433,7 +433,7 @@ $$(x_G,y_G) = \left(\frac{x_1+x_2+x_3}{3},\frac{y_1+y_2+y_3}{3}\right).$$
 		\item Programme une fonction \ci{barycentre_proche(P,barycentres)}
 		qui à partir d'un point $P=(x_0,y_0)$ renvoie le rang du point le plus proche dans la liste \ci{barycentres} donnée.
 		
-		Par exemple si nous avons la liste \ci{barycentres = [(80,40),(20,80),(60,60)]}\couleurnb{ (en rouge)}{}
+		Par exemple, si nous avons la liste \ci{barycentres = [(80,40),(20,80),(60,60)]}\couleurnb{ (en rouge)}{}
 		et le point $P=(40,40)$\couleurnb{ (en noir)}{}, alors le barycentre le plus proche de $P$ est $G_2=(60,60)$ qui est de rang $2$ dans la liste des barycentres. Donc la fonction \ci{barycentre_proche(P,barycentres)} renvoie ici $2$.
 		
 		\begin{center}
@@ -519,7 +519,7 @@ $$(x_G,y_G) = \left(\frac{x_1+x_2+x_3}{3},\frac{y_1+y_2+y_3}{3}\right).$$
 
 \medskip
 
-On termine par un exemple avec $5$ groupes de points (à gauche les points de départs, au centre les $5$ barycentres initiaux et le premier coloriage, à droite le résultat après plusieurs itérations). Il faut parfois tester différentes configurations des barycentres initiaux pour que cela fonctionne bien.
+On termine par un exemple avec $5$ groupes de points (à gauche les points de départ, au centre les $5$ barycentres initiaux et le premier coloriage, à droite le résultat après plusieurs itérations). Il faut parfois tester différentes configurations des barycentres initiaux pour que cela fonctionne bien.
 	\begin{center}
 	\includegraphics[scale=\myscale,scale=0.21]{ecran_barycentres_exemple_bis_01}\quad
 	\includegraphics[scale=\myscale,scale=0.22]{ecran_barycentres_exemple_bis_02}\quad
@@ -532,7 +532,7 @@ On termine par un exemple avec $5$ groupes de points (à gauche les points de d�
 
 \emph{Note.} 
 
-Il y a une différence fondamentale entre cette activité et l'activité sur les  $k$ voisins. Il s'agit ici d'un \emph{apprentissage non supervisé} c'est-à-dire qu'on laisse l'algorithme trouver tout seul les groupes. L'activité sur les $k$ voisins est celle d'un \emph{apprentissage supervisé} : certains points sont déjà coloriés rouge ou bleu et servent de référence, ensuite il s'agit de colorier les autres points suivant ce modèle.
+Il y a une différence fondamentale entre cette activité et l'activité sur les  $k$ voisins. Il s'agit ici d'un \emph{apprentissage non supervisé}, c'est-à-dire qu'on laisse l'algorithme trouver tout seul les groupes. L'activité sur les $k$ voisins est celle d'un \emph{apprentissage supervisé} : certains points sont déjà coloriés rouge ou bleu et servent de référence, ensuite il s'agit de colorier les autres points suivant ce modèle.
 
 
 \end{activite}
@@ -570,7 +570,7 @@ Il y a une différence fondamentale entre cette activité et l'activité sur les
 
 Le cerveau est composé d'environ $100$ milliards de neurones.
 Les réseaux de neurones artificiels s'inspirent du cerveau pour répondre à des problèmes complexes.
-Un réseau de neurones possède des coefficients qui sont calculés par un apprentissage. Le réseau est ensuite capable de répondre au problème posé, y compris lors de situations qui n'ont pas été rencontrées lors de l'apprentissage.
+Un réseau de neurones possède des coefficients qui sont calculés par apprentissage. Le réseau est ensuite capable de répondre au problème posé, y compris lors de situations qui n'ont pas été rencontrées lors de l'apprentissage.
 
 \medskip
 
@@ -593,7 +593,7 @@ Notre neurone fonctionne ainsi :
 \textbf{Activation du neurone.}
 	
 Comment savoir si le neurone est activé ? 
-En fonction de l'entrée $(e_1,e_2,e_3)$ et de l'état du neurone $(p_1,p_2,p_3)$ 
+En fonction de l'entrée $(e_1,e_2,e_3)$ et de l'état du neurone $(p_1,p_2,p_3)$, 
 on commence par calculer une valeur $q$ selon la formule :
 $$q = p_1 e_1 + p_2e_2+p_3e_3.$$
 
@@ -612,7 +612,7 @@ Note bien qu'il n'y a que deux sorties possibles $s=0$ ou $s=1$.
 \textbf{Objectif.}
 
 Quelle tâche demande-t-on à notre neurone ? Le neurone prend en entrée des nombres $(e_1,e_2,e_3)$ et renvoie en sortie $0$ ou $1$. Il répond donc a une question du type \og{}oui ou non ?\fg{}.
-Plus précisément la question à laquelle répond le neurone est \og{}ce point de coordonnées $(e_1,e_2,e_3)$ est-il au-dessus ou en dessous de ce plan $\mathcal{P}$ ?\fg{} Le plan $\mathcal{P}$ dont il est question est le plan d'équation $p_1x+p_2y+p_3z=1$ déterminé par l'état $(p_1,p_2,p_3)$ du neurone.
+Plus précisément la question à laquelle répond le neurone est \og{}ce point de coordonnées $(e_1,e_2,e_3)$ est-il au-dessus ou en dessous du plan $\mathcal{P}$ ?\fg{} Le plan $\mathcal{P}$ dont il est question est le plan d'équation $p_1x+p_2y+p_3z=1$ déterminé par l'état $(p_1,p_2,p_3)$ du neurone.
 On verra dans l'activité suivante comment cela permet de répondre à la question \og{}cette couleur est-elle rouge ou pas ?\fg{}.
 
 Le problème principal est, qu'au départ, on ne connaît pas le plan $\mathcal{P}$ qui répond au problème que l'on se pose, autrement dit on ne sait pas quel état $(p_1,p_2,p_3)$ convient. Pour notre exemple cela signifie que l'ordinateur ne sait pas ce qu'est la couleur rouge. Il va donc falloir lui apprendre !
@@ -650,8 +650,8 @@ p'_3 &=& p_3 - \epsilon e_3 \\
 \end{itemize}
 
 Le paramètre $\epsilon$ est un petit réel. On prendra $\epsilon = 0.2$ par exemple.
-On répète ces étapes avec plusieurs entrées et objectifs. Géométriquement chaque apprentissage déplace un petit peu le plan $\mathcal{P}$ pour mieux répondre au problème. L'état du neurone va converger vers un état $(p_1,p_2,p_3)$. 
-Une fois la phase d'apprentissage terminée on conserve cet état final $(p_1,p_2,p_3)$. Maintenant 
+On répète ces étapes avec plusieurs couples (entrées,objectifs). Géométriquement chaque apprentissage déplace un petit peu le plan $\mathcal{P}$ pour mieux répondre au problème. L'état du neurone va converger vers un état $(p_1,p_2,p_3)$. 
+Une fois la phase d'apprentissage terminée, on conserve cet état final $(p_1,p_2,p_3)$. Maintenant 
 on laisse répondre le neurone en regardant s'il s'active ou pas selon des entrées quelconques $(e_1,e_2,e_3)$ (même si ces entrées ne font pas partie de la liste d'apprentissage).
 
 
@@ -659,7 +659,7 @@ on laisse répondre le neurone en regardant s'il s'active ou pas selon des entr�
 \textbf{Réseau de neurones.}
 
 Dans un réseau de neurones il y a plusieurs neurones organisés en couches. Les sorties d'une couche servent d'entrées pour la couche suivante. Un réseau de neurones simple et bien entraîné peut reconnaître des chiffres manuscrits (c'est un $0$, c'est un $1$\ldots), des réseaux plus sophistiqués reconnaissent des photos (c'est un chat ou c'est un chien), jouent aux échecs (le meilleur coup est
-la reine en d7) et conduisent des voitures !
+la reine en d7) ou conduisent des voitures !
 
 \myfigure{0.7}{
 	\tikzinput{fig_neurone_4}
@@ -675,8 +675,7 @@ la reine en d7) et conduisent des voitures !
 \index{rgb@\emph{rgb}}
 	
 \textbf{Code couleur \emph{rgb}.}
-Dans le système \emph{rgb} on code une couleur selon ses niveaux de rouge/vert/bleu (\emph{red}/\emph{green}/\emph{blue}). Donc une couleur est codée par trois réels $(r,g,b)$ 
-chacun allant de $0$ à $1$.
+Dans le système \emph{rgb}, on code une couleur selon ses niveaux de rouge/vert/bleu (\emph{red}/\emph{green}/\emph{blue}). Une couleur est donc codée par trois réels $(r,g,b)$ chacun entre de $0$ à $1$.
 
 
 Voici quelques exemples de couleurs.
@@ -704,7 +703,7 @@ Voici quelques exemples de couleurs.
 \medskip
 
 \textbf{Nuances de rouge.}
-Dans l'usage la couleur rouge ne se limite pas au code $(1,0,0)$, il peut y avoir du rouge clair, du rouge foncé, du rouge orangé\ldots{} Par exemple le code $(0.8,0.2,0.1)$ est bien une nuance de rouge (voir le tableau ci-dessus).
+Dans l'usage, la couleur rouge ne se limite pas au code $(1,0,0)$, il peut y avoir du rouge clair, du rouge foncé, du rouge orangé\ldots{} Par exemple le code $(0.8,0.2,0.1)$ est bien une nuance de rouge (voir le tableau ci-dessus).
 
 Si on considère l'espace de toutes les couleurs comme un cube (axe $x$ pour le rouge variant de $0$ à $1$, axe $y$ pour le vert, axe $z$ pour le bleu) alors le rouge et ses nuances correspondent à une zone au voisinage du point $(1,0,0)$.
 
@@ -739,7 +738,7 @@ Cette zone sera une portion du cube des couleurs coupé par un plan d'équation 
 	\item \textbf{Activation d'un neurone.}
 	
 	Programme une fonction \ci{activation(neurone,entree)}
-	qui selon l'état de \ci{neurone = [p1,p2,p3]} et les valeurs 
+	qui selon l'état du \ci{neurone = [p1,p2,p3]} et les valeurs 
 	\ci{entree = [e1,e2,e3]} renvoie $s=1$ en cas d'activation et $s=0$ sinon.
 	On rappelle que cette activation est déterminée par :
 	$$\left\{ 
@@ -765,7 +764,7 @@ Cette fois le neurone s'active et la sortie vaut $s=1$.
 	\item \textbf{Apprentissage.}
 	
 	Programme une fonction \ci{apprentissage(neurone,entree,objectif)} qui renvoie l'état $[p'_1,p'_2,p'_3]$ modifié du neurone
-	après apprentissage avec l'entrée et l'objectif ($0$ ou $1$) donné.
+	après apprentissage avec l'entrée et l'objectif ($0$ ou $1$) donnés.
 	
 	Voici comment faire :
 	\begin{itemize}
@@ -793,14 +792,14 @@ Cette fois le neurone s'active et la sortie vaut $s=1$.
 	\medskip
 	
 	\emph{Exemples.}
-	Partons du neurone dont l'état de départ \ci{neurone} est $[p_1,p_2,p_3] = [1,1,1]$.
+	Partons du neurone dont l'état de départ de \ci{neurone} est $[p_1,p_2,p_3] = [1,1,1]$.
 	\begin{itemize}
-		\item Si l'entrée est $[e_1,e_2,e_3] = [1,0,2]$ et l'objectif à atteindre est $b=1$, alors on calcule $s=1$.
+		\item Si l'entrée est $[e_1,e_2,e_3] = [1,0,2]$ et l'objectif à atteindre est $b=1$. On calcule $s=1$.
 		Comme $s=b$ alors on ne fait rien et $[p'_1,p'_2,p'_3] = [p_1,p_2,p_3]$.
 		
 		\item Ce serait pareil si l'entrée était $[0.5,0.1,0.2]$ avec un objectif de $b=0$ (car on a aussi $s=0$).
 		
-		\item Si l'entrée est $[e_1,e_2,e_3] = [0.5,0.2,0]$ et l'objectif est $b=1$, alors on calcule $s=0$.
+		\item Si l'entrée est $[e_1,e_2,e_3] = [0.5,0.2,0]$ et l'objectif est $b=1$. On calcule $s=0$.
 		Comme l'objectif est différent de la sortie, on modifie l'état du neurone, selon la formule 
 		$p'_i = p_i + \epsilon e_i$. On trouve donc :
 	$$p'_1 = 1 + 0.2 \times 0.5 = 1.1 \qquad p'_2 = 1 + 0.2 \times 0.2 = 1.04 \qquad p'_3 = 1 + 0.2 \times 0 = 1$$
@@ -808,7 +807,7 @@ Cette fois le neurone s'active et la sortie vaut $s=1$.
 
 		
 		\item On repart de l'état initial du neurone $[p_1,p_2,p_3] = [1,1,1]$.
-		Si l'entrée est $[e_1,e_2,e_3] = [0,1,1]$ et l'objectif est $b=0$, alors on calcule $s=1$.
+		Si l'entrée est $[e_1,e_2,e_3] = [0,1,1]$ et l'objectif est $b=0$. On calcule $s=1$.
 		Comme l'objectif est différent de la sortie on modifie l'état du neurone, selon la formule 
 		$p'_i = p_i - \epsilon e_i$. On trouve donc :
 		$$p'_1 = 1 - 0.2 \times 0 = 1 \qquad p'_2 = 1 - 0.2 \times 1 = 0.8 \qquad p'_3 = 1 - 0.2 \times 1 = 0.8$$
@@ -816,7 +815,7 @@ Cette fois le neurone s'active et la sortie vaut $s=1$.
 	\end{itemize}	
 		
 	
-	\emph{Indications.} Pour éviter les problèmes en modifiant une liste tu peux commencer par la copier, avec par exemple :	
+	\emph{Indications.} Pour éviter les problèmes en modifiant une liste, tu peux commencer par la copier, avec par exemple :	
 	\mycenterline{\ci{nouv_neurone = list(neurone)}}	
 	
 	Tu peux ensuite modifier la liste \ci{nouv_neurone}.
@@ -825,12 +824,12 @@ Cette fois le neurone s'active et la sortie vaut $s=1$.
 	
 	Pour que le neurone s'entraîne il faut lui procurer plusieurs données.
 	Programme une fonction \ci{epoque_apprentissage(neurone_init,liste_entrees_objectifs)}
-	qui calcule le nouvel état du neurone après entraînement sur chaque élément de la liste.
+	qui calcule le nouvel état du neurone après entraînement sur tous les éléments de la liste.
 	La liste d'entraînement est une liste composée de couples entrée/objectif attendu : 	
 	\mycenterline{\ci{[ ([1,0,0],1), ([0,1,1],0), ([0,1,0],0), ... ]}}
 	
 	Il s'agit juste d'itérer la fonction \ci{apprentissage()} sur chaque élément de la liste. 
-	Un entraînement sur la totalité du jeu de tests s'appelle une \emph{époque}.
+	Un entraînement sur la totalité du jeu de test s'appelle une \emph{époque}.
 	
 	\item  \textbf{Apprentissage de la couleur rouge.}
 	
@@ -920,7 +919,7 @@ Note que pour faire comprendre au neurone ce qu'est du rouge, il faut aussi lui 
 
 	\emph{Résultats.} En partant de l'état initial $[p_1,p_2,p_3]=[1,1,1]$ avec un pas de $\epsilon=0.2$
 	alors l'état du neurone converge en $10$ époques vers $[1.66,-0.78,-0.66]$
-	(ces valeurs ne sont pas uniques, elles dépendent de l'échantillon d'apprentissage, de $\epsilon$ et du nombre d'époques).
+	(ces valeurs dépendent de l'échantillon d'apprentissage, de $\epsilon$ et du nombre d'époques).
 	
 \myfigure{0.5}{
 	\tikzinput{fig_neurone_2}
@@ -966,7 +965,7 @@ Note que pour faire comprendre au neurone ce qu'est du rouge, il faut aussi lui 
 \end{enumerate}
 
 
-\emph{Projet.} Programme une interface graphique qui permet l'apprentissage interactif en proposant à l'utilisateur des couleurs avec un choix \og{}rouge/pas rouge\fg{} ; affiche aussi l'état du neurone, son évolution et sa réussite sur un jeu de tests.
+\emph{Projet.} Programme une interface graphique qui permet l'apprentissage interactif en proposant à l'utilisateur des couleurs avec un choix \og{}rouge/pas rouge\fg{} ; affiche aussi l'état du neurone, son évolution et sa réussite sur un jeu de test.
 \end{activite}
 
 
