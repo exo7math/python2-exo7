@@ -45,9 +45,9 @@ $$u_n \le k v_n.$$
 	
 	\item $u_n = \sqrt{n}$ et $v_n = \ln(n)$. Comme $\frac{u_n}{v_n} \to +\infty$ lorsque $n\to+\infty$ alors la suite $\left(\frac{u_n}{v_n}\right)$ n'est pas bornée.  $(u_n)$ n'est pas un grand O de $(v_n)$.  Par contre dans l'autre sens, on a bien $v_n = O(u_n)$.
 	
-	\item $u_n \in O(n)$ signifie qu'il existe $k>0$ tel que $u_n \le kn$ (pour tout $n\in\Nn$).
+	\item $u_n = O(n)$ signifie qu'il existe $k>0$ tel que $u_n \le kn$ (pour tout $n\in\Nn$).
 	
-	\item $u_n \in O(1)$ signifie que la suite $(u_n)$ est bornée.
+	\item $u_n = O(1)$ signifie que la suite $(u_n)$ est bornée.
 		
 \end{itemize}
 
@@ -133,7 +133,7 @@ On mesure l'efficacité d'un algorithme à l'aide de la complexité.
 	
 	\item La complexité $C_n$ dépend de la taille $n$ des données en entrée (par exemple le nombre de chiffres d'un entier ou bien la longueur de la liste). On obtient ainsi une suite $(C_n)$.
 	
-	\item Le bons algorithmes ont des complexités polynomiales qui sont en $O(n)$ (linéaire), ou en $O(n^2)$ (quadratique) ou bien en $O(n^k)$, $k\in\Nn^*$ (polynomiale). Les mauvais algorithmes ont des complexités exponentielles, en $O(e^n)$ par exemple.
+	\item Les bons algorithmes ont des complexités polynomiales qui sont en $O(n)$ (linéaire), ou en $O(n^2)$ (quadratique) ou bien en $O(n^k)$, $k\in\Nn^*$ (polynomiale). Les mauvais algorithmes ont des complexités exponentielles, en $O(e^n)$ par exemple.
 \end{itemize}
 
 \bigskip
@@ -147,8 +147,8 @@ Il y a plusieurs méthodes, on les compare en comptant le nombre d'opérations �
 	\begin{tabular}{|c|c|}\hline
 		Algorithme  & Ordre de la complexité \\ \hline\hline
 		Multiplication d'école & $O(n^2)$ \\ \hline
-		Multiplication de Karatsuba & $O(n^{\log_2(3)}) \simeq O(n^{1.53})$  \\ \hline
-		Transformée de Fourier rapide & $O(n\cdot \ln(n) \cdot \ln(\ln(n))$  \\\hline
+		Multiplication de Karatsuba & $O(n^{\log_2(3)}) \simeq O(n^{1.58})$  \\ \hline
+		Transformée de Fourier rapide & $O(n\cdot \ln(n) \cdot \ln(\ln(n)))$  \\\hline
 	\end{tabular}
 \end{center}  
 
